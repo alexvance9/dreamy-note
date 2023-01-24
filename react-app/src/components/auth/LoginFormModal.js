@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import { useModal } from "../../context/Modal";
 
-const LoginForm = () => {
+const LoginFormModal = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  const { closeModal } = useModal();
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -16,6 +18,7 @@ const LoginForm = () => {
     if (data) {
       setErrors(data);
     }
+    await closeModal()
   };
 
   const updateEmail = (e) => {
@@ -27,7 +30,7 @@ const LoginForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/' />;
+    return <Redirect to='/dashboard' />;
   }
 
   return (
@@ -62,4 +65,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default LoginFormModal;
