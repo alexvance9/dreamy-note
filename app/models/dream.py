@@ -10,7 +10,7 @@ class Dream(db.Model):
     title = db.Column(db.String, nullable=False)
     date = db.Column(db.Date, nullable=False)
     body = db.Column(db.Text, nullable=False)
-    # dreamer_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    dreamer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
 
     dreamer = db.relationship("User", back_populates="dreams")
 
