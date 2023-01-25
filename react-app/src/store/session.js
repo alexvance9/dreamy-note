@@ -2,6 +2,8 @@
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
 
+/* --------- ACTIONS ---------- */
+
 const setUser = (user) => ({
   type: SET_USER,
   payload: user
@@ -11,7 +13,10 @@ const removeUser = () => ({
   type: REMOVE_USER,
 })
 
-const initialState = { user: null };
+
+
+
+/* --------- AUTH THUNKS ---------- */
 
 export const authenticate = () => async (dispatch) => {
   const response = await fetch('/api/auth/', {
@@ -96,6 +101,98 @@ export const signUp = (username, email, password) => async (dispatch) => {
     return ['An error occurred. Please try again.']
   }
 }
+
+/*---------- DREAM THUNKS ---------- */
+
+export const createDream = (title, date, body) => async (dispatch) => {
+  const response = await fetch('/api/dreams', {
+    methods: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      title,
+      date,
+      body
+    })
+  })
+
+  if (response.ok) {
+    // api route will return current user to update user slice of state
+    const data = await response.json();
+    dispatch(setUser(data))
+    return null
+    // FE not expecting return
+  } else if (response.status < 500) {
+    // if error is coming from backend route^^
+      const data = await response.json()
+      if (data.errors) {
+        return data.errors
+      }
+  } else {
+    return ['An error ocurred, please try again.']
+  }
+
+}
+
+
+export const updateDream = (title, date, body, dreamId) => async (dispatch) => {
+  // dreamId must be sent from FE
+  const response = await fetch(`/api/dreams/${dreamId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      title,
+      date,
+      body
+    })
+  })
+
+  if (response.ok) {
+    // api route will return current user to update user slice of state
+    const data = await response.json();
+    dispatch(setUser(data))
+    return null
+    // FE not expecting return
+  } else if (response.status < 500) {
+    // if error is coming from backend route^^
+    const data = await response.json()
+    if (data.errors) {
+      return data.errors
+    }
+  } else {
+    return ['An error ocurred, please try again.']
+  }
+
+}
+
+export const deleteDream = (dreamId) => async (dispatch) => {
+  const response = await fetch(`/api/dreams/${dreamId}`, {
+    method: 'DELETE'
+  })
+
+  if (response.ok) {
+    // api route will return current user to update user slice of state
+    const data = await response.json();
+    dispatch(setUser(data))
+    return null
+    // FE not expecting return
+  } else if (response.status < 500) {
+    // if error is coming from backend route^^
+    const data = await response.json()
+    if (data.errors) {
+      return data.errors
+    }
+  } else {
+    return ['An error ocurred, please try again.']
+  }
+}
+
+/*---------- REDUCER ---------- */
+
+const initialState = { user: null };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
