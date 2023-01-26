@@ -6,6 +6,8 @@ import LogoutButton from '../auth/LogoutButton';
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../auth/LoginFormModal';
 import SignUpFormModal from '../auth/SignUpFormModal';
+import './NavBar.css'
+import owl from '../../assets/owl.png'
 
 
 const NavBar = ({loaded}) => {
@@ -15,16 +17,37 @@ const NavBar = ({loaded}) => {
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <ul>
-        <li>
-          <LogoutButton />
-        </li>
-        {/* <ProfileButton user={sessionUser} /> */}
-      </ul>
+      <div className='logged-in-nav'>
+        <div className='linavtop flexcol'>
+          <div className='flex user'>
+            <div className='owl-icon'>
+              <img className='user-owl-img' alt='owl icon' src={owl} />
+            </div>
+            <div className='username'>Hello, {sessionUser.username}.</div>
+          </div>
+          <div className='logout-button'>
+            <LogoutButton />
+          </div>
+        </div>
+        <div className='linavlower flexcol'>
+          <div className='tab flex'>
+            <i className="fa-solid fa-house-chimney"></i>
+            <NavLink to='/dashboard'>
+              Dashboard
+            </NavLink>
+          </div>
+          <div className='tab flex'>
+            <i className="fa-solid fa-moon"></i>
+            <NavLink to='/dreams'>
+              My Dreams
+            </NavLink>
+          </div>
+        </div>
+      </div>
     );
   } else {
     sessionLinks = (
-      <li>
+      <div className='logged-out-nav flex'>
         <OpenModalButton
           buttonText="Log In"
           modalComponent={<LoginFormModal />}
@@ -33,21 +56,13 @@ const NavBar = ({loaded}) => {
           buttonText="Sign Up"
           modalComponent={<SignUpFormModal />}
         />
-      </li>
+      </div>
     );
   }
 
   return (
-    <nav>
-      <ul>
-        <li>
-          <NavLink to='/' exact={true} activeClassName='active'>
-            Home
-          </NavLink>
-        </li>
+    <nav className={sessionUser ? 'app-nav' : 'splash-nav'}>
           {loaded && sessionLinks}
-       
-      </ul>
     </nav>
   );
 }
