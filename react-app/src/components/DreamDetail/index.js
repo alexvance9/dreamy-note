@@ -8,14 +8,14 @@ import { updateDream } from "../../store/session";
 
 const DreamDetail = ({dream}) => {
     const dispatch = useDispatch()
-//    const dreamAsP = '<p>' + dream[0].body + '</p>'
-//    console.log(dreamAsP)
+
+// bc dream gets sent as[{...}] 
     const currentDream = dream[0]
     
+    // function returns date as 'yyy-mm-dd'
     const dateHandler = (str) => {
         return new Date(str).toISOString().split('T')[0].toString()
     }
-    // console.log(dateHandler)
 
     const [errors, setErrors] = useState([]);
     const [isEdit, setIsEdit] = useState(false)
@@ -24,11 +24,6 @@ const DreamDetail = ({dream}) => {
     const [date, setDate] = useState(dateHandler(currentDream.date))
     const [value, setValue] = useState(currentDream.body)
 
-    
-
-    // console.log(value)
-    // console.log(typeof value)
-    
 
     const openEditor = async (e) => {
         e.preventDefault()
@@ -40,10 +35,9 @@ const DreamDetail = ({dream}) => {
         const body = value
         const dreamId = currentDream.id
         const strDate = dateHandler(date)
-        console.log(strDate)
+        
 
         const data = await dispatch(updateDream(title, strDate, body, dreamId))
-        
             if (data) {
                 console.log(data)
                 setErrors(data);
@@ -52,10 +46,6 @@ const DreamDetail = ({dream}) => {
             }
     }
 
-    // function handleChange(content, delta, source, editor) {
-    //     setValue(editor.getContents());
-    //     console.log(value)
-    // }
 
     let detailComponents;
     if (isEdit) {

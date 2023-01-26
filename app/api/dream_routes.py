@@ -47,9 +47,9 @@ def update_dream(id):
     """
     updates an existing dream entry, returns current user 
     Dispatch wants user to update user slice of state, which includes the users dreams.
+    DreamForm handles date which gets sent as yyy-mm-dd
     """
 
-    print('got here')
     form = DreamForm()
 
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -57,11 +57,6 @@ def update_dream(id):
         current_dream = Dream.query.get(id)
         if not current_dream:
             return {'errors': ['Could not find dream']}, 404
-        # print(form.data['date'])
-        # date_str_to_nums = form.data['date'].split('-')
-        # year = date_str_to_nums[0]
-        # month = date_str_to_nums [1]
-        # day = date_str_to_nums[2]
 
 
         current_dream.title = form.data['title']
