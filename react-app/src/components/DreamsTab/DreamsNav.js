@@ -1,4 +1,5 @@
 import DreamCard from "../DreamCard";
+import { NavLink } from "react-router-dom";
 
 const DreamNav = ({dreams}) => {
 
@@ -12,7 +13,9 @@ const DreamNav = ({dreams}) => {
             </div>
             <div className="dream-cards-container flexcol">
                 {dreams.map(dream => (
-                    <DreamCard dream={dream} />
+                    <NavLink to={`/dreams/${dream.id}`} key={dream.id} className='dream-card-nav'>
+                        <DreamCard dream={dream} />
+                    </NavLink>
                 ))}
             </div>
         </div>
