@@ -1,0 +1,33 @@
+.dreams-tab-container {
+    width: 80%;
+    height: 100%;
+    /* border: 2px solid red; */
+}
+
+.dream-nav-container {
+    /* border: 2px solid green; */
+    width: 35%;
+    height: 100%;
+    background-color: rgb(77, 71, 167);
+    /* margin: 0 auto; */
+    /* background-color: rgb(85, 56, 160); */
+}
+
+.dream-title > * {
+    margin: 0;
+    padding: 10px; 
+    color: rgb(214, 212, 212);   
+}
+
+.dream-title {
+    padding-left: 30px;
+    padding-top: 40px;
+    /* border: 2px solid red; */
+    align-items: center;
+}
+.dream-cards-container {
+    height: 100%;
+    border: solid 2px green;
+    align-items: center;
+    overflow: auto;
+}

@@ -1,0 +1,20 @@
+
+
+.dream-card {
+    width: 85%;
+    border: none;
+    background-color: rgb(36, 7, 91);
+    color: rgb(198, 195, 195);
+    height: 15%;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 20px;
+    margin-bottom: 15px;
+    
+}
+
+.dream-card > div {
+    overflow: hidden;
+        white-space: nowrap;
+    text-overflow: ellipsis;
+}
