@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
+import { Route, Switch } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+// import LoginFormModal from './components/auth/LoginFormModal';
+// import SignUpForm from './components/auth/SignUpFormModal';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import User from './components/User';
+// import UsersList from './components/UsersList';
+// import User from './components/User';
 import { authenticate } from './store/session';
+import Dashboard from './components/Dashboard';
+import DreamsTab from './components/DreamsTab';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+
+  const sessionUser = useSelector(state => state.session.user);
 
   useEffect(() => {
     (async() => {
@@ -25,26 +29,25 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <NavBar />
+    <div className={sessionUser ? 'app-con' : 'splash-con' }>
+      <NavBar loaded={loaded}/>
+      {loaded && (
       <Switch>
-        <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+        <ProtectedRoute path='/dreams' exact={true} >
+          <DreamsTab/>
         </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
+        <ProtectedRoute path='/dreams/:dreamId' exact={true} >
+          <DreamsTab />
+        </ProtectedRoute>
+        <ProtectedRoute path='/dashboard' exact={true}>
+          <Dashboard />
         </ProtectedRoute>
         <Route path='/' exact={true} >
-          <h1>My Home Page</h1>
+          <h1>Welcome to dreamy note</h1>
         </Route>
       </Switch>
-    </BrowserRouter>
+      )}
+    </div>
   );
 }
 
