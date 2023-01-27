@@ -21,6 +21,18 @@ const LoginFormModal = () => {
     await closeModal()
   };
 
+  const handleDemo = async (e) => {
+    e.preventDefault();
+    const demoEmail = 'demo@aa.io'
+    const demoPassword = 'password'
+
+    const data = await dispatch(login(demoEmail, demoPassword))
+    if (data) {
+      setErrors(data)
+    }
+    await closeModal()
+  }
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -60,6 +72,7 @@ const LoginFormModal = () => {
           onChange={updatePassword}
         />
         <button type='submit'>Login</button>
+        <button onClick={handleDemo}>Demo User</button>
       </div>
     </form>
   );
