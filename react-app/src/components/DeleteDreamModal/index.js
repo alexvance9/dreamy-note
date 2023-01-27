@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deleteDream } from "../../store/session";
 
+
 function DeleteDreamModal({ currentDreamId }) {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -12,17 +13,26 @@ function DeleteDreamModal({ currentDreamId }) {
 
     // add error handling here
 
-    const handleDelete = async (e) => {
+    const handleDelete = (e) => {
         e.preventDefault();
 
-        const data = await dispatch(deleteDream(currentDreamId))
-        if (data) {
-            console.log(data)
-            setErrors(data);
-        } else {
-            history.push('/dashboard')
-            await closeModal()
-        }
+        dispatch(deleteDream(currentDreamId))
+            .then(history.push("/dreams"))
+            .then(closeModal())
+            .catch(e => {
+                console.log(e)
+                setErrors(e)
+            })
+
+        // FOR SOME REASON this async await created a race condition... so switched to .then
+        // if (data) {
+        //     console.log("this is the data:", data)
+        //     setErrors(data);
+        // } else {
+        //     // await history.push("/dashboard")
+        //     await closeModal()
+        //     return <Redirect to="/dashboard" />
+        // }
     }
 
     return (
