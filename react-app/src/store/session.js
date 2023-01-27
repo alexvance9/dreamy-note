@@ -106,7 +106,7 @@ export const signUp = (username, email, password) => async (dispatch) => {
 
 export const createDream = (title, date, body) => async (dispatch) => {
   const response = await fetch('/api/dreams', {
-    methods: 'POST',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
