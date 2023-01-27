@@ -10,6 +10,7 @@ import './NavBar.css'
 import owl from '../../assets/owl.png'
 
 
+
 const NavBar = ({loaded}) => {
 
   const sessionUser = useSelector(state => state.session.user);
@@ -30,8 +31,9 @@ const NavBar = ({loaded}) => {
           </div>
         </div>
         <div className='linavlower flexcol'>
-          <div>
+          <div className='new-dream-button flex'>
             <NavLink to='/dreams/new'>
+            <i className="fa-solid fa-plus"></i>
               New Dream
             </NavLink>
           </div>
