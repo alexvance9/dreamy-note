@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector} from "react-redux";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import parse from 'html-react-parser';
@@ -14,9 +14,9 @@ import DeleteDreamModal from "../DeleteDreamModal";
 const DreamDetail = ({dreamProp}) => {
     // bc dream gets sent as[{...}] 
     const currentDream = dreamProp[0]
-    console.log(dreamProp)
-    const params = useParams()
-    console.log('params', params)
+    // console.log(dreamProp)
+    // const params = useParams()
+    // console.log('params', params)
 
     const selectedDream = useSelector(state => state.dream.dream)
    
