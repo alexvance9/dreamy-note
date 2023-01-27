@@ -8,11 +8,12 @@ import CreateDreamForm from "../CreateDreamForm";
 import './DreamsTab.css'
 
 const DreamsTab = ({isNew}) => {
+    // see note
+
     // grab the current user from state
-    // const sessionUser = useSelector(state => state.session.user);
     // dreams live on the user slice of state
-    // const dreams = sessionUser.dreams
     const dispatch = useDispatch()
+    
     const dreams = useSelector(state => state.session.user.dreams)
 
     const [isLoaded, setIsLoaded] = useState(false)
