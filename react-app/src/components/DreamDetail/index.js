@@ -5,7 +5,8 @@ import 'react-quill/dist/quill.snow.css';
 import parse from 'html-react-parser';
 import { updateDream } from "../../store/session";
 
-
+/* This component shows a nicely rendered view of a particular 
+    dream entry, and handles editing of the dream.*/
 const DreamDetail = ({dream}) => {
     const dispatch = useDispatch()
 

@@ -30,6 +30,11 @@ const NavBar = ({loaded}) => {
           </div>
         </div>
         <div className='linavlower flexcol'>
+          <div>
+            <NavLink to='/dreams/new'>
+              New Dream
+            </NavLink>
+          </div>
           <div className='tab flex'>
             <i className="fa-solid fa-house-chimney"></i>
             <NavLink to='/dashboard'>

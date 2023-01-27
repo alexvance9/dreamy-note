@@ -34,10 +34,13 @@ function App() {
       {loaded && (
       <Switch>
         <ProtectedRoute path='/dreams' exact={true} >
-          <DreamsTab/>
+          <DreamsTab isNew={false}/>
+        </ProtectedRoute>
+        <ProtectedRoute path='/dreams/new' exact={true} >
+          <DreamsTab isNew={true}/>
         </ProtectedRoute>
         <ProtectedRoute path='/dreams/:dreamId' exact={true} >
-          <DreamsTab />
+          <DreamsTab isNew={false}/>
         </ProtectedRoute>
         <ProtectedRoute path='/dashboard' exact={true}>
           <Dashboard />
