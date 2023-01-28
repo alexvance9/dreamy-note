@@ -8,6 +8,7 @@ import { updateDream } from "../../store/session";
 import { getSingleDream } from "../../store/dream";
 import OpenModalButton from "../OpenModalButton";
 import DeleteDreamModal from "../DeleteDreamModal";
+import './DreamDetail.css'
 
 /* This component shows a nicely rendered view of a particular 
     dream entry, and handles editing of the dream.*/
@@ -53,6 +54,7 @@ const DreamDetail = ({dreamProp}) => {
             await setEditBody(data.body)
             const parsedBody = parse(data.body)
             await setValue(parsedBody)
+            // await setIsEdit(false)
             await setIsLoaded(true);
         })();
     }, [dispatch, currentDream.id]);
@@ -85,6 +87,7 @@ const DreamDetail = ({dreamProp}) => {
                 setErrors(data);
             } else {
                 // TODO
+                // await setTitle()
                 await setValue(parse(editBody))
                 await setIsEdit(false)
             }
@@ -95,19 +98,19 @@ const DreamDetail = ({dreamProp}) => {
     let detailComponents;
     if (isEdit) {
         detailComponents = (
-            <>
-                <div>
+            <div className="dream-edit-view">
+                <div className={errors.length ? "edit-dream-errors" : "hidden-errors"}>
                     {errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
-                <div>this will be the edit a dream form</div>
+                <h2>Edit Your Dream</h2>
                 <form onSubmit={saveChanges}>
-                    <div>
+                    <div className="edit-title flex">
                         <label htmlFor="title">Title</label>
                         <input name='title' type='text' value={title} onChange={e => setTitle(e.target.value)}/>
                     </div>
-                    <div>
+                    <div className="edit-date flex">
                         <label htmlFor="date">Date</label>
                         <input name='date' type='date' value={date} onChange={e => setDate(e.target.value)} />
                     </div>
@@ -115,25 +118,29 @@ const DreamDetail = ({dreamProp}) => {
                        
                     <button type="submit" >this will save the changes</button>
                 </form>
-            </>
+            </div>
         )
     } else {
         detailComponents = (
-            <>
-                <div>this will be the detail page</div>
-                {/* TODO */}
-                <div>{value}</div>
-                <button onClick={openEditor}>edit the dream</button>
-                <OpenModalButton
-                    buttonText="Delete this Dream"
-                    modalComponent={<DeleteDreamModal currentDreamId={selectedDream.id}/>}
-                />
-            </>
+            <div className="dream-detail-view">
+                <div className="dream-detail-header">
+                    <div className="detail-date">{date}</div>
+                    <div className="detail-title">{title}</div>
+                    <div className="detail-button-container">
+                        <button onClick={openEditor}>Edit Dream</button>
+                        <OpenModalButton
+                            buttonText="Delete Dream"
+                            modalComponent={<DeleteDreamModal currentDreamId={selectedDream.id} />}
+                        />
+                    </div>
+                </div>
+                <div className="detail-body">{value}</div> 
+            </div>
         )
     }
 
     return (
-        <div key={dreamProp}>{detailComponents}</div>
+        <div className='dream-detail-container' key={dreamProp}>{detailComponents}</div>
     )
 }
 

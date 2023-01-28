@@ -1,0 +1,119 @@
+.dream-detail-container {
+    width: 100%;
+    background-color: rgb(25, 10, 33);
+    display: flex;
+    overflow: auto;
+    height: 100%;
+    /* border: 2px solid aqua; */
+}
+
+.dream-detail-view {
+    background-color: rgb(25, 10, 33);
+    color: rgb(198, 195, 195);
+    /* border: 2px solid green; */
+    width: 90%;
+    height: fit-content;
+    margin: 0 auto;
+    /* padding: 15px; */
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.dream-detail-header {
+    /* border: 2px solid red; */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: inherit;
+    width: 100%;
+    height: 3rem;
+    margin: 0;
+    position: sticky;
+    top: 0;
+    padding-top: 10px;
+    /* border-radius: 0 0 1rem 1rem; */
+}
+
+.detail-date {
+    font-size: small;
+    color: rgb(128, 255, 0)
+}
+.detail-title{
+    font-size: x-large;
+    font-weight: 600;
+    color: white;
+}
+
+.detail-body {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgb(48, 47, 47);
+    min-height: 40vh;
+    border-radius: 1rem;
+}
+
+.detail-button-container {
+    display: flex;
+    /* border: 2px solid pink; */
+}
+
+.detail-button-container > button {
+    background-color: inherit;
+    color:rgb(128, 255, 0);
+    font-weight: 600;
+    border: 1.5px solid rgb(128, 255, 0);
+    border-radius: .5rem;
+    padding: 5px;
+    margin: 0 5px
+}
+
+
+
+/* EDIT DREAM VIEW */
+.dream-edit-view {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+.dreeam-edit-view > * {
+    border: none;
+}
+
+.edit-title {
+   /* border: 2px solid pink; */
+   padding: 0 20px 20px 0;
+}
+.edit-title > label {
+    font-size: large;
+    font-weight: 600;
+    padding-right: 20px;
+}
+.edit-date{
+    padding: 0 20px 20px 0;
+}
+.edit-date > label {
+    font-size: large;
+    font-weight: 600;
+    padding-right: 20px;
+}
+
+.hidden-errors {
+    visibility: hidden;
+}
+
+.quill {
+    background-color: rgb(48, 47, 47);
+    /* border-radius: 1rem; */
+}
+
+
+
+.ql-toolbar {
+    background-color: rgb(198, 195, 195);
+}
+

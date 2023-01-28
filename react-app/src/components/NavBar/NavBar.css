@@ -1,7 +1,7 @@
 .app-nav {
     display: flex;
     width: 20%;
-    background-color: rgb(18, 3, 46);
+    background-color: rgb(25, 10, 33);
     /* background-color: black; */
     box-sizing: border-box;
     margin: 0;
@@ -14,8 +14,8 @@
 }
 
 .username {
-    color: rgb(241, 220, 56);
-    font-size: 16px;
+    color: rgb(128, 255, 0);
+    font-size: 18px;
     /* border: 2px solid red */
 }
 
@@ -26,15 +26,16 @@
     height: 100%;
 }
 
-.owl-icon {
+.sheep-icon {
+    /* border: 2px solid chartreuse; */
     display: flex;
     box-sizing: border-box;
-    width: 40px;
-    height: 40px;
+    width: 70px;
+    height: 70px;
     margin-right: 10px;
 }
 
-.user-owl-img {
+.user-sheep-img {
     height: 100%;
     width: 100%;
     object-fit: contain;
@@ -44,7 +45,7 @@
     margin: 20px auto;
     padding-bottom: 10px;
     box-sizing: border-box;
-    border-bottom: 2px solid rgb(64, 57, 166);
+    border-bottom: 2px solid rgb(128, 255, 0);
     width: 85%;
 }
 
@@ -54,12 +55,13 @@
 }
 
 .logout-button > button {
-    background-color: rgb(64, 57, 166);
-    /* background-color: rgb(94, 72, 21); */
+    /* background-color: rgb(64, 57, 166); */
+    background-color: rgb(42, 41, 41);
     color: rgb(198, 195, 195);
     border: none;
     border-radius: 10px;
-    width: 100%;
+    width: 70%;
+    margin: 0 auto;
     padding: 5px;
 }
 
@@ -98,8 +100,8 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
-    background-color: rgb(241, 220, 56);
-    color: rgb(64, 57, 166);
+    background-color: rgb(128, 255, 0);
+    color: black;
     /* background-color: rgb(64, 57, 166); */
     font-weight: bolder;
     border-radius: 1rem;
