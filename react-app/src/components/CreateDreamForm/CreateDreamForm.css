@@ -1,0 +1,48 @@
+.dream-form-container {
+    display: flex;
+    flex-direction: column;
+    color: rgb(214, 212, 212);
+    margin: 0 auto;
+    align-items: center;
+    width: 80%;
+}
+
+.dream-form-container > form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.create-dream-button {
+    align-self: end;
+        margin-top: 40px;
+}
+
+.create-dream-button > button {
+    background-color: rgb(128, 255, 0);
+    border: none;
+    border-radius: .5rem;
+    padding: 5px;
+    font-weight: 600;
+}
+
+.create-title {
+    /* border: 2px solid pink; */
+    padding: 0 20px 20px 0;
+}
+
+.create-title>label {
+    font-size: large;
+    font-weight: 600;
+    padding-right: 20px;
+}
+
+.create-date {
+    padding: 0 20px 20px 0;
+}
+
+.create-date>label {
+    font-size: large;
+    font-weight: 600;
+    padding-right: 20px;
+}

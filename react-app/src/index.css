@@ -20,3 +20,10 @@ body {
     flex-direction: column;
 }
 
+button {
+    cursor: pointer;
+}
+
+i[class*='fa'] {
+    color: rgb(128, 255, 0);
+}

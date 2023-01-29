@@ -54,7 +54,7 @@ const DreamDetail = ({dreamProp}) => {
             await setEditBody(data.body)
             const parsedBody = parse(data.body)
             await setValue(parsedBody)
-            // await setIsEdit(false)
+            await setIsEdit(false)
             await setIsLoaded(true);
         })();
     }, [dispatch, currentDream.id]);
@@ -115,8 +115,10 @@ const DreamDetail = ({dreamProp}) => {
                         <input name='date' type='date' value={date} onChange={e => setDate(e.target.value)} />
                     </div>
                     <ReactQuill theme='snow' value={editBody} onChange={setEditBody}/>
-                       
-                    <button type="submit" >this will save the changes</button>
+
+                    <div className="edit-form-button">
+                    <button type="submit" >Save Changes</button>
+                    </div>
                 </form>
             </div>
         )
