@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { createDream } from "../../store/session";
+import './CreateDreamForm.css'
 
 const CreateDreamForm = () => {
     const dispatch = useDispatch()
@@ -38,24 +39,26 @@ const CreateDreamForm = () => {
 
     return (
         <div className="dream-form-container">
-            <div>
+            <div className={errors.length ? "create-dream-errors" : "hidden-errors"}>
                 {errors.map((error, ind) => (
                     <div key={ind}>{error}</div>
                 ))}
             </div>
-            <div>this will be the edit a dream form</div>
+            <h2>New Dream</h2>
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className="create-title">
                     <label htmlFor="title">Title</label>
                     <input name='title' type='text' value={title} onChange={e => setTitle(e.target.value)} />
                 </div>
-                <div>
+                <div className="create-date">
                     <label htmlFor="date">Date</label>
                     <input name='date' type='date' value={date} onChange={e => setDate(e.target.value)} />
                 </div>
                 <ReactQuill theme='snow' value={body} onChange={setBody} />
-                
+
+                <div className="create-dream-button">
                 <button type="submit" >this will save the dream</button>
+                </div>
             </form>
         </div>
     )

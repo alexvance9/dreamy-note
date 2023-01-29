@@ -8,11 +8,12 @@ import CreateDreamForm from "../CreateDreamForm";
 import './DreamsTab.css'
 
 const DreamsTab = ({isNew}) => {
+    // see note
+
     // grab the current user from state
-    // const sessionUser = useSelector(state => state.session.user);
     // dreams live on the user slice of state
-    // const dreams = sessionUser.dreams
     const dispatch = useDispatch()
+    
     const dreams = useSelector(state => state.session.user.dreams)
 
     const [isLoaded, setIsLoaded] = useState(false)
@@ -59,12 +60,15 @@ const DreamsTab = ({isNew}) => {
     let renderPage;
     if (isNew) {
         renderPage = (
-            <CreateDreamForm />
+            <div className="render-view-container">
+                <CreateDreamForm />
+            </div>
         )
     } else {
         renderPage = (
-            <DreamDetail dreamProp={d} />
-            // <div>nada</div>
+            <div className="render-view-container">
+                <DreamDetail dreamProp={d} />
+            </div>
         )
     }
 
