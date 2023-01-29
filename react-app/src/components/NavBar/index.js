@@ -7,7 +7,7 @@ import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../auth/LoginFormModal';
 import SignUpFormModal from '../auth/SignUpFormModal';
 import './NavBar.css'
-import owl from '../../assets/owl.png'
+import sheep from '../../assets/sheep.png'
 
 
 
@@ -20,9 +20,9 @@ const NavBar = ({loaded}) => {
     sessionLinks = (
       <div className='logged-in-nav'>
         <div className='linavtop flexcol'>
-          <div className='flex user'>
-            <div className='owl-icon'>
-              <img className='user-owl-img' alt='owl icon' src={owl} />
+          <div className='flexcol user'>
+            <div className='sheep-icon'>
+              <img className='user-sheep-img' alt='sheep icon' src={sheep} />
             </div>
             <div className='username'>Hello, {sessionUser.username}.</div>
           </div>

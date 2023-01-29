@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deleteDream } from "../../store/session";
+import './DeleteDreamModal.css'
+import sheep from '../../assets/sheep.png'
 
 
 function DeleteDreamModal({ currentDreamId }) {
@@ -44,11 +46,16 @@ function DeleteDreamModal({ currentDreamId }) {
             </div>
             <h2>Are you sure you want to delete this Dream?</h2>
             <h4>It will be lost to the Dream void</h4>
-            <button onClick={handleDelete}>Yes, Delete it.</button>
-            <button onClick={closeModal}>No, Dont!</button>
+            <div className='sheep-icon'>
+                <img className='user-sheep-img' alt='sheep icon' src={sheep} />
+            </div>
+            <div className="delete-buttons">
+            <button className="yes-delete" onClick={handleDelete}>Yes, Delete it.</button>
+            <button className='no-delete' onClick={closeModal}>No, Dont!</button>
+            </div>
         </div>
     )
-
 }
+
 
 export default DeleteDreamModal;
