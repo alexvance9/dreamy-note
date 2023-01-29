@@ -11,8 +11,11 @@ class Dream(db.Model):
     date = db.Column(db.Date, nullable=False)
     body = db.Column(db.Text, nullable=False)
     dreamer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+    journal_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('journals.id')))
 
     dreamer = db.relationship("User", back_populates="dreams")
+
+    journal = db.relationship("Journal", back_populates="entries")
 
     def to_dict(self):
         return {

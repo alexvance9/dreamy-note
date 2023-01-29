@@ -16,6 +16,8 @@ class User(db.Model, UserMixin):
 
     dreams = db.relationship("Dream", back_populates="dreamer")
 
+    journals = db.relationship("Journal", back_populates="user")
+
     @property
     def password(self):
         return self.hashed_password
