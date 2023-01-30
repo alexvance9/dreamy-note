@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: e002a7087c6a
+Revision ID: 89f6ee66532b
 Revises: 
-Create Date: 2023-01-29 16:48:54.180619
+Create Date: 2023-01-30 07:18:45.721949
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e002a7087c6a'
+revision = '89f6ee66532b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,7 +33,7 @@ def upgrade():
     sa.Column('date_created', sa.Date(), nullable=False),
     sa.Column('last_updated', sa.Date(), nullable=True),
     sa.Column('dreamer_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['dreamer_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['dreamer_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('dreams',
@@ -43,8 +43,8 @@ def upgrade():
     sa.Column('body', sa.Text(), nullable=False),
     sa.Column('dreamer_id', sa.Integer(), nullable=True),
     sa.Column('journal_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['dreamer_id'], ['users.id'], ),
-    sa.ForeignKeyConstraint(['journal_id'], ['journals.id'], ),
+    sa.ForeignKeyConstraint(['dreamer_id'], ['users.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['journal_id'], ['journals.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

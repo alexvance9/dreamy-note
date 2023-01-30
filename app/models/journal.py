@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from datetime import date
 
 class Journal(db.Model):
     __tablename__ = 'journals'
@@ -10,11 +11,11 @@ class Journal(db.Model):
     title = db.Column(db.String, nullable=False)
     date_created = db.Column(db.Date, nullable=False)
     last_updated = db.Column(db.Date, nullable=True)
-    dreamer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+    dreamer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete="CASCADE"))
 
     user = db.relationship("User", back_populates="journals")
 
-    entries = db.relationship("Dream", back_populates="journal")
+    entries = db.relationship("Dream", back_populates="journal", cascade="all, delete")
 
     def to_dict(self):
         return {
@@ -22,5 +23,10 @@ class Journal(db.Model):
             'title': self.title,
             'dateCreated': self.date_created,
             'lastUpdated': self.last_updated,
-            'entries': self.entries
+            'entries': [entry.to_journal_dict() for entry in self.entries]
         }
+    
+
+    def set_last_updated(self):
+        new_date = date.now()
+        self.last_updated = new_date

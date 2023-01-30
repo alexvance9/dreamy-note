@@ -10,10 +10,10 @@ class Dream(db.Model):
     title = db.Column(db.String, nullable=False)
     date = db.Column(db.Date, nullable=False)
     body = db.Column(db.Text, nullable=False)
-    dreamer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
-    journal_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('journals.id')))
+    dreamer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete="CASCADE"))
+    journal_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('journals.id'), ondelete="CASCADE"))
 
-    dreamer = db.relationship("User", back_populates="dreams")
+    dreamer = db.relationship("User", back_populates="dreams", )
 
     journal = db.relationship("Journal", back_populates="entries")
 
@@ -23,5 +23,14 @@ class Dream(db.Model):
             'title': self.title,
             'date': self.date,
             'body': self.body,
-            'journal': self.journal
+            'journal': self.journal.to_dict()
+        }
+    
+
+    def to_journal_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'date': self.date,
+            'body': self.body
         }

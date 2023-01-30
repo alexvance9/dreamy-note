@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from datetime import date
-from app.models import Dream, db
+from app.models import Dream, Journal, db
 from flask_login import current_user, login_required
 from app.forms import DreamForm
 from.auth_routes import validation_errors_to_error_messages
@@ -15,29 +15,33 @@ def create_dream():
     """
     Creates a new dream entry, returns current user 
     Dispatch wants user to update user slice of state, which includes the users dreams.
+    also updates journal.last_updated
     """
     
     form = DreamForm()
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        journal = Journal.query.get(form.data['journal_id'])
 
         new_dream = Dream(
             title=form.data['title'],
             date=form.data['date'],
             body=form.data['body'],
-            dreamer_id=current_user.id
+            dreamer_id=current_user.id,
+            journal_id=form.data['journal_id']
         )
 
         db.session.add(new_dream)
         db.session.commit()
+        journal.set_last_updated()
         return current_user.to_dict(), 200
     
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @dream_routes.route('/<int:id>', methods=['PUT'])
-# @login_required
+@login_required
 def update_dream(id):
     """
     updates an existing dream entry, returns current user 
@@ -57,9 +61,11 @@ def update_dream(id):
         current_dream.title = form.data['title']
         current_dream.date = form.data['date']
         current_dream.body = form.data['body']
+        current_dream.journal_id = form.data['journal_id']
 
         db.session.add(current_dream)
         db.session.commit()
+        current_dream.journal.set_last_updated()
         return current_user.to_dict(), 200
     
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -77,8 +83,10 @@ def delete_dream(id):
     if not current_dream:
         return {'errors': ['Could not find dream']}, 404
     
+    current_dream.journal.set_last_updated()
     db.session.delete(current_dream)
     db.session.commit()
+
     return current_user.to_dict(), 200
 
 

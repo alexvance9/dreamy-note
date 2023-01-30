@@ -13,9 +13,10 @@ const CreateDreamForm = () => {
     const [errors, setErrors] = useState([]);
     const [title, setTitle] = useState("")
     const [date, setDate] = useState("")
+    // const [journal, setJournal] = useState("")
     const [body, setBody] = useState("")
 
-    // console.log(date)
+    
 
     const handleDate = (str) => {
 
