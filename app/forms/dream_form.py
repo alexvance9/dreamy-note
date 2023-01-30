@@ -1,6 +1,11 @@
+from datetime import date
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateField, TextAreaField
 from wtforms.validators import DataRequired, ValidationError
+
+def not_future(form, field):
+    if field.data > date.today():
+        raise ValidationError('Dream date cannot be in the future.')
 
 class DreamForm(FlaskForm):
     title = StringField('title', validators=[DataRequired(message='Please give your Dream a Title')])

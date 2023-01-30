@@ -22,5 +22,6 @@ class Dream(db.Model):
             'id': self.id,
             'title': self.title,
             'date': self.date,
-            'body': self.body
+            'body': self.body,
+            'journal': self.journal
         }
