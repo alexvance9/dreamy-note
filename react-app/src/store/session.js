@@ -104,7 +104,7 @@ export const signUp = (username, email, password) => async (dispatch) => {
 
 /*---------- DREAM THUNKS ---------- */
 
-export const createDream = (title, date, body) => async (dispatch) => {
+export const createDream = (title, date, body, journalId) => async (dispatch) => {
   const response = await fetch('/api/dreams', {
     method: 'POST',
     headers: {
@@ -113,7 +113,8 @@ export const createDream = (title, date, body) => async (dispatch) => {
     body: JSON.stringify({
       title,
       date,
-      body
+      body,
+      journal_id: journalId
     })
   })
 

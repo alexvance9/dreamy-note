@@ -11,11 +11,12 @@ const loadDreams = (data) => ({
 
 /* --------- JOURNAL THUNKS ---------- */
 
-export const loadDreamsThunk = () => async (dispatch) => {
+export const loadJournalsThunk = () => async (dispatch) => {
     const response = await fetch('/api/journals')
 
     if (response.ok) {
         const data = await response.json()
+        console.log(data)
         dispatch(loadDreams(data))
         return null
     } else if (response.status < 500) {
@@ -35,7 +36,8 @@ export default function reducer(state = initialState, action) {
     switch (action.type) {
         case LOAD_JOURNALS: {
             const newState = {journals : {}}
-                action.data.forEach( journal => newState.journals[journal.id] = journal)
+            // console.log("action.data", action.payload)
+                action.payload.forEach( journal => newState.journals[journal.id] = journal)
             return newState;
         }
         default:

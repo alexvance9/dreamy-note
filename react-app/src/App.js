@@ -10,6 +10,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import { authenticate } from './store/session';
 import Dashboard from './components/Dashboard';
 import DreamsTab from './components/DreamsTab';
+import JournalsTab from './components/JournalsTab';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -33,6 +34,9 @@ function App() {
       <NavBar loaded={loaded}/>
       {loaded && (
       <Switch>
+        <ProtectedRoute path='/journals' exact={true} >
+          <JournalsTab/>
+        </ProtectedRoute>
         <ProtectedRoute path='/dreams' exact={true} >
           <DreamsTab isNew={false}/>
         </ProtectedRoute>

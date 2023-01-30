@@ -28,5 +28,5 @@ class Journal(db.Model):
     
 
     def set_last_updated(self):
-        new_date = date.now()
+        new_date = date.today()
         self.last_updated = new_date

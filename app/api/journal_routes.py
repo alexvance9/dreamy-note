@@ -17,7 +17,7 @@ def get_journals():
     """
     user_journals = Journal.query.filter(Journal.dreamer_id == current_user.id).all()
 
-    return [journal.to_dict() for journal in user_journals], 200
+    return jsonify([journal.to_dict() for journal in user_journals]), 200
 
 
 
