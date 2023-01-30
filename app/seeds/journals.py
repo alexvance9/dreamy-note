@@ -1,25 +1,26 @@
 from app.models import db, Journal, environment, SCHEMA
+from datetime import date
 
 
 # Adds a demo user, you can add other users here if you want
 def seed_journals():
     journal1 = Journal(
-        title='Journal #1', dreamer_id=1
+        title='Journal #1', date_created=date(2022, 6, 1), dreamer_id=1
     )
     journal2 = Journal(
-        title='Greece Trip', dreamer_id=1
+        title='Greece Trip', date_created=date(2022, 6, 1), dreamer_id=1
     )
     journal3 = Journal(
-        title='Freshman Year', dreamer_id=2
+        title='Freshman Year', date_created=date(2022, 6, 1), dreamer_id=2
     )
     journal4 = Journal(
-        title='Journal #1', dreamer_id=2
+        title='Journal #1', date_created=date(2022, 6, 1), dreamer_id=2
     )
     journal5 = Journal(
-        title='Good Dreams', dreamer_id=3
+        title='Good Dreams', date_created=date(2022, 6, 1), dreamer_id=3
     )
     journal6 = Journal(
-        title='Bad Dreams', dreamer_id=3
+        title='Bad Dreams', date_created=date(2022, 6, 1), dreamer_id=3
     )
    
     journals = [journal1, journal2, journal3, journal4, journal5, journal6]
