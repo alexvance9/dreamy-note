@@ -34,9 +34,10 @@ const DreamsTab = ({isNew}) => {
     
     // If there is a url param, grab it. else, we will render the details of the 
     // first dream in the list. 
+    console.log(params)
         
         let currentDreamId;
-        if (Object.keys(params).length){
+        if (params.dreamId){
             currentDreamId = Number(params.dreamId)
             // setCurrentDream(currentDreamId)
         } else {
