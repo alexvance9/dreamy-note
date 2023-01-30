@@ -19,6 +19,7 @@ const DreamDetail = ({dreamProp}) => {
 
     // grab dream slice of state
     const selectedDream = useSelector(state => state.dream.dream)
+    const userJournals = useSelector(state => state.session.user.journals)
    
     const dispatch = useDispatch()
     const [isLoaded, setIsLoaded] = useState(false)
@@ -28,6 +29,7 @@ const DreamDetail = ({dreamProp}) => {
 
     const [title, setTitle] = useState('') //string
     const [date, setDate] = useState('') //date string in yyyy-mm-dd 
+    const [journalId, setJournalId] = useState('')
     const [value, setValue] = useState('') //this is the value of the 'body' after being parsed by the react html parser
     const [editBody, setEditBody] = useState('') // this is the value of the body before being parsed, so still html string
 
@@ -50,6 +52,7 @@ const DreamDetail = ({dreamProp}) => {
             // dream.date is a json date so needs to be handled
             const handledDate = dateHandler(data.date)
             await setDate(handledDate)
+            await setJournalId(data.journal.id)
             // edit body is what shows in the editor, value is the parsed body to display outside of the editor
             await setEditBody(data.body)
             const parsedBody = parse(data.body)
@@ -81,7 +84,7 @@ const DreamDetail = ({dreamProp}) => {
         const strDate = dateHandler(date)
         
 
-        const data = await dispatch(updateDream(title, strDate, body, dreamId))
+        const data = await dispatch(updateDream(title, strDate, body, dreamId, journalId))
             if (data) {
                 console.log(data)
                 setErrors(data);
@@ -113,6 +116,14 @@ const DreamDetail = ({dreamProp}) => {
                     <div className="edit-date flex">
                         <label htmlFor="date">Date</label>
                         <input name='date' type='date' value={date} onChange={e => setDate(e.target.value)} />
+                    </div>
+                    <div className="journal-select">
+                        <select name="journal" value={journalId} onChange={e => setJournalId(e.target.value)}>
+                            <option value="">Select a Journal...</option>
+                            {userJournals.map(journal => (
+                                <option key={journal.id} value={journal.id}>{journal.title}</option>
+                            ))}
+                        </select>
                     </div>
                     <ReactQuill theme='snow' value={editBody} onChange={setEditBody}/>
 

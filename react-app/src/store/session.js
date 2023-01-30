@@ -137,7 +137,7 @@ export const createDream = (title, date, body, journalId) => async (dispatch) =>
 }
 
 
-export const updateDream = (title, date, body, dreamId) => async (dispatch) => {
+export const updateDream = (title, date, body, dreamId, journalId) => async (dispatch) => {
   // dreamId must be sent from FE
   const response = await fetch(`/api/dreams/${dreamId}`, {
     method: 'PUT',
@@ -147,7 +147,8 @@ export const updateDream = (title, date, body, dreamId) => async (dispatch) => {
     body: JSON.stringify({
       title,
       date,
-      body
+      body,
+      journal_id: journalId
     })
   })
 
