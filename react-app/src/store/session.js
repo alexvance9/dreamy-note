@@ -104,7 +104,7 @@ export const signUp = (username, email, password) => async (dispatch) => {
 
 /*---------- DREAM THUNKS ---------- */
 
-export const createDream = (title, date, body) => async (dispatch) => {
+export const createDream = (title, date, body, journalId) => async (dispatch) => {
   const response = await fetch('/api/dreams', {
     method: 'POST',
     headers: {
@@ -113,7 +113,8 @@ export const createDream = (title, date, body) => async (dispatch) => {
     body: JSON.stringify({
       title,
       date,
-      body
+      body,
+      journal_id: journalId
     })
   })
 
@@ -136,7 +137,7 @@ export const createDream = (title, date, body) => async (dispatch) => {
 }
 
 
-export const updateDream = (title, date, body, dreamId) => async (dispatch) => {
+export const updateDream = (title, date, body, dreamId, journalId) => async (dispatch) => {
   // dreamId must be sent from FE
   const response = await fetch(`/api/dreams/${dreamId}`, {
     method: 'PUT',
@@ -146,7 +147,8 @@ export const updateDream = (title, date, body, dreamId) => async (dispatch) => {
     body: JSON.stringify({
       title,
       date,
-      body
+      body,
+      journal_id: journalId
     })
   })
 
