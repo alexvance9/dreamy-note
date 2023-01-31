@@ -5,6 +5,7 @@ import { authenticate } from "../../store/session";
 import DreamDetail from "../DreamDetail";
 import DreamNav from "./DreamsNav"
 import CreateDreamForm from "../CreateDreamForm";
+import {loadJournalsThunk} from '../../store/journals'
 import './DreamsTab.css'
 
 const DreamsTab = ({isNew}) => {
@@ -29,6 +30,7 @@ const DreamsTab = ({isNew}) => {
     useEffect(() => {
         (async () => {
             await dispatch(authenticate());
+            await dispatch(loadJournalsThunk());
             setIsLoaded(true);
         })();
     }, [dispatch]);
