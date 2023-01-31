@@ -48,9 +48,7 @@ const DreamsTab = ({isNew}) => {
         
 
     if (!isLoaded) {
-        return (
-            <div>just loading from tab!</div>
-        )
+        return null
     }
 
     

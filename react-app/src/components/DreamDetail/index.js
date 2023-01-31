@@ -87,6 +87,8 @@ const DreamDetail = ({dreamProp}) => {
     // handles edit form submit
     const saveChanges = async(e) => {
         e.preventDefault()
+        // add validations for date
+
        let body;
         if (bodyHasContent(editBody)){
              body = editBody //html string, not parsed
@@ -97,8 +99,6 @@ const DreamDetail = ({dreamProp}) => {
        
         const dreamId = selectedDream.id
         const strDate = dateHandler(date)
-        
-        
 
         const data = await dispatch(updateDream(title, strDate, body, dreamId, journalId))
             if (data) {

@@ -25,14 +25,14 @@ const CreateDreamForm = () => {
     // console.log('journal titles: ', journalTitlesList)
 
     
-
+// yyyy-mm-dd
     const handleDate = (str) => {
-
-        const dateStr = new Date(str).toISOString().split('T')[0].toString()
+        const dateStr = new Date(str).toISOString().split('T')[0]?.toString()
         return dateStr
     }
 
     const bodyHasContent = (body) => {
+        console.log(body)
         const htmlRegex = /(<([^>]+)>)/ig
         const whiteSpaceRegex = /\s/g
         let noHtml = body.replace(htmlRegex, "")
@@ -42,6 +42,7 @@ const CreateDreamForm = () => {
 
    const handleSubmit = async (e) => {
         e.preventDefault()
+// todo validate date exists
 
         const submitDate = handleDate(date)
         if (bodyHasContent(body)){

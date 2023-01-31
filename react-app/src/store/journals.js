@@ -1,5 +1,6 @@
 // Constants
-const LOAD_JOURNALS = 'journals/LOAD_DREAMS';
+const LOAD_JOURNALS = 'journals/LOAD_JOURNALS';
+const LOAD_SINGLE_JOURNAL = 'journals/LOAD_SINGLE_JOURNAL'
 const ADD_JOURNAL = 'journals/ADD_JOURNAL';
 const EDIT_JOURNAL = 'journals/EDIT_JOURNAL';
 const DELETE_JOURNAL = 'journals/DELETE_JOURNAL';
@@ -21,6 +22,11 @@ const editJournal = (data) => ({
     payload: data
 })
 
+const loadSingleJournal = (data) => ({
+    type: LOAD_SINGLE_JOURNAL,
+    payload: data
+})
+
 // const deleteJournal = () => ({
 //     type: DELETE_JOURNAL
 // })
@@ -39,6 +45,24 @@ export const loadJournalsThunk = () => async (dispatch) => {
     } else if (response.status < 500) {
         const data = response.json()
         if(data.errors){
+            return data.errors
+        }
+    } else {
+        return ['an error ocurred at load journals, please try again.']
+    }
+}
+
+export const loadSingleJournalThunk = (journalId) => async (dispatch) => {
+    const response = await fetch(`/api/journals/${journalId}`)
+
+    if (response.ok) {
+        const data = await response.json()
+        console.log(data)
+        dispatch(loadSingleJournal(data))
+        return null
+    } else if (response.status < 500) {
+        const data = response.json()
+        if (data.errors) {
             return data.errors
         }
     } else {
@@ -121,23 +145,28 @@ export const deleteJournalThunk = (journalId) => async (dispatch) => {
 }
 
 
-const initialState = { journals: {} }
+const initialState = { journals: {}, singleJournal: {} }
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case LOAD_JOURNALS: {
-            const newState = {journals : {}}
+            const newState = {journals : {}, singleJournal: {}}
             // console.log("action.data", action.payload)
                 action.payload.forEach( journal => newState.journals[journal.id] = journal)
             return newState;
         }
+        case LOAD_SINGLE_JOURNAL: {
+            const newState = { journals: {...state.journals}, singleJournal: {}}
+            newState.singleJournal = action.payload
+            return newState;
+        }
         case ADD_JOURNAL: {
-            const newState = {journals: {...state.journals}}
+            const newState = {journals: {...state.journals}, singleJournal: {}}
             newState.journals[action.payload.id] = action.payload;
             return newState;
         }
         case EDIT_JOURNAL: {
-            const newState = { journals: { ...state.journals } }
+            const newState = { journals: { ...state.journals }, singleJournal: {} }
             newState.journals[action.payload.id] = action.payload;
             return newState;
         }
