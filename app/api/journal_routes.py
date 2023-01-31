@@ -43,7 +43,7 @@ def create_journal():
     """
     Creates a new journal, returns journal.to_dict
     """
-
+    print('got to journal route')
     form = JournalForm()
 
     form['csrf_token'].data = request.cookies['csrf_token']
