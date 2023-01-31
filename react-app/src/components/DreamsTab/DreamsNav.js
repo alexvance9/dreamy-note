@@ -13,7 +13,7 @@ const DreamNav = ({dreams}) => {
             </div>
             <div className="dream-cards-container flexcol">
                 {dreams.map(dream => (
-                    <NavLink to={`/dreams/${dream.id}`} key={dream.id} className='dream-card-nav'>
+                    <NavLink to={`/dreams/${dream.id}`} key={dream.id} className='dream-card-nav' activeClassName="selected-dream-card">
                         <DreamCard dream={dream} />
                     </NavLink>
                 ))}
