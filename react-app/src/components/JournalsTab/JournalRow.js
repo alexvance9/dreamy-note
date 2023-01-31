@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { NavLink } from "react-router-dom";
 import OpenModalButton from '../OpenModalButton';
 import EditJournalModal from './EditJournalModal';
 import DeleteJournalModal from "./DeleteJournalModal";
@@ -43,7 +44,7 @@ const JournalRow = ({journal}) => {
     )
     return (
         <tr>
-            <td>{journal.title}</td>
+            <td><NavLink to={`/journals/${journal.id}`}>{journal.title}</NavLink></td>
             <td>{journal.entries.length}</td>
             <td>{journal.lastUpdated}</td>
             <td>&mdash;</td>
