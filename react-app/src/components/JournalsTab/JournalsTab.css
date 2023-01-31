@@ -2,11 +2,11 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     background-color: rgb(34, 14, 45);
     color: rgb(214, 212, 212)
 }
 
 .hidden {
-    visibility: hidden;
+    display:none;
 }

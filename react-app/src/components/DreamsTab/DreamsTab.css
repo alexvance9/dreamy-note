@@ -72,7 +72,7 @@
     border-bottom: .25px solid rgb(138, 136, 136);
 }
 
-.selected-dream-card {
+.selected-dream-card > *{
     background-color: #323232;
     border: 2px solid rgb(128, 255, 0);
 }
