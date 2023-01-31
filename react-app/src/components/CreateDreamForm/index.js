@@ -32,17 +32,29 @@ const CreateDreamForm = () => {
         return dateStr
     }
 
+    const bodyHasContent = (body) => {
+        const htmlRegex = /(<([^>]+)>)/ig
+        const whiteSpaceRegex = /\s/g
+        let noHtml = body.replace(htmlRegex, "")
+        let notWhiteSpace = !!(noHtml.replace(whiteSpaceRegex, "").length)
+        return notWhiteSpace
+    }
+
    const handleSubmit = async (e) => {
         e.preventDefault()
 
         const submitDate = handleDate(date)
-
-        const data = await dispatch(createDream(title, submitDate, body, journalId))
-        if (data) {
-            console.log(data)
-            setErrors(data);
+        if (bodyHasContent(body)){
+            const data = await dispatch(createDream(title, submitDate, body, journalId))
+            if (data) {
+                console.log(data)
+                setErrors(data);
+            } else {
+                await history.push('/dreams')
+            }
         } else {
-            await history.push('/dreams')
+            setErrors(['Please Describe Your Dream'])
+            return
         }
     }
 

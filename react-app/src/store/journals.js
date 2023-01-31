@@ -21,9 +21,9 @@ const editJournal = (data) => ({
     payload: data
 })
 
-const deleteJournal = () => ({
-    type: DELETE_JOURNAL
-})
+// const deleteJournal = () => ({
+//     type: DELETE_JOURNAL
+// })
 
 
 /* --------- JOURNAL THUNKS ---------- */
@@ -107,7 +107,8 @@ export const deleteJournalThunk = (journalId) => async (dispatch) => {
     })
     if (response.ok) {
         // const data = await response.json()
-        dispatch(deleteJournal())
+        // dispatch(deleteJournal())
+        dispatch(loadJournalsThunk())
         return null
     } else if (response.status < 500) {
         const data = response.json()

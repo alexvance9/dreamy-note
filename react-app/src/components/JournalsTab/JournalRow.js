@@ -36,7 +36,7 @@ const JournalRow = ({journal}) => {
 
     const menuClassName = "journal-dropdown" + (showMenu ? "" : " hidden");
     const entryClassName = "journal-entry" + (showEntries ? "" : " hidden")
-    const entryButton = (showEntries ? <i class="fa-solid fa-caret-down"></i> : <i class="fa-solid fa-caret-right"></i> )
+    const entryButton = (showEntries ? <i className="fa-solid fa-caret-down"></i> : <i className="fa-solid fa-caret-right"></i> )
 
     const menuComponents = (
         <div className={menuClassName} ref={ulRef}>
@@ -60,7 +60,7 @@ const JournalRow = ({journal}) => {
             <td><button className='journals-menu' onClick={openMenu}><i className="fa-solid fa-ellipsis"></i></button>{menuComponents}</td>
         </tr>
         {journal.entries.map(entry => (
-            <tr className={entryClassName}>
+            <tr key={entry.id} className={entryClassName}>
                 <td>{entry.title}</td>
             </tr>
         ))}

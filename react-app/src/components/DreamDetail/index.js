@@ -70,6 +70,14 @@ const DreamDetail = ({dreamProp}) => {
         )
     }
 
+    const bodyHasContent = (body) => {
+        const htmlRegex = /(<([^>]+)>)/ig
+        const whiteSpaceRegex = /\s/g
+        let noHtml = body.replace(htmlRegex, "")
+        let notWhiteSpace = !!(noHtml.replace(whiteSpaceRegex, "").length)
+        return notWhiteSpace
+    }
+
     // edit button handler, when is edit is true it will render the edit form
     const openEditor = async (e) => {
         e.preventDefault()
@@ -79,9 +87,17 @@ const DreamDetail = ({dreamProp}) => {
     // handles edit form submit
     const saveChanges = async(e) => {
         e.preventDefault()
-        const body = editBody //html string, not parsed
+       let body;
+        if (bodyHasContent(editBody)){
+             body = editBody //html string, not parsed
+        } else {
+            setErrors(['Please describe your dream'])
+            return
+        }
+       
         const dreamId = selectedDream.id
         const strDate = dateHandler(date)
+        
         
 
         const data = await dispatch(updateDream(title, strDate, body, dreamId, journalId))
