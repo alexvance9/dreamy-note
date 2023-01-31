@@ -8,6 +8,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 // import UsersList from './components/UsersList';
 // import User from './components/User';
 import { authenticate } from './store/session';
+import { loadJournalsThunk } from './store/journals';
 import Dashboard from './components/Dashboard';
 import DreamsTab from './components/DreamsTab';
 import JournalsTab from './components/JournalsTab';
@@ -21,6 +22,7 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
+      await dispatch(loadJournalsThunk());
       setLoaded(true);
     })();
   }, [dispatch]);

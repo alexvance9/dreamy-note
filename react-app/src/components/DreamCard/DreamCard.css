@@ -2,11 +2,13 @@
 
 .dream-card {
     /* width: 100%; */
-    height: 22vh;
-    width: 85%;
+    height: 100%;
+    width: 90%;
     margin: auto;
-    border-radius: .5rem;
-    background-color: rgb(42, 41, 41);
+    /* border-radius: .5rem; */
+    border-top: .25px solid rgb(138, 136, 136);
+    /* background-color: rgb(42, 41, 41); */
+    
     color: rgb(214, 212, 212);
     display: flex;
     flex-direction: column;
@@ -22,8 +24,12 @@
     display: flex;
     flex-direction: column;
     max-height: 30%;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     overflow: hidden;
+}
+
+.card-body > *:not(:first-child) {
+    display: none;
 }
 
 .card-body > ul > li {
@@ -33,7 +39,7 @@
     overflow: hidden;
     margin: 0;
     padding: 0;
-    line-height: 2rem;
+    /* line-height: 2rem; */
 }
 .card-body > ol > li {
     /* display: flex; */
@@ -42,7 +48,7 @@
     overflow: hidden;
     margin: 0;
     padding: 0;
-    line-height: 2rem;
+    /* line-height: 2rem; */
 }
 .card-body > * {
     text-overflow: ellipsis;
@@ -50,7 +56,8 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    line-height: 2rem;
+    /* line-height: 2rem; */
+    font-size: 16px;
 }
 
 .card-date {

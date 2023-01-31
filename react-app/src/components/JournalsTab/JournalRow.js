@@ -8,11 +8,17 @@ import DeleteJournalModal from "./DeleteJournalModal";
 const JournalRow = ({journal}) => {
 
     const [showMenu, setShowMenu] = useState(false);
+    const [showEntries, setShowEntries] = useState(false);
     const ulRef = useRef();
     const openMenu = () => {
         if (showMenu) return;
         setShowMenu(true);
     };
+
+    const handleEntries = (e) => {
+        e.preventDefault()
+        setShowEntries(!showEntries)
+    }
 
     useEffect(() => {
         if (!showMenu) return;
@@ -29,6 +35,8 @@ const JournalRow = ({journal}) => {
     }, [showMenu]);
 
     const menuClassName = "journal-dropdown" + (showMenu ? "" : " hidden");
+    const entryClassName = "journal-entry" + (showEntries ? "" : " hidden")
+    const entryButton = (showEntries ? <i class="fa-solid fa-caret-down"></i> : <i class="fa-solid fa-caret-right"></i> )
 
     const menuComponents = (
         <div className={menuClassName} ref={ulRef}>
@@ -43,13 +51,20 @@ const JournalRow = ({journal}) => {
         </div>
     )
     return (
+        <>
         <tr>
-            <td><NavLink to={`/journals/${journal.id}`}>{journal.title}</NavLink></td>
+            <td><button onClick={handleEntries}>{entryButton}</button><NavLink to={`/journals/${journal.id}`}>{journal.title}</NavLink></td>
             <td>{journal.entries.length}</td>
             <td>{journal.lastUpdated}</td>
             <td>&mdash;</td>
             <td><button className='journals-menu' onClick={openMenu}><i className="fa-solid fa-ellipsis"></i></button>{menuComponents}</td>
         </tr>
+        {journal.entries.map(entry => (
+            <tr className={entryClassName}>
+                <td>{entry.title}</td>
+            </tr>
+        ))}
+        </>
     )
 }
 
