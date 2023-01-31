@@ -34,6 +34,9 @@ function App() {
       <NavBar loaded={loaded}/>
       {loaded && (
       <Switch>
+        <ProtectedRoute path='/journals/:journalId' exact={true} >
+          <DreamsTab/>
+        </ProtectedRoute>
         <ProtectedRoute path='/journals' exact={true} >
           <JournalsTab/>
         </ProtectedRoute>

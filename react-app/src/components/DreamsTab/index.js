@@ -13,8 +13,16 @@ const DreamsTab = ({isNew}) => {
     // grab the current user from state
     // dreams live on the user slice of state
     const dispatch = useDispatch()
-    
-    const dreams = useSelector(state => state.session.user.dreams)
+    let params = useParams()
+
+    const userDreams = useSelector(state => state.session.user.dreams)
+    const journals = useSelector(state => state.journals.journals)
+    let dreams;
+    if (params.journalId){
+        dreams = journals[params.journalId].entries
+    } else {
+        dreams = userDreams
+    }
 
     const [isLoaded, setIsLoaded] = useState(false)
 
@@ -28,13 +36,10 @@ const DreamsTab = ({isNew}) => {
     // console.log(isLoaded)
 
     /* --- WEIRD CONDITIONAL RENDERING OF DREAM PAGE VIEW--- */
-
-
-    let params = useParams()
     
     // If there is a url param, grab it. else, we will render the details of the 
     // first dream in the list. 
-    console.log(params)
+    
         
         let currentDreamId;
         if (params.dreamId){
