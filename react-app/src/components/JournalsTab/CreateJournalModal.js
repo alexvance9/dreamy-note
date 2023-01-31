@@ -21,6 +21,7 @@ const CreateJournalModal = () => {
 
     return (
         <form onSubmit={handleSubmit}>
+            <h2>Create A New Journal</h2>
             <div>
                 {errors.map((error, ind) => (
                     <div key={ind}>{error}</div>
@@ -31,7 +32,7 @@ const CreateJournalModal = () => {
                   type='text'
                   placeholder="Journal Title"
                   value={title}
-                  onChange={setTitle}    
+                  onChange={e => setTitle(e.target.value)}    
                 />
             </div>
             <button type='submit'>Create Journal</button>

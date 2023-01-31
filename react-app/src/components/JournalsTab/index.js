@@ -1,19 +1,22 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { loadJournalsThunk } from '../../store/journals';
+import OpenModalButton from '../OpenModalButton'
+import CreateJournalModal from './CreateJournalModal';
+
 import './JournalsTab.css'
+import JournalRow from './JournalRow';
 
 const JournalsTab = () => {
     const dispatch = useDispatch()
     const [isLoaded, setIsLoaded] = useState(false)
-    const [showMenu, setShowMenu] = useState(false);
-    const ulRef = useRef();
+    
 
 
     const journals = useSelector(state => state.journals.journals)
-    console.log("inside component:", journals)
+    // console.log("inside component:", journals)
     const journalsArr = Object.values(journals)
-    console.log("journals array: ", journalsArr)
+    // console.log("journals array: ", journalsArr)
 
 
     useEffect(() => {
@@ -23,33 +26,7 @@ const JournalsTab = () => {
         })();
     }, [dispatch]);
 
-    const openMenu = () => {
-        if (showMenu) return;
-        setShowMenu(true);
-    };
-
-    useEffect(() => {
-        if (!showMenu) return;
-
-        const closeMenu = (e) => {
-            if (!ulRef.current.contains(e.target)) {
-                setShowMenu(false);
-            }
-        };
-
-        document.addEventListener('click', closeMenu);
-
-        return () => document.removeEventListener("click", closeMenu);
-    }, [showMenu]);
-
-    const menuClassName = "journal-dropdown" + (showMenu ? "" : " hidden");
-
-    const menuComponents = (
-        <div className={menuClassName} ref={ulRef}>
-            <button>edit</button>
-            <button>delete</button>
-        </div>
-    )
+    
 
     if(!isLoaded) {
         return (
@@ -60,6 +37,13 @@ const JournalsTab = () => {
     return (
         <div className='journals-tab'>
             <h2>My Dream Journals</h2>
+            <div>
+            <OpenModalButton
+                buttonText="New Journal"
+                modalComponent={<CreateJournalModal />}
+            />
+            </div>
+
             <div className='journals-table' >
                 <table>
                     <thead>
@@ -73,13 +57,7 @@ const JournalsTab = () => {
                     </thead>
                     <tbody>
                         {journalsArr.map(journal => (
-                            <tr>
-                                <td>{journal.title}</td>
-                                <td>{journal.entries.length}</td>
-                                <td>{journal.lastUpdated}</td>
-                                <td>&mdash;</td>
-                                <td><button className='journals-menu' onClick={openMenu}><i className="fa-solid fa-ellipsis"></i></button>{menuComponents}</td>
-                            </tr>
+                           <JournalRow key={journal.id} journal={journal} />
                         ))}
                     </tbody>
                 </table>
