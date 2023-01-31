@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -13,9 +13,18 @@ const CreateDreamForm = () => {
     const [errors, setErrors] = useState([]);
     const [title, setTitle] = useState("")
     const [date, setDate] = useState("")
+    const [journalId, setJournalId] = useState("")
     const [body, setBody] = useState("")
 
-    // console.log(date)
+    const userJournals = useSelector(state => state.session.user.journals)
+    console.log("user journals: ", userJournals)
+    console.log('journal state:', journalId)
+    // const journalTitlesList = userJournals.map(journal => {
+    //     return journal.title
+    // })
+    // console.log('journal titles: ', journalTitlesList)
+
+    
 
     const handleDate = (str) => {
 
@@ -28,7 +37,7 @@ const CreateDreamForm = () => {
 
         const submitDate = handleDate(date)
 
-        const data = await dispatch(createDream(title, submitDate, body))
+        const data = await dispatch(createDream(title, submitDate, body, journalId))
         if (data) {
             console.log(data)
             setErrors(data);
@@ -53,6 +62,14 @@ const CreateDreamForm = () => {
                 <div className="create-date">
                     <label htmlFor="date">Date</label>
                     <input name='date' type='date' value={date} onChange={e => setDate(e.target.value)} />
+                </div>
+                <div className="journal-select">
+                    <select name="journal" value={journalId} onChange={e => setJournalId(e.target.value)}>
+                        <option value="">Select a Journal...</option>
+                        {userJournals.map(journal => (
+                            <option key={journal.id} value={journal.id}>{journal.title}</option>
+                        ))}
+                    </select>
                 </div>
                 <ReactQuill theme='snow' value={body} onChange={setBody} />
 

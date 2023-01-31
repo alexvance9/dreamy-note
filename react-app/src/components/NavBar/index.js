@@ -49,6 +49,12 @@ const NavBar = ({loaded}) => {
               My Dreams
             </NavLink>
           </div>
+          <div className='tab flex'>
+            <i className="fa-solid fa-book"></i>
+            <NavLink to='/journals'>
+              My Journals
+            </NavLink>
+          </div>
         </div>
       </div>
     );
