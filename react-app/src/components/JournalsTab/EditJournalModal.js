@@ -11,35 +11,71 @@ const EditJournalModal = ({journal}) => {
 
     
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        const journalId = journal.id
-        dispatch(editJournalThunk(title, journalId))
-            .then(closeModal())
-            .catch(e => {
-                console.log(e)
-                setErrors(e)
-            })
+        const trimmedTitle = title.trim()
+        if (!trimmedTitle){
+            setErrors(['Please name your journal.'])
+        }else {
+            const journalId = journal.id
+            const data = await dispatch(editJournalThunk(trimmedTitle, journalId))
+            if (data){
+               await setErrors(data.errors)
+            } else {
+                setErrors([])
+                await closeModal()
+            }
+            }
+
+    }
+
+    const handleCancel = (e) => {
+        e.preventDefault()
+        closeModal()
+    }
+
+    let subtitleComponents;
+    if (!errors.length) {
+        subtitleComponents = (
+            <div>
+                We bet you can do better than "Journal".
+            </div>
+        )
+    } else {
+        subtitleComponents = (
+            <div className="errors">
+                {
+                    errors.map((error, ind) => (
+                        <div key={ind}>{error}</div>
+                    ))
+                }
+            </div>
+        )
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Rename Journal</h2>
-            <div>
-                {errors.map((error, ind) => (
-                    <div key={ind}>{error}</div>
-                ))}
-            </div>
-            <div>
-                <input
-                    type='text'
-                    placeholder="Journal Title"
-                    value={title}
-                    onChange={e => setTitle(e.target.value)}
-                />
-            </div>
-            <button type='submit'>Done</button>
-        </form>
+        <div className="new-journal-modal">
+            <form className="new-journal-form" onSubmit={handleSubmit}>
+                <h2 className="new-journal-h2">Rename your Journal</h2>
+                <div className="subtitle-components">
+                    {subtitleComponents}
+                </div>
+                <div className="title-input flexcol">
+                    <label htmlFor="title">Name</label>
+                    <input
+                        name="title"
+                        type='text'
+                        placeholder="Journal name"
+                        value={title}
+                        onChange={e => setTitle(e.target.value)}
+                    />
+                </div>
+                <div className="modal-buttons">
+                <button className="submit-button" type='submit'>Rename</button>
+                <button className="cancel-button" onClick={handleCancel}>Cancel</button>
+                </div>
+            </form>
+        </div>
     )
 }
 

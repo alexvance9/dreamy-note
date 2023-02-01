@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router-dom";
 import { loadSingleJournalThunk } from "../../store/journals";
 import JournalDetailNav from "./JournalDetailNav";
+import CreateDreamForm from "../CreateDreamForm";
+import './JoDe.css'
+import DreamDetail from "../DreamDetail";
 
 const JournalDetailsView = () => {
     const dispatch = useDispatch()
@@ -19,8 +22,8 @@ const JournalDetailsView = () => {
     }, [dispatch, journalId]);
     
     const currentJournal = useSelector(state => state.journals.singleJournal)
-    const entries = currentJournal.entries
-    
+    const entries = useSelector(state => state.journals.singleJournal.entries)
+      
 
     if (!isLoaded) {
         return (
@@ -28,22 +31,33 @@ const JournalDetailsView = () => {
         )
     }
 
-    console.log(entries)
-    let currentEntryId;
-    if (dreamId) {
-        currentEntryId = Number(dreamId)
-        // setCurrentDream(currentDreamId)
+    // console.log(entries)
+    let entry;
+    if (entries.length){
+        let currentEntryId;
+        if (dreamId) {
+            currentEntryId = Number(dreamId)
+            // setCurrentDream(currentDreamId)
+        } else {
+            currentEntryId = entries[0].id
+        }
+        // console.log(currentEntryId)
+        // grab the dream by id from the users dreams attr.
+        entry = entries.filter(entry => entry.id === currentEntryId)
     } else {
-        currentEntryId = entries[0].id
+        return (
+            <div className="render-view-container">
+                <CreateDreamForm journalIdProp={currentJournal.id}/>
+            </div>
+        )
     }
-    // console.log(currentEntryId)
-    // grab the dream by id from the users dreams attr.
-    let entry = entries.filter(entry => entry.id === currentEntryId)
-    console.log(entry)
 
     return (
-        <div className="journal-detail-view">
+        <div className="journal-detail-container flex">
             <JournalDetailNav currentJournal={currentJournal} entries={entries}/>
+            <div className="render-view-container">
+                <DreamDetail dreamProp={entry}/>
+            </div>
         </div>
     )
 }

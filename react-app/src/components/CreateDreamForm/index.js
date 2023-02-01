@@ -6,7 +6,13 @@ import 'react-quill/dist/quill.snow.css';
 import { createDream } from "../../store/session";
 import './CreateDreamForm.css'
 
-const CreateDreamForm = () => {
+const CreateDreamForm = ({journalIdProp}) => {
+    let redireUrl;
+    if (journalIdProp) {
+        redireUrl = `/journals/${journalIdProp}`
+    } else {
+        redireUrl = '/dreams'
+    }
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -17,13 +23,27 @@ const CreateDreamForm = () => {
     const [body, setBody] = useState("")
 
     const userJournals = useSelector(state => state.session.user.journals)
-    console.log("user journals: ", userJournals)
-    console.log('journal state:', journalId)
+    // console.log("user journals: ", userJournals)
+    // console.log('journal state:', journalId)
     // const journalTitlesList = userJournals.map(journal => {
     //     return journal.title
     // })
     // console.log('journal titles: ', journalTitlesList)
 
+   const modules = {
+        toolbar: [
+            [{ 'header': [1, 2, false] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            ['clean']
+        ],
+    }
+
+       const formats = [
+            'header',
+            'bold', 'italic', 'underline', 'strike', 
+            'list', 'bullet'
+        ]
     
 // yyyy-mm-dd
     const handleDate = (str) => {
@@ -43,20 +63,25 @@ const CreateDreamForm = () => {
    const handleSubmit = async (e) => {
         e.preventDefault()
 // todo validate date exists
-
-        const submitDate = handleDate(date)
-        if (bodyHasContent(body)){
-            const data = await dispatch(createDream(title, submitDate, body, journalId))
+        const errors = []
+        const trimTitle = title.trim()
+        if (!trimTitle) errors.push(['Please name your Dream'])
+        if (!date) errors.push(['When did you have this dream?'])
+        if(!journalId) errors.push(['Please select a journal for this dream'])
+        if (!bodyHasContent(body)) errors.push(['Please describe your dream'])
+        
+        if(!errors.length){
+            setErrors([])
+            const submitDate = handleDate(date)
+            const data = await dispatch(createDream(trimTitle, submitDate, body, journalId))
             if (data) {
-                console.log(data)
-                setErrors(data);
+                // console.log(data)
+                return setErrors(data);
             } else {
-                await history.push('/dreams')
+                return history.push(redireUrl)
             }
-        } else {
-            setErrors(['Please Describe Your Dream'])
-            return
-        }
+        } 
+        return setErrors(errors)
     }
 
     return (
@@ -84,7 +109,7 @@ const CreateDreamForm = () => {
                         ))}
                     </select>
                 </div>
-                <ReactQuill theme='snow' value={body} onChange={setBody} />
+                <ReactQuill theme='snow' modules={modules} formats={formats} value={body} onChange={setBody} />
 
                 <div className="create-dream-button">
                 <button type="submit" >this will save the dream</button>

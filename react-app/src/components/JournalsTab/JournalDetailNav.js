@@ -1,4 +1,5 @@
-import NavCard from "./NavCard";
+
+import DreamCard from "../DreamCard";
 import { NavLink } from "react-router-dom";
 
 const JournalDetailNav = ({ currentJournal, entries }) => {
@@ -13,7 +14,7 @@ const JournalDetailNav = ({ currentJournal, entries }) => {
             <div className="journal-cards-container flexcol">
                 {entries.map(entry => (
                     <NavLink to={`/journals/${currentJournal.id}/entries/${entry.id}`} key={entry.id} className='journal-card-nav' activeClassName="selected-journal-card">
-                        <NavCard dream={entry} />
+                        <DreamCard dream={entry} />
                     </NavLink>
                 ))}
             </div>

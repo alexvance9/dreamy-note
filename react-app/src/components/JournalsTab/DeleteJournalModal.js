@@ -1,14 +1,14 @@
 import { useState } from "react"
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { deleteJournalThunk, loadJournalsThunk } from "../../store/journals";
+import { deleteJournalThunk } from "../../store/journals";
 import sheep from '../../assets/sheep.png'
 
 
 function DeleteJournalModal({ journal }) {
     const dispatch = useDispatch();
-    const history = useHistory();
+    // const history = useHistory();
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
 

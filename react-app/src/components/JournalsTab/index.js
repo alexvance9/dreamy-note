@@ -36,8 +36,9 @@ const JournalsTab = () => {
 
     return (
         <div className='journals-tab'>
-            <h2>My Dream Journals</h2>
-            <div>
+            <h2 className='my-journals'>My Dream Journals</h2>
+            <div className='new-journal-button'>
+                <i className="fa-solid fa-book"></i>
             <OpenModalButton
                 buttonText="New Journal"
                 modalComponent={<CreateJournalModal />}
@@ -48,11 +49,11 @@ const JournalsTab = () => {
                 <table>
                     <thead>
                         <tr>
-                            <th>Title</th>
-                            <th>Entries</th>
-                            <th>Updated</th>
-                            <th>Shared</th>
-                            <th></th>
+                            <th className='table-title header-title'>Name</th>
+                            <th className='table-entries'>Entries</th>
+                            <th className='table-updated'>Updated</th>
+                            <th className='table-shared'>Shared</th>
+                            <th className='table-menu'></th>
                         </tr>
                     </thead>
                     <tbody>

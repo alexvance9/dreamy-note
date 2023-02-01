@@ -145,28 +145,29 @@ export const deleteJournalThunk = (journalId) => async (dispatch) => {
 }
 
 
-const initialState = { journals: {}, singleJournal: {} }
+const initialState = { journals: {}, singleJournal: { entries: []} }
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case LOAD_JOURNALS: {
-            const newState = {journals : {}, singleJournal: {}}
+            const newState = { journals: {}, singleJournal: { entries: [] } }
             // console.log("action.data", action.payload)
                 action.payload.forEach( journal => newState.journals[journal.id] = journal)
             return newState;
         }
         case LOAD_SINGLE_JOURNAL: {
-            const newState = { journals: {...state.journals}, singleJournal: {}}
+            const newState = { journals: { ...state.journals }, singleJournal: { entries: [] } }
             newState.singleJournal = action.payload
+            newState.singleJournal.entries = action.payload.entries
             return newState;
         }
         case ADD_JOURNAL: {
-            const newState = {journals: {...state.journals}, singleJournal: {}}
+            const newState = { journals: { ...state.journals }, singleJournal: { entries: [] } }
             newState.journals[action.payload.id] = action.payload;
             return newState;
         }
         case EDIT_JOURNAL: {
-            const newState = { journals: { ...state.journals }, singleJournal: {} }
+            const newState = { journals: { ...state.journals }, singleJournal: { entries: [] } }
             newState.journals[action.payload.id] = action.payload;
             return newState;
         }

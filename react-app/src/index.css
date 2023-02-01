@@ -1,4 +1,7 @@
 /* TODO Add site wide styles */
+* {
+    box-sizing: border-box;
+}
 
 .app-con {
     display: flex;

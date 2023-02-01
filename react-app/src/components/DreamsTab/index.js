@@ -40,6 +40,12 @@ const DreamsTab = ({isNew}) => {
         if (params.dreamId){
             currentDreamId = Number(params.dreamId)
             // setCurrentDream(currentDreamId)
+        } else if (!dreams.length) {
+            return (
+                <div className="render-view-container">
+                    <CreateDreamForm journalIdProp={false}/>
+                </div>
+            )
         } else {
             currentDreamId = dreams[0].id
         }
@@ -60,7 +66,7 @@ const DreamsTab = ({isNew}) => {
     if (isNew) {
         renderPage = (
             <div className="render-view-container">
-                <CreateDreamForm />
+                <CreateDreamForm journalIdProp={false} />
             </div>
         )
     } else {

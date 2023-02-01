@@ -39,29 +39,32 @@ const JournalRow = ({journal}) => {
     const entryButton = (showEntries ? <i className="fa-solid fa-caret-down"></i> : <i className="fa-solid fa-caret-right"></i> )
 
     const menuComponents = (
-        <div className={menuClassName} ref={ulRef}>
-            <OpenModalButton
-                buttonText="edit"
-                modalComponent={<EditJournalModal journal={journal}/>}
-            />
-            <OpenModalButton
-                buttonText="delete"
-                modalComponent={<DeleteJournalModal journal={journal} />}
-            />
+        <div className="drop-container">
+            <div className={menuClassName} ref={ulRef}>
+                <OpenModalButton
+                    buttonText="edit"
+                    modalComponent={<EditJournalModal journal={journal}/>}
+                />
+                <OpenModalButton
+                    buttonText="delete"
+                    modalComponent={<DeleteJournalModal journal={journal} />}
+                />
+            </div>
         </div>
     )
+
     return (
         <>
         <tr>
-            <td><button onClick={handleEntries}>{entryButton}</button><NavLink to={`/journals/${journal.id}`}>{journal.title}</NavLink></td>
-            <td>{journal.entries.length}</td>
-            <td>{journal.lastUpdated}</td>
-            <td>&mdash;</td>
-            <td><button className='journals-menu' onClick={openMenu}><i className="fa-solid fa-ellipsis"></i></button>{menuComponents}</td>
+            <td className="table-title"><button onClick={handleEntries}>{entryButton}</button><NavLink to={`/journals/${journal.id}`}>{journal.title}</NavLink></td>
+            <td className="table-entries">{journal.entries.length}</td>
+            <td className="table-updated">{journal.lastUpdated}</td>
+            <td className="table-shared">&mdash;</td>
+            <td className="table-menu"><button className='journals-menu' onClick={openMenu}><i className="fa-solid fa-ellipsis"></i></button>{menuComponents}</td>
         </tr>
         {journal.entries.map(entry => (
             <tr key={entry.id} className={entryClassName}>
-                <td>{entry.title}</td>
+                <td className="journal-entry-td"><NavLink to={`/journals/${journal.id}/entries/${entry.id}`}><i className="fa-regular fa-file-lines"></i>{entry.title}</NavLink></td>
             </tr>
         ))}
         </>
