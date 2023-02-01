@@ -7,6 +7,7 @@ import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../auth/LoginFormModal';
 import SignUpFormModal from '../auth/SignUpFormModal';
 import './NavBar.css'
+import '../SplashPage/Splash.css'
 import sheep from '../../assets/sheep.png'
 
 
@@ -62,12 +63,12 @@ const NavBar = ({loaded}) => {
     sessionLinks = (
       <div className='logged-out-nav flex'>
         <OpenModalButton
-          buttonText="Log In"
-          modalComponent={<LoginFormModal />}
-        />
-        <OpenModalButton
           buttonText="Sign Up"
           modalComponent={<SignUpFormModal />}
+        />
+        <OpenModalButton
+          buttonText="Log In"
+          modalComponent={<LoginFormModal />}
         />
       </div>
     );

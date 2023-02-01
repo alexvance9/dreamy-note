@@ -1,0 +1,33 @@
+.signup-modal {
+    background-color: grey;
+    padding: 20px;
+    width: 35vw;
+    display: flex;
+    margin: 0 auto;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 95%;
+    /* border: 2px solid red; */
+}
+
+.signup-form>*{
+    width: 100%;
+}
+
+.errors {
+    color: red;
+}
+
+.login-modal {
+    background-color: grey;
+        padding: 20px;
+        width: 25vw;
+        display: flex;
+        margin: 0 auto;
+}
