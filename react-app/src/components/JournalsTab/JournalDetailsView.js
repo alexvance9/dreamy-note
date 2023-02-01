@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router-dom";
 import { loadSingleJournalThunk } from "../../store/journals";
 import JournalDetailNav from "./JournalDetailNav";
-import CreateDreamForm from "../CreateDreamForm";
+import NoDreamsYet from "../ExtraPages/NoDreamsYet";
 import './JoDe.css'
 import DreamDetail from "../DreamDetail";
 
@@ -46,9 +46,7 @@ const JournalDetailsView = () => {
         entry = entries.filter(entry => entry.id === currentEntryId)
     } else {
         return (
-            <div className="render-view-container">
-                <CreateDreamForm journalIdProp={currentJournal.id}/>
-            </div>
+            <NoDreamsYet />
         )
     }
 

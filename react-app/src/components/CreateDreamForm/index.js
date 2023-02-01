@@ -6,13 +6,8 @@ import 'react-quill/dist/quill.snow.css';
 import { createDream } from "../../store/session";
 import './CreateDreamForm.css'
 
-const CreateDreamForm = ({journalIdProp}) => {
-    let redireUrl;
-    if (journalIdProp) {
-        redireUrl = `/journals/${journalIdProp}`
-    } else {
-        redireUrl = '/dreams'
-    }
+const CreateDreamForm = () => {
+    
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -78,7 +73,7 @@ const CreateDreamForm = ({journalIdProp}) => {
                 // console.log(data)
                 return setErrors(data);
             } else {
-                return history.push(redireUrl)
+                return history.push('/dreams')
             }
         } 
         return setErrors(errors)

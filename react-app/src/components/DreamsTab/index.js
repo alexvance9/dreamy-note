@@ -43,7 +43,7 @@ const DreamsTab = ({isNew}) => {
         } else if (!dreams.length) {
             return (
                 <div className="render-view-container">
-                    <CreateDreamForm journalIdProp={false}/>
+                    <CreateDreamForm />
                 </div>
             )
         } else {
@@ -66,7 +66,7 @@ const DreamsTab = ({isNew}) => {
     if (isNew) {
         renderPage = (
             <div className="render-view-container">
-                <CreateDreamForm journalIdProp={false} />
+                <CreateDreamForm />
             </div>
         )
     } else {
