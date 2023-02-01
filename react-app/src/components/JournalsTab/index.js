@@ -6,6 +6,7 @@ import CreateJournalModal from './CreateJournalModal';
 
 import './JournalsTab.css'
 import JournalRow from './JournalRow';
+import LoadingPage from '../ExtraPages/LoadingPage';
 
 const JournalsTab = () => {
     const dispatch = useDispatch()
@@ -30,7 +31,7 @@ const JournalsTab = () => {
 
     if(!isLoaded) {
         return (
-            <div>loading...</div>
+            <LoadingPage />
         )
     }
 

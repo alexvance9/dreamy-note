@@ -1,19 +1,17 @@
 import sheep from '../../assets/sheep.png'
 import './extra.css'
 
-
-const NoDreamsYet = () => {
+const PageNotFound = () => {
     return (
         <div className="journal-detail-container">
             <div className='sheep-no-dreams'>
                 <img className='user-sheep-img' alt='sheep icon' src={sheep} />
             </div>
             <div className='not-found-container flexcol'>
-            <h1>There arent't any Dreams in this Journal yet.</h1>
-            <p>Write a new dream entry to proceed.</p>
+                <h1>Oops!</h1>
+                <p>We couldn't find the page you were looking for</p>
             </div>
         </div>
     )
 }
-
-export default NoDreamsYet;
+export default PageNotFound;

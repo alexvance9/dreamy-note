@@ -9,6 +9,7 @@ import { getSingleDream } from "../../store/dream";
 import OpenModalButton from "../OpenModalButton";
 import DeleteDreamModal from "../DeleteDreamModal";
 import './DreamDetail.css'
+import LoadingPage from "../ExtraPages/LoadingPage";
 
 /* This component shows a nicely rendered view of a particular 
     dream entry, and handles editing of the dream.*/
@@ -66,7 +67,7 @@ const DreamDetail = ({dreamProp}) => {
     // if use effect hasnt run or there was no dreamProp passed for some reason.
     if (!isLoaded) {
         return (
-            <div>just loading!</div>
+            <LoadingPage />
         )
     }
 
@@ -92,7 +93,8 @@ const DreamDetail = ({dreamProp}) => {
         // add validations for date
         const errors = []
         const trimTitle = title.trim()
-        if (!trimTitle) errors.push(['Please name your Dream'])
+        if (!trimTitle) errors.push(['Please give your dream a title'])
+        if(trimTitle.length > 35) errors.push(['Title must be less than 35 characters.'])
         if (!date) errors.push(['When did you have this dream?'])
         if (!journalId) errors.push(['Please select a journal for this dream'])
         if (!bodyHasContent(editBody)) errors.push(['Please describe your dream'])
@@ -172,8 +174,7 @@ const DreamDetail = ({dreamProp}) => {
         detailComponents = (
             <div className="dream-detail-view">
                 <div className="dream-detail-header">
-                    <div className="detail-date">{date}</div>
-                    <div className="detail-title">{title}</div>
+                    
                     <div className="detail-button-container">
                         <button onClick={openEditor}>Edit Dream</button>
                         <OpenModalButton
@@ -182,7 +183,13 @@ const DreamDetail = ({dreamProp}) => {
                         />
                     </div>
                 </div>
-                <div className="detail-body">{value}</div> 
+                <div className="detail-body flexcol">
+                    <div className="detail-body-top flex">
+                        <div className="detail-title">{title}</div>
+                        <div className="detail-date">{date}</div>
+                    </div>
+                    <div>{value}</div>
+                    </div> 
             </div>
         )
     }

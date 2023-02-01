@@ -6,6 +6,7 @@ import JournalDetailNav from "./JournalDetailNav";
 import NoDreamsYet from "../ExtraPages/NoDreamsYet";
 import './JoDe.css'
 import DreamDetail from "../DreamDetail";
+import LoadingPage from "../ExtraPages/LoadingPage";
 
 const JournalDetailsView = () => {
     const dispatch = useDispatch()
@@ -27,7 +28,7 @@ const JournalDetailsView = () => {
 
     if (!isLoaded) {
         return (
-            <div>loading...</div>
+           <LoadingPage />
         )
     }
 

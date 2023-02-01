@@ -8,11 +8,12 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 // import UsersList from './components/UsersList';
 // import User from './components/User';
 import { authenticate } from './store/session';
-import { loadJournalsThunk } from './store/journals';
+// import { loadJournalsThunk } from './store/journals';
 import Dashboard from './components/Dashboard';
 import DreamsTab from './components/DreamsTab';
 import JournalsTab from './components/JournalsTab';
 import JournalDetailsView from './components/JournalsTab/JournalDetailsView';
+import PageNotFound from './components/ExtraPages/PageNotFound';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -23,7 +24,7 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
-      await dispatch(loadJournalsThunk());
+      // await dispatch(loadJournalsThunk());
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -60,6 +61,9 @@ function App() {
         </ProtectedRoute>
         <Route path='/' exact={true} >
           <h1>Welcome to dreamy note</h1>
+        </Route>
+        <Route>
+          <PageNotFound />
         </Route>
       </Switch>
       )}

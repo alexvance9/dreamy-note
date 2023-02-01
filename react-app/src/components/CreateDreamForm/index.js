@@ -51,8 +51,8 @@ const CreateDreamForm = () => {
         const htmlRegex = /(<([^>]+)>)/ig
         const whiteSpaceRegex = /\s/g
         let noHtml = body.replace(htmlRegex, "")
-        let notWhiteSpace = !!(noHtml.replace(whiteSpaceRegex, "").length)
-        return notWhiteSpace
+        let notJustWhiteSpace = !!(noHtml.replace(whiteSpaceRegex, "").length)
+        return notJustWhiteSpace
     }
 
    const handleSubmit = async (e) => {
@@ -61,6 +61,7 @@ const CreateDreamForm = () => {
         const errors = []
         const trimTitle = title.trim()
         if (!trimTitle) errors.push(['Please name your Dream'])
+        if (trimTitle.length > 35) errors.push(['Title must be less than 35 characters.'])
         if (!date) errors.push(['When did you have this dream?'])
         if(!journalId) errors.push(['Please select a journal for this dream'])
         if (!bodyHasContent(body)) errors.push(['Please describe your dream'])
