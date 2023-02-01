@@ -4,10 +4,10 @@ import { NavLink } from "react-router-dom";
 const DreamNav = ({dreams}) => {
 
     if (!dreams) return null;
-   console.log("original", dreams)
+//    console.log("original", dreams)
 
    const dreamsCopy = [...dreams]
-   console.log('copy', dreamsCopy)
+//    console.log('copy', dreamsCopy)
 
    function dateSorter(a, b){
         // console.log("a: ", a.date)
