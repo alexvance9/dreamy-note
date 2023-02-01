@@ -12,6 +12,7 @@ import { loadJournalsThunk } from './store/journals';
 import Dashboard from './components/Dashboard';
 import DreamsTab from './components/DreamsTab';
 import JournalsTab from './components/JournalsTab';
+import JournalDetailsView from './components/JournalsTab/JournalDetailsView';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -36,8 +37,11 @@ function App() {
       <NavBar loaded={loaded}/>
       {loaded && (
       <Switch>
+        <ProtectedRoute path='/journals/:journalId/entries/:dreamId' exact={true} >
+          <JournalDetailsView/>
+        </ProtectedRoute>
         <ProtectedRoute path='/journals/:journalId' exact={true} >
-          <DreamsTab/>
+          <JournalDetailsView/>
         </ProtectedRoute>
         <ProtectedRoute path='/journals' exact={true} >
           <JournalsTab/>

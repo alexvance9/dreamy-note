@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from datetime import date
+from app.models import User, db, Journal
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -66,6 +67,12 @@ def sign_up():
             username=form.data['username'],
             email=form.data['email'],
             password=form.data['password']
+        )
+        default_journal = Journal(
+            title="My Journal",
+            date_created=date.today(),
+            last_updated=date.today(),
+            user=user
         )
         db.session.add(user)
         db.session.commit()

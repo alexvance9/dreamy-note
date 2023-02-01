@@ -3,8 +3,8 @@
 .dream-card {
     /* width: 100%; */
     height: 100%;
-    width: 90%;
-    margin: auto;
+    width: 100%;
+    margin: 0 auto;
     /* border-radius: .5rem; */
     border-top: .25px solid rgb(138, 136, 136);
     /* background-color: rgb(42, 41, 41); */
@@ -12,7 +12,10 @@
     color: rgb(214, 212, 212);
     display: flex;
     flex-direction: column;
-    padding: 1rem;  
+    padding-top: 1rem;  
+    padding-bottom: 1rem;  
+    padding-left: 1rem;  
+    padding-right: .5rem;  
     justify-content: space-between;
 }
 .card-title {
@@ -29,6 +32,12 @@
 }
 
 .card-body > *:not(:first-child) {
+    display: none;
+}
+.card-body > ul>*:not(:first-child) {
+    display: none;
+}
+.card-body > ol> *:not(:first-child) {
     display: none;
 }
 

@@ -1,12 +1,155 @@
 .journals-tab {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 75%;
     /* border: 2px solid red; */
     background-color: rgb(34, 14, 45);
-    color: rgb(214, 212, 212)
+    color: rgb(214, 212, 212);
+    padding-left: 30px;
+    padding-right: 30px;
+}
+/* .journals-tab > * {
+    border: 2px pink dotted;
+} */
+.my-journals {
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.new-journal-button {
+    padding: 10px;
+    align-self: flex-end;
+}
+
+.new-journal-button > button {
+    background-color: transparent;
+    border: none;
+    color: rgb(128, 255, 0);
 }
 
 .hidden {
     display:none;
+}
+
+table {
+   /* border: 2px solid red; */
+   width: 100%;
+}
+
+thead {
+    display: flex;
+}
+tbody {
+    display: flex;
+    flex-direction: column;
+}
+
+tbody>tr:nth-child(odd){
+    background-color: rgb(25, 10, 33);
+    /* border: 2px solid red; */
+}
+
+tr {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: flex-start; */
+    /* border: 2px solid green; */
+}
+
+.table-title {
+    width: 30%;
+    display: flex;
+    align-items: center;
+}
+.table-title > * {
+    padding: 5px;
+}
+
+
+.table-menu > * {
+    padding: 5px;
+}
+.header-title {
+    padding-left: 25px;
+}
+
+.table-entries {
+    width: 10%;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.table-updated {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+.table-shared {
+    width: 15%;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    /* border: 2px solid green; */
+}
+.table-menu {
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+td>button {
+    background-color: transparent;
+    border: none;
+}
+
+.journal-entry {
+    padding-left: 35px;
+    color: rgb(214, 212, 212);
+}
+.journal-entry-td > a {
+    color: rgb(214, 212, 212);
+    text-decoration: none;
+}
+.journal-entry-td>a:hover{
+    text-decoration: underline;
+}
+.table-title > a {
+    color: rgb(214, 212, 212);
+    text-decoration: none;
+}
+.table-title>a:hover{
+    text-decoration: underline;
+}
+
+.journal-entry-td > a > *{
+    padding-right: 10px;
+    /* color: rgb(214, 212, 212); */
+}
+
+
+.drop-container {
+    position: relative;
+    
+}
+
+.journal-dropdown {
+    position: absolute;
+    top: 140%;
+    right: 0;
+    /* border: 2px solid red; */
+    padding: 10px;
+    background-color: black;
+}
+
+.journal-dropdown>button{
+    background-color: transparent;
+    color: rgb(128, 255, 0);
+    border: none;
+}
+.journal-dropdown>button:hover{
+    text-decoration: underline;
 }
