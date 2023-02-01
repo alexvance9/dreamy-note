@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 const DreamNav = ({dreams}) => {
 
     if (!dreams) return null;
+   
 
     return (
         <div className="dream-nav-container flexcol">

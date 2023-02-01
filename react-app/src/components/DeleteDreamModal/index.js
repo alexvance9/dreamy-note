@@ -22,7 +22,7 @@ function DeleteDreamModal({ currentDreamId }) {
             .then(history.push("/dreams"))
             .then(closeModal())
             .catch(e => {
-                console.log(e)
+                // console.log(e)
                 setErrors(e)
             })
 

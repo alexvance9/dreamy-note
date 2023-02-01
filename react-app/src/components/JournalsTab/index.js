@@ -15,9 +15,9 @@ const JournalsTab = () => {
 
 
     const journals = useSelector(state => state.journals)
-    console.log("inside component:", journals)
+    // console.log("inside component:", journals)
     const journalsArr = Object.values(journals.journals)
-    console.log("journals array: ", journalsArr)
+    // console.log("journals array: ", journalsArr)
 
 
     useEffect(() => {

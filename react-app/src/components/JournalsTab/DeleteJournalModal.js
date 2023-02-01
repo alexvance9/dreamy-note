@@ -21,7 +21,7 @@ function DeleteJournalModal({ journal }) {
         dispatch(deleteJournalThunk(journalId))
         .then(closeModal())
             .catch(e => {
-                console.log(e)
+                // console.log(e)
                 setErrors(e)
             })
 

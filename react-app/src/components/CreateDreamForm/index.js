@@ -47,7 +47,7 @@ const CreateDreamForm = () => {
     }
 
     const bodyHasContent = (body) => {
-        console.log(body)
+        // console.log(body)
         const htmlRegex = /(<([^>]+)>)/ig
         const whiteSpaceRegex = /\s/g
         let noHtml = body.replace(htmlRegex, "")

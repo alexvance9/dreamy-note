@@ -32,7 +32,7 @@
 .splash-con {
     display: flex;
     flex-direction: column;
-    border: 2px solid green;
+    /* border: 2px solid green; */
     width: 100vw;
     height: 100vh;
     background-color: rgb(25, 10, 33);

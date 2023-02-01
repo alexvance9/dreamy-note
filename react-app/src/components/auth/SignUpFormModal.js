@@ -39,7 +39,7 @@ const SignUpFormModal = () => {
       }
       return closeModal()
     }
-    console.log(signupErrors)
+    // console.log(signupErrors)
     return setErrors(signupErrors)
   };
 
