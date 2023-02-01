@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import { useModal } from "../../context/Modal";
+import './auth.css'
 
 const LoginFormModal = () => {
   const [errors, setErrors] = useState([]);
@@ -14,12 +15,19 @@ const LoginFormModal = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(data);
+    const loginErrors = []
+    if (!email) loginErrors.push(['Email is required'])
+    if (!password) loginErrors.push(['Password is required'])
+    if (!loginErrors.length){
+      setErrors([])
+      const data = await dispatch(login(email, password));
+      if (data) {
+        return setErrors(data);
+      }
+      return closeModal()
     }
-    await closeModal()
-  };
+    return setErrors(loginErrors)
+    }
 
   const handleDemo = async (e) => {
     e.preventDefault();
@@ -46,8 +54,10 @@ const LoginFormModal = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
-      <div>
+    <div className='login-modal'>
+    <form className='login-form' onSubmit={onLogin}>
+      <h2>Log In</h2>
+      <div className='errors'>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
@@ -75,6 +85,7 @@ const LoginFormModal = () => {
         <button onClick={handleDemo}>Demo User</button>
       </div>
     </form>
+    </div >
   );
 };
 

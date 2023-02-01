@@ -46,3 +46,23 @@
     font-weight: 600;
     padding-right: 20px;
 }
+
+.create-dream-form >div>input{
+    border: 1px solid grey;
+    background-color: rgb(48, 47, 47);
+    border-radius: .25rem;
+    color: rgb(214, 212, 212);
+    padding: 5px;
+}
+
+.create-dream-form>div>select {
+    border: 1px solid grey;
+        background-color: rgb(48, 47, 47);
+        border-radius: .25rem;
+        color: rgb(128, 255, 0);
+        padding: 5px;
+}
+
+.journal-select {
+    margin-bottom: 10px;
+}

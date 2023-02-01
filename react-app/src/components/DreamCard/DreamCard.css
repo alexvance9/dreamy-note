@@ -17,9 +17,12 @@
     padding-left: 1rem;  
     padding-right: .5rem;  
     justify-content: space-between;
+    /* overflow: hidden; */
 }
 .card-title {
     margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .card-body {

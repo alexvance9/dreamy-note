@@ -47,12 +47,12 @@ const CreateDreamForm = () => {
     }
 
     const bodyHasContent = (body) => {
-        console.log(body)
+        // console.log(body)
         const htmlRegex = /(<([^>]+)>)/ig
         const whiteSpaceRegex = /\s/g
         let noHtml = body.replace(htmlRegex, "")
-        let notWhiteSpace = !!(noHtml.replace(whiteSpaceRegex, "").length)
-        return notWhiteSpace
+        let notJustWhiteSpace = !!(noHtml.replace(whiteSpaceRegex, "").length)
+        return notJustWhiteSpace
     }
 
    const handleSubmit = async (e) => {
@@ -61,6 +61,7 @@ const CreateDreamForm = () => {
         const errors = []
         const trimTitle = title.trim()
         if (!trimTitle) errors.push(['Please name your Dream'])
+        if (trimTitle.length > 35) errors.push(['Title must be less than 35 characters.'])
         if (!date) errors.push(['When did you have this dream?'])
         if(!journalId) errors.push(['Please select a journal for this dream'])
         if (!bodyHasContent(body)) errors.push(['Please describe your dream'])
@@ -87,10 +88,10 @@ const CreateDreamForm = () => {
                 ))}
             </div>
             <h2>New Dream</h2>
-            <form onSubmit={handleSubmit}>
+            <form className="create-dream-form" onSubmit={handleSubmit}>
                 <div className="create-title">
                     <label htmlFor="title">Title</label>
-                    <input name='title' type='text' value={title} onChange={e => setTitle(e.target.value)} />
+                    <input name='title' placeholder="Title" type='text' value={title} onChange={e => setTitle(e.target.value)} />
                 </div>
                 <div className="create-date">
                     <label htmlFor="date">Date</label>

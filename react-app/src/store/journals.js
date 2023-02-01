@@ -39,7 +39,7 @@ export const loadJournalsThunk = () => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json()
-        console.log(data)
+        // console.log(data)
         dispatch(loadJournals(data))
         return null
     } else if (response.status < 500) {
@@ -57,7 +57,7 @@ export const loadSingleJournalThunk = (journalId) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json()
-        console.log(data)
+        // console.log(data)
         dispatch(loadSingleJournal(data))
         return null
     } else if (response.status < 500) {

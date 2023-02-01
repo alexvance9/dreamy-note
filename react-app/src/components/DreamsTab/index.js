@@ -7,6 +7,7 @@ import DreamNav from "./DreamsNav"
 import CreateDreamForm from "../CreateDreamForm";
 
 import './DreamsTab.css'
+import LoadingPage from "../ExtraPages/LoadingPage";
 
 const DreamsTab = ({isNew}) => {
     // see note
@@ -54,7 +55,9 @@ const DreamsTab = ({isNew}) => {
         
 
     if (!isLoaded) {
-        return null
+        return (
+            <LoadingPage />
+        )
     }
 
     

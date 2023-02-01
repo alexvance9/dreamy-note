@@ -86,8 +86,10 @@ tr {
     display: flex;
     align-items: center;
     padding: 5px;
+    visibility: hidden;
 }
 .table-shared {
+    visibility: hidden;
     width: 15%;
     display: flex;
     align-items: center;

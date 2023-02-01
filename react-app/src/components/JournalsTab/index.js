@@ -6,6 +6,7 @@ import CreateJournalModal from './CreateJournalModal';
 
 import './JournalsTab.css'
 import JournalRow from './JournalRow';
+import LoadingPage from '../ExtraPages/LoadingPage';
 
 const JournalsTab = () => {
     const dispatch = useDispatch()
@@ -14,9 +15,9 @@ const JournalsTab = () => {
 
 
     const journals = useSelector(state => state.journals)
-    console.log("inside component:", journals)
+    // console.log("inside component:", journals)
     const journalsArr = Object.values(journals.journals)
-    console.log("journals array: ", journalsArr)
+    // console.log("journals array: ", journalsArr)
 
 
     useEffect(() => {
@@ -30,7 +31,7 @@ const JournalsTab = () => {
 
     if(!isLoaded) {
         return (
-            <div>loading...</div>
+            <LoadingPage />
         )
     }
 

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import { useModal } from "../../context/Modal";
+import "./auth.css"
 
 const SignUpFormModal = () => {
   const [errors, setErrors] = useState([]);
@@ -14,16 +15,32 @@ const SignUpFormModal = () => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
+  const hasWhiteSpace = (input) => {
+    const whiteSpaceRegex = /\s+/g
+    const whiteSpaceCheck = input.replace(whiteSpaceRegex, "")
+    return input !== whiteSpaceCheck
+  }
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    if (password === repeatPassword) {
+    const signupErrors = []
+    if (hasWhiteSpace(username)) signupErrors.push(['Username cannot have whitespace'])
+    if (username.length > 25) signupErrors.push(['Username must have 20 characters or less'])
+    if (hasWhiteSpace(email)) signupErrors.push(['Email cannot have whitespace'])
+    if (hasWhiteSpace(password)) signupErrors.push(['Password cannot have whitespace'])
+    if (password !== repeatPassword) signupErrors.push(['Repeat password does not match'])
+
+    
+    if (!signupErrors.length) {
+      setErrors([])
       const data = await dispatch(signUp(username, email, password));
       if (data) {
-        setErrors(data)
+        return setErrors(data)
       }
-      await closeModal()
+      return closeModal()
     }
+    // console.log(signupErrors)
+    return setErrors(signupErrors)
   };
 
   const updateUsername = (e) => {
@@ -47,13 +64,15 @@ const SignUpFormModal = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
-      <div>
+    <div className='signup-modal'>
+    <form className='signup-form' onSubmit={onSignUp}>
+      <h2>Sign Up </h2>
+      <ul className='errors'>
         {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
+          <li key={ind}>{error}</li>
         ))}
-      </div>
-      <div>
+      </ul>
+      <div className='flexcol'>
         <label>User Name</label>
         <input
           type='text'
@@ -62,7 +81,7 @@ const SignUpFormModal = () => {
           value={username}
         ></input>
       </div>
-      <div>
+        <div className='flexcol'>
         <label>Email</label>
         <input
           type='text'
@@ -71,7 +90,7 @@ const SignUpFormModal = () => {
           value={email}
         ></input>
       </div>
-      <div>
+        <div className='flexcol'>
         <label>Password</label>
         <input
           type='password'
@@ -80,7 +99,7 @@ const SignUpFormModal = () => {
           value={password}
         ></input>
       </div>
-      <div>
+        <div className='flexcol'>
         <label>Repeat Password</label>
         <input
           type='password'
@@ -92,6 +111,7 @@ const SignUpFormModal = () => {
       </div>
       <button type='submit'>Sign Up</button>
     </form>
+    </div>
   );
 };
 
