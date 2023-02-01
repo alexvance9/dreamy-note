@@ -64,10 +64,20 @@ const DreamDetail = ({dreamProp}) => {
 
 
     // if use effect hasnt run or there was no dreamProp passed for some reason.
-    if (!isLoaded || !dreamProp.length) {
+    if (!isLoaded) {
         return (
             <div>just loading!</div>
         )
+    }
+
+    
+
+    const bodyHasContent = (body) => {
+        const htmlRegex = /(<([^>]+)>)/ig
+        const whiteSpaceRegex = /\s/g
+        let noHtml = body.replace(htmlRegex, "")
+        let notWhiteSpace = !!(noHtml.replace(whiteSpaceRegex, "").length)
+        return notWhiteSpace
     }
 
     // edit button handler, when is edit is true it will render the edit form
@@ -79,23 +89,48 @@ const DreamDetail = ({dreamProp}) => {
     // handles edit form submit
     const saveChanges = async(e) => {
         e.preventDefault()
-        const body = editBody //html string, not parsed
-        const dreamId = selectedDream.id
-        const strDate = dateHandler(date)
-        
-
-        const data = await dispatch(updateDream(title, strDate, body, dreamId, journalId))
-            if (data) {
-                console.log(data)
-                setErrors(data);
-            } else {
-                // TODO
-                // await setTitle()
-                await setValue(parse(editBody))
-                await setIsEdit(false)
-            }
+        // add validations for date
+        const errors = []
+        const trimTitle = title.trim()
+        if (!trimTitle) errors.push(['Please name your Dream'])
+        if (!date) errors.push(['When did you have this dream?'])
+        if (!journalId) errors.push(['Please select a journal for this dream'])
+        if (!bodyHasContent(editBody)) errors.push(['Please describe your dream'])
+       
+        if(!errors.length){
+            setErrors([])
+            const dreamId = selectedDream.id
+            const strDate = dateHandler(date)
+    
+            const data = await dispatch(updateDream(trimTitle, strDate, editBody, dreamId, journalId))
+                if (data) {
+                    // console.log(data)
+                    return setErrors(data);
+                } else {
+                    // TODO
+                    // await setTitle()
+                    await setValue(parse(editBody))
+                    await setIsEdit(false)
+                    return
+                }
+        }
+        return setErrors(errors)
     }
 
+    const modules = {
+        toolbar: [
+            [{ 'header': [1, 2, false] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            ['clean']
+        ],
+    }
+
+    const formats = [
+        'header',
+        'bold', 'italic', 'underline', 'strike',
+        'list', 'bullet'
+    ]
     
 
     let detailComponents;
@@ -125,7 +160,7 @@ const DreamDetail = ({dreamProp}) => {
                             ))}
                         </select>
                     </div>
-                    <ReactQuill theme='snow' value={editBody} onChange={setEditBody}/>
+                    <ReactQuill theme='snow' modules={modules} formats={formats} value={editBody} onChange={setEditBody}/>
 
                     <div className="edit-form-button">
                     <button type="submit" >Save Changes</button>

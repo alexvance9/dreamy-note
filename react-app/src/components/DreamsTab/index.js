@@ -5,7 +5,7 @@ import { authenticate } from "../../store/session";
 import DreamDetail from "../DreamDetail";
 import DreamNav from "./DreamsNav"
 import CreateDreamForm from "../CreateDreamForm";
-import {loadJournalsThunk} from '../../store/journals'
+
 import './DreamsTab.css'
 
 const DreamsTab = ({isNew}) => {
@@ -16,21 +16,14 @@ const DreamsTab = ({isNew}) => {
     const dispatch = useDispatch()
     let params = useParams()
 
-    const userDreams = useSelector(state => state.session.user.dreams)
-    const journals = useSelector(state => state.journals.journals)
-    let dreams;
-    if (params.journalId){
-        dreams = journals[params.journalId].entries
-    } else {
-        dreams = userDreams
-    }
+    const dreams = useSelector(state => state.session.user.dreams)
+    
 
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
         (async () => {
             await dispatch(authenticate());
-            await dispatch(loadJournalsThunk());
             setIsLoaded(true);
         })();
     }, [dispatch]);
@@ -47,6 +40,12 @@ const DreamsTab = ({isNew}) => {
         if (params.dreamId){
             currentDreamId = Number(params.dreamId)
             // setCurrentDream(currentDreamId)
+        } else if (!dreams.length) {
+            return (
+                <div className="render-view-container">
+                    <CreateDreamForm />
+                </div>
+            )
         } else {
             currentDreamId = dreams[0].id
         }
@@ -55,9 +54,7 @@ const DreamsTab = ({isNew}) => {
         
 
     if (!isLoaded) {
-        return (
-            <div>just loading from tab!</div>
-        )
+        return null
     }
 
     

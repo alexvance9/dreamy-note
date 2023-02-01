@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deleteJournalThunk } from "../../store/journals";
@@ -8,7 +8,7 @@ import sheep from '../../assets/sheep.png'
 
 function DeleteJournalModal({ journal }) {
     const dispatch = useDispatch();
-    const history = useHistory();
+    // const history = useHistory();
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
 
@@ -19,8 +19,7 @@ function DeleteJournalModal({ journal }) {
         const journalId = journal.id
 
         dispatch(deleteJournalThunk(journalId))
-            .then(history.push("/journals"))
-            .then(closeModal())
+        .then(closeModal())
             .catch(e => {
                 console.log(e)
                 setErrors(e)

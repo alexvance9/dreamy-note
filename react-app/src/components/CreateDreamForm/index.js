@@ -7,6 +7,7 @@ import { createDream } from "../../store/session";
 import './CreateDreamForm.css'
 
 const CreateDreamForm = () => {
+    
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -17,33 +18,65 @@ const CreateDreamForm = () => {
     const [body, setBody] = useState("")
 
     const userJournals = useSelector(state => state.session.user.journals)
-    console.log("user journals: ", userJournals)
-    console.log('journal state:', journalId)
+    // console.log("user journals: ", userJournals)
+    // console.log('journal state:', journalId)
     // const journalTitlesList = userJournals.map(journal => {
     //     return journal.title
     // })
     // console.log('journal titles: ', journalTitlesList)
 
+   const modules = {
+        toolbar: [
+            [{ 'header': [1, 2, false] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            ['clean']
+        ],
+    }
+
+       const formats = [
+            'header',
+            'bold', 'italic', 'underline', 'strike', 
+            'list', 'bullet'
+        ]
     
-
+// yyyy-mm-dd
     const handleDate = (str) => {
-
-        const dateStr = new Date(str).toISOString().split('T')[0].toString()
+        const dateStr = new Date(str).toISOString().split('T')[0]?.toString()
         return dateStr
+    }
+
+    const bodyHasContent = (body) => {
+        console.log(body)
+        const htmlRegex = /(<([^>]+)>)/ig
+        const whiteSpaceRegex = /\s/g
+        let noHtml = body.replace(htmlRegex, "")
+        let notWhiteSpace = !!(noHtml.replace(whiteSpaceRegex, "").length)
+        return notWhiteSpace
     }
 
    const handleSubmit = async (e) => {
         e.preventDefault()
-
-        const submitDate = handleDate(date)
-
-        const data = await dispatch(createDream(title, submitDate, body, journalId))
-        if (data) {
-            console.log(data)
-            setErrors(data);
-        } else {
-            await history.push('/dreams')
-        }
+// todo validate date exists
+        const errors = []
+        const trimTitle = title.trim()
+        if (!trimTitle) errors.push(['Please name your Dream'])
+        if (!date) errors.push(['When did you have this dream?'])
+        if(!journalId) errors.push(['Please select a journal for this dream'])
+        if (!bodyHasContent(body)) errors.push(['Please describe your dream'])
+        
+        if(!errors.length){
+            setErrors([])
+            const submitDate = handleDate(date)
+            const data = await dispatch(createDream(trimTitle, submitDate, body, journalId))
+            if (data) {
+                // console.log(data)
+                return setErrors(data);
+            } else {
+                return history.push('/dreams')
+            }
+        } 
+        return setErrors(errors)
     }
 
     return (
@@ -71,7 +104,7 @@ const CreateDreamForm = () => {
                         ))}
                     </select>
                 </div>
-                <ReactQuill theme='snow' value={body} onChange={setBody} />
+                <ReactQuill theme='snow' modules={modules} formats={formats} value={body} onChange={setBody} />
 
                 <div className="create-dream-button">
                 <button type="submit" >this will save the dream</button>
