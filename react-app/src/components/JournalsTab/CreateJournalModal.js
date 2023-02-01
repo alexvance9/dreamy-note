@@ -15,6 +15,8 @@ const CreateJournalModal = () => {
         const trimmedTitle = title.trim()
         if (!trimmedTitle) {
             setErrors(['Please name your journal.'])
+        } else if (trimmedTitle.length > 30) {
+            setErrors(['Journal Name must be 30 characters or less'])
         } else {
             
             const data = await dispatch(createJournalThunk(trimmedTitle))

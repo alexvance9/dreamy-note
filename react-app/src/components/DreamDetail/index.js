@@ -145,7 +145,7 @@ const DreamDetail = ({dreamProp}) => {
                     ))}
                 </div>
                 <h2>Edit Your Dream</h2>
-                <form onSubmit={saveChanges}>
+                <form className="edit-dream-form" onSubmit={saveChanges}>
                     <div className="edit-title flex">
                         <label htmlFor="title">Title</label>
                         <input name='title' type='text' value={title} onChange={e => setTitle(e.target.value)}/>

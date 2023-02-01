@@ -88,10 +88,10 @@ const CreateDreamForm = () => {
                 ))}
             </div>
             <h2>New Dream</h2>
-            <form onSubmit={handleSubmit}>
+            <form className="create-dream-form" onSubmit={handleSubmit}>
                 <div className="create-title">
                     <label htmlFor="title">Title</label>
-                    <input name='title' type='text' value={title} onChange={e => setTitle(e.target.value)} />
+                    <input name='title' placeholder="Title" type='text' value={title} onChange={e => setTitle(e.target.value)} />
                 </div>
                 <div className="create-date">
                     <label htmlFor="date">Date</label>

@@ -14,6 +14,7 @@ import DreamsTab from './components/DreamsTab';
 import JournalsTab from './components/JournalsTab';
 import JournalDetailsView from './components/JournalsTab/JournalDetailsView';
 import PageNotFound from './components/ExtraPages/PageNotFound';
+import SplashPage from './components/SplashPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -60,7 +61,7 @@ function App() {
           <Dashboard />
         </ProtectedRoute>
         <Route path='/' exact={true} >
-          <h1>Welcome to dreamy note</h1>
+          <SplashPage />
         </Route>
         <Route>
           <PageNotFound />
