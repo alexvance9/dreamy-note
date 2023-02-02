@@ -5,6 +5,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { createDream } from "../../store/session";
 import './CreateDreamForm.css'
+import moment from 'moment'
 
 const CreateDreamForm = () => {
     
@@ -18,12 +19,6 @@ const CreateDreamForm = () => {
     const [body, setBody] = useState("")
 
     const userJournals = useSelector(state => state.session.user.journals)
-    // console.log("user journals: ", userJournals)
-    // console.log('journal state:', journalId)
-    // const journalTitlesList = userJournals.map(journal => {
-    //     return journal.title
-    // })
-    // console.log('journal titles: ', journalTitlesList)
 
    const modules = {
         toolbar: [
@@ -42,8 +37,8 @@ const CreateDreamForm = () => {
     
 // yyyy-mm-dd
     const handleDate = (str) => {
-        const dateStr = new Date(str).toISOString().split('T')[0]?.toString()
-        return dateStr
+        const handled = moment(str).format("YYYY-MM-DD")
+        return handled
     }
 
     const bodyHasContent = (body) => {

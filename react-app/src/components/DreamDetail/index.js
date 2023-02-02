@@ -17,7 +17,7 @@ import LoadingPage from "../ExtraPages/LoadingPage";
 const DreamDetail = ({dreamProp}) => {
     // bc dream gets sent as[{...}] 
     const currentDream = dreamProp[0]
-
+    console.log()
     // grab dream slice of state
     const selectedDream = useSelector(state => state.dream.dream)
     const userJournals = useSelector(state => state.session.user.journals)
