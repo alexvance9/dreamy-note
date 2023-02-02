@@ -23,6 +23,7 @@
     margin-bottom: 10px;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-weight: 600;
 }
 
 .card-body {

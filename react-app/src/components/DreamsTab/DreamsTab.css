@@ -2,11 +2,12 @@
     width: 75%;
     height: 100%;
     /* border: 2px solid red; */
+    background-image: url('../../assets/black-space.jpg');
 }
 
 .dream-nav-container {
     /* border: 2px solid green; */
-    min-width: 20%;
+    min-width: 30%;
     max-width: 30%;
     min-height: 100%;
     /* height: fit-content; */
@@ -15,6 +16,8 @@
     /* background-image: url('../../assets/stars.jpg'); */
     /* margin: 0 auto; */
     background-color: rgb(34, 14, 45);
+    background: linear-gradient(rgb(42, 17, 56, 0.45), rgb(34, 14, 45));
+    backdrop-filter: blur(1px);
 }
 
 .dream-nav-container::-webkit-scrollbar {
@@ -24,7 +27,9 @@
 
 .render-view-container {
     width: 100%;
-    background-color: rgb(25, 10, 33);
+    /* background-color: rgb(25, 10, 33, .45); */
+    /* backdrop-filter: blur(1px); */
+    /* border: 2px solid red; */
 }
 
 .dream-title > * {

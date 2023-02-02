@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from datetime import date
+from datetime import datetime
 
 class Journal(db.Model):
     __tablename__ = 'journals'
@@ -10,7 +10,7 @@ class Journal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     date_created = db.Column(db.Date, nullable=False)
-    last_updated = db.Column(db.Date, nullable=True)
+    last_updated = db.Column(db.Datetime, default=datetime.now(), onupdate=datetime.now(), nullable=True)
     dreamer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete="CASCADE"))
 
     user = db.relationship("User", back_populates="journals")

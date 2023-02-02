@@ -43,8 +43,11 @@ const DreamsTab = ({isNew}) => {
             // setCurrentDream(currentDreamId)
         } else if (!dreams.length) {
             return (
-                <div className="render-view-container">
-                    <CreateDreamForm />
+                <div className="dreams-tab-container flex">
+                    <DreamNav dreams={dreams} />
+                    <div className="render-view-container">
+                        <CreateDreamForm />
+                    </div>
                 </div>
             )
         } else {

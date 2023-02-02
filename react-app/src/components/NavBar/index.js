@@ -3,9 +3,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
-import OpenModalButton from '../OpenModalButton';
-import LoginFormModal from '../auth/LoginFormModal';
-import SignUpFormModal from '../auth/SignUpFormModal';
+// import OpenModalButton from '../OpenModalButton';
+// import LoginFormModal from '../auth/LoginFormModal';
+// import SignUpFormModal from '../auth/SignUpFormModal';
 import './NavBar.css'
 import '../SplashPage/Splash.css'
 import sheep from '../../assets/sheep.png'
