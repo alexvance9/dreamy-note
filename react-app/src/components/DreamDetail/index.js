@@ -10,6 +10,7 @@ import OpenModalButton from "../OpenModalButton";
 import DeleteDreamModal from "../DeleteDreamModal";
 import './DreamDetail.css'
 import LoadingPage from "../ExtraPages/LoadingPage";
+import moment from 'moment'
 
 /* This component shows a nicely rendered view of a particular 
     dream entry, and handles editing of the dream.*/
@@ -37,7 +38,8 @@ const DreamDetail = ({dreamProp}) => {
     // function returns date as 'yyyy-mm-dd'
     const dateHandler = (str) => {
         // console.log('this is the date string passed to handler,', str)
-        const handled = new Date(str).toISOString().split('T')[0].toString()
+        // const handled = new Date(str).toISOString().split('T')[0].toString()
+        const handled = moment(str).format("YYYY-MM-DD")
         return handled
     }
 
@@ -186,7 +188,7 @@ const DreamDetail = ({dreamProp}) => {
                 <div className="detail-body flexcol">
                     <div className="detail-body-top flex">
                         <div className="detail-title">{title}</div>
-                        <div className="detail-date">{date}</div>
+                        <div className="detail-date">{moment(date).format("MM/DD/YYYY")}</div>
                     </div>
                     <div>{value}</div>
                     </div> 

@@ -26,7 +26,8 @@ class Journal(db.Model):
             'entries': [entry.to_journal_dict() for entry in self.entries]
         }
     
-
+    
     def set_last_updated(self):
         new_date = date.today()
+        print("setting last updated to: ", new_date)
         self.last_updated = new_date

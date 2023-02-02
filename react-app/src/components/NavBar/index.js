@@ -34,12 +34,12 @@ const NavBar = ({loaded}) => {
         <div className='linavlower flexcol'>
           <div className='new-dream-button flex'>
             <NavLink to='/dreams/new'>
-            <i className="fa-solid fa-plus"></i>
+              <i id='new-dream-plus' className="fa-solid fa-plus"></i>
               New Dream
             </NavLink>
           </div>
           <div className='tab flex'>
-            <i className="fa-solid fa-house-chimney"></i>
+            <i  className="fa-solid fa-house-chimney"></i>
             <NavLink to='/dashboard'>
               Dashboard
             </NavLink>
@@ -61,16 +61,7 @@ const NavBar = ({loaded}) => {
     );
   } else {
     sessionLinks = (
-      <div className='logged-out-nav flex'>
-        <OpenModalButton
-          buttonText="Sign Up"
-          modalComponent={<SignUpFormModal />}
-        />
-        <OpenModalButton
-          buttonText="Log In"
-          modalComponent={<LoginFormModal />}
-        />
-      </div>
+      <div></div>
     );
   }
 

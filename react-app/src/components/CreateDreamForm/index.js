@@ -5,6 +5,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { createDream } from "../../store/session";
 import './CreateDreamForm.css'
+import '../DreamDetail/DreamDetail.css'
 import moment from 'moment'
 
 const CreateDreamForm = () => {
@@ -76,6 +77,7 @@ const CreateDreamForm = () => {
     }
 
     return (
+        <div className="dream-detail-container">
         <div className="dream-form-container">
             <div className={errors.length ? "create-dream-errors" : "hidden-errors"}>
                 {errors.map((error, ind) => (
@@ -84,11 +86,11 @@ const CreateDreamForm = () => {
             </div>
             <h2>New Dream</h2>
             <form className="create-dream-form" onSubmit={handleSubmit}>
-                <div className="create-title">
+                <div className="create-title flex">
                     <label htmlFor="title">Title</label>
                     <input name='title' placeholder="Title" type='text' value={title} onChange={e => setTitle(e.target.value)} />
                 </div>
-                <div className="create-date">
+                <div className="create-date flex">
                     <label htmlFor="date">Date</label>
                     <input name='date' type='date' value={date} onChange={e => setDate(e.target.value)} />
                 </div>
@@ -103,9 +105,10 @@ const CreateDreamForm = () => {
                 <ReactQuill theme='snow' modules={modules} formats={formats} value={body} onChange={setBody} />
 
                 <div className="create-dream-button">
-                <button type="submit" >this will save the dream</button>
+                <button type="submit" >Save Dream</button>
                 </div>
             </form>
+        </div>
         </div>
     )
 }
