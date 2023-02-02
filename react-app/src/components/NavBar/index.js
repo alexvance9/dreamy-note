@@ -25,7 +25,7 @@ const NavBar = ({loaded}) => {
             <div className='sheep-icon'>
               <img className='user-sheep-img' alt='sheep icon' src={sheep} />
             </div>
-            <div className='username'>Hello, {sessionUser.username}.</div>
+            <div className='username'>Hello, <br/> {sessionUser.username}.</div>
           </div>
           <div className='logout-button'>
             <LogoutButton />

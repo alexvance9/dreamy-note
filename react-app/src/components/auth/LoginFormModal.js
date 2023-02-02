@@ -56,14 +56,14 @@ const LoginFormModal = () => {
   return (
     <div className='login-modal'>
     <form className='login-form' onSubmit={onLogin}>
-      <h2>Log In</h2>
+      <h2>Welcome Back</h2>
       <div className='errors'>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
-      <div>
-        <label htmlFor='email'>Email</label>
+      <div className='flexcol'>
+        {/* <label htmlFor='email'>Email</label> */}
         <input
           name='email'
           type='text'
@@ -72,8 +72,8 @@ const LoginFormModal = () => {
           onChange={updateEmail}
         />
       </div>
-      <div>
-        <label htmlFor='password'>Password</label>
+      <div className='flexcol'>
+        {/* <label htmlFor='password'>Password</label> */}
         <input
           name='password'
           type='password'
@@ -81,9 +81,9 @@ const LoginFormModal = () => {
           value={password}
           onChange={updatePassword}
         />
+      </div>
         <button type='submit'>Login</button>
         <button onClick={handleDemo}>Demo User</button>
-      </div>
     </form>
     </div >
   );

@@ -66,50 +66,57 @@ const SignUpFormModal = () => {
   return (
     <div className='signup-modal'>
     <form className='signup-form' onSubmit={onSignUp}>
-      <h2>Sign Up </h2>
-      <ul className='errors'>
+      <h2>Create An Account </h2>
+      <div className='errors'>
         {errors.map((error, ind) => (
-          <li key={ind}>{error}</li>
+          <div key={ind}>{error}</div>
         ))}
-      </ul>
+      </div>
       <div className='flexcol'>
-        <label>User Name</label>
+        {/* <label>User Name</label> */}
         <input
           type='text'
           name='username'
+          placeholder='Choose A User Name'
           onChange={updateUsername}
           value={username}
+          required={true}
         ></input>
       </div>
         <div className='flexcol'>
-        <label>Email</label>
+        {/* <label>Email</label> */}
         <input
           type='text'
           name='email'
+          placeholder='Enter Your Email'
           onChange={updateEmail}
           value={email}
+          required={true}
         ></input>
       </div>
         <div className='flexcol'>
-        <label>Password</label>
+        {/* <label>Password</label> */}
         <input
           type='password'
           name='password'
+          placeholder='Choose A Password'
           onChange={updatePassword}
           value={password}
+          required={true}
         ></input>
       </div>
         <div className='flexcol'>
-        <label>Repeat Password</label>
+        {/* <label>Repeat Password</label> */}
         <input
           type='password'
           name='repeat_password'
+          placeholder='Repeat Password'
           onChange={updateRepeatPassword}
           value={repeatPassword}
           required={true}
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
+      <button type='submit'>Start Journaling</button>
     </form>
     </div>
   );
