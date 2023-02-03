@@ -57,7 +57,7 @@ const JournalRow = ({journal}) => {
     // console.log("lastUpdated: ", journal.lastUpdated)
     // console.log("moment attempt: ", moment(journal.lastUpdated))
     // console.log("new date: ", new Date(journal.lastUpdated))
-    const momentUpdated = moment(journal.lastUpdated)
+    // const momentUpdated = moment(journal.lastUpdated)
     // console.log("format:", momentUpdated.format("MM/D/YYYY"))
 
     return (
@@ -65,7 +65,7 @@ const JournalRow = ({journal}) => {
         <tr>
             <td className="table-title"><button onClick={handleEntries}>{entryButton}</button><NavLink to={`/journals/${journal.id}`}>{journal.title}</NavLink></td>
             <td className="table-entries">{journal.entries.length}</td>
-            <td className="table-updated">{momentUpdated.fromNow()}</td>
+            <td className="table-updated">{moment(journal.dateCreated, "MM-DD-YYYY").format("MM/DD/YYYY")}</td>
             <td className="table-shared">&mdash;</td>
             <td className="table-menu"><button className='journals-menu' onClick={openMenu}><i className="fa-solid fa-ellipsis"></i></button>{menuComponents}</td>
         </tr>

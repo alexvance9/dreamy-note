@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
+from sqlalchemy.ext.hybrid import hybrid_property, hybrid_method
 
 class Journal(db.Model):
     __tablename__ = 'journals'
@@ -17,6 +18,9 @@ class Journal(db.Model):
 
     entries = db.relationship("Dream", back_populates="journal", cascade="all, delete")
 
+    # def __init__(self, last_updated):
+    #     self.last_updated = last_updated
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -27,7 +31,11 @@ class Journal(db.Model):
         }
     
     
-    # def set_last_updated(self):
-    #     new_date = date.today()
-    #     print("setting last updated to: ", new_date)
-    #     self.last_updated = new_date
+    # @hybrid_property
+    # def get_last_updated(self):
+    #     return self.last_updated
+    
+
+    # @last_updated.setter
+    # def last_updated(self, new_datetime):
+    #     self.last_updated = new_datetime

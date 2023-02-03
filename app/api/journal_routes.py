@@ -52,7 +52,7 @@ def create_journal():
         new_journal = Journal(
             title=form.data["title"],
             date_created=date.today(),
-            last_updated=date.today(),
+            # last_updated=date.today(),
             dreamer_id=current_user.id
         )
 

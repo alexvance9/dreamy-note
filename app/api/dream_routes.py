@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from datetime import date
+from datetime import date, datetime
 from app.models import Dream, Journal, db
 from flask_login import current_user, login_required
 from app.forms import DreamForm
@@ -34,6 +34,7 @@ def create_dream():
 
         db.session.add(new_dream)
         db.session.commit()
+        # journal.last_updated = datetime.now()
         return new_dream.to_dict(), 200
     
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
