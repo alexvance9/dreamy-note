@@ -2,6 +2,7 @@
     width: 80%;
     height: 100%;
     /* border: 2px solid red; */
+    background-image: url('../../assets/black-space.jpg');
 }
 
 .journal-nav-container {
@@ -9,6 +10,8 @@
     min-height: 100%;
     overflow-y: auto;
     background-color: rgb(34, 14, 45);
+        background: linear-gradient(rgb(42, 17, 56, 0.45), rgb(34, 14, 45));
+        backdrop-filter: blur(1px);
 }
 
 .journal-nav-container::-webkit-scrollbar {

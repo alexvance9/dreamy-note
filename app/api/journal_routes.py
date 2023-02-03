@@ -83,7 +83,7 @@ def update_journal(id):
 
         db.session.add(current_journal)
         db.session.commit()
-        current_journal.set_last_updated()
+        
         return current_journal.to_dict(), 201
 
 

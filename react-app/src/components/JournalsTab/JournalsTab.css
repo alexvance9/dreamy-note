@@ -86,7 +86,7 @@ tr {
     display: flex;
     align-items: center;
     padding: 5px;
-    visibility: hidden;
+    /* visibility: hidden; */
 }
 .table-shared {
     visibility: hidden;
