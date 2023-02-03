@@ -12,6 +12,7 @@ class Journal(db.Model):
     title = db.Column(db.String, nullable=False)
     date_created = db.Column(db.Date, nullable=False)
     last_updated = db.Column(db.DateTime, default=datetime.now(), onupdate=datetime.now(), nullable=True)
+    is_default = db.Column(db.Boolean, nullable=False, default=False)
     dreamer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete="CASCADE"))
 
     user = db.relationship("User", back_populates="journals")

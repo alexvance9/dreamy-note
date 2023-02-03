@@ -99,6 +99,8 @@ def delete_journal(id):
     current_journal = Journal.query.get(id)
     if not current_journal:
         return {'errors': ['Could not find journal']}, 404
+    elif current_journal.is_default == True:
+        return {'errors': ['Cannot delete default journal']}, 400
     
     db.session.delete(current_journal)
     db.session.commit()
