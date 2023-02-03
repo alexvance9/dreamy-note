@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router-dom";
-import { authenticate } from "../../store/session";
 import DreamDetail from "../DreamDetail";
 import DreamNav from "./DreamsNav"
 import CreateDreamForm from "../CreateDreamForm";
 
 import './DreamsTab.css'
 import LoadingPage from "../ExtraPages/LoadingPage";
+import { loadDreamsThunk } from "../../store/dreams";
 
 const DreamsTab = ({isNew}) => {
     // see note
@@ -17,14 +17,14 @@ const DreamsTab = ({isNew}) => {
     const dispatch = useDispatch()
     let params = useParams()
 
-    const dreams = useSelector(state => state.session.user.dreams)
-    
+    const dreams = useSelector(state => state.dreams.dreams)
+    const dreamsArr = Object.values(dreams)
 
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
         (async () => {
-            await dispatch(authenticate());
+            await dispatch(loadDreamsThunk());
             setIsLoaded(true);
         })();
     }, [dispatch]);
@@ -34,7 +34,7 @@ const DreamsTab = ({isNew}) => {
     /* --- WEIRD CONDITIONAL RENDERING OF DREAM PAGE VIEW--- */
 
     // sort the dreams array to be in order by date.
-    const dreamsCopy = [...dreams]
+    const dreamsCopy = [...dreamsArr]
     //    console.log('copy', dreamsCopy)
 
     function dateSorter(a, b) {
@@ -56,10 +56,10 @@ const DreamsTab = ({isNew}) => {
         if (params.dreamId){
             currentDreamId = Number(params.dreamId)
             // setCurrentDream(currentDreamId)
-        } else if (!dreams.length) {
+        } else if (!dreamsArr.length) {
             return (
                 <div className="dreams-tab-container flex">
-                    <DreamNav dreams={dreams} />
+                    <DreamNav dreams={dreamsArr} />
                     <div className="render-view-container">
                         <CreateDreamForm />
                     </div>
@@ -69,7 +69,7 @@ const DreamsTab = ({isNew}) => {
             currentDreamId = sorted[0].id
         }
         // grab the dream by id from the users dreams attr.
-        let d = dreams.filter(dream => dream.id === currentDreamId)
+        let d = dreams[currentDreamId]
         
 
     if (!isLoaded) {

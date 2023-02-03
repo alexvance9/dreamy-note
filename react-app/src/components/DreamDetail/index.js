@@ -4,8 +4,8 @@ import { useDispatch, useSelector} from "react-redux";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import parse from 'html-react-parser';
-import { updateDream } from "../../store/session";
-import { getSingleDream } from "../../store/dream";
+
+import { getSingleDream, updateDreamThunk } from "../../store/dreams";
 import OpenModalButton from "../OpenModalButton";
 import DeleteDreamModal from "../DeleteDreamModal";
 import './DreamDetail.css'
@@ -16,12 +16,11 @@ import moment from 'moment'
     dream entry, and handles editing of the dream.*/
 
 const DreamDetail = ({dreamProp}) => {
-    // bc dream gets sent as[{...}] 
-    const currentDream = dreamProp[0]
     
     // grab dream slice of state
-    const selectedDream = useSelector(state => state.dream.dream)
+    const selectedDream = useSelector(state => state.dreams.singleDream)
     const userJournals = useSelector(state => state.session.user.journals)
+    console.log(selectedDream.id)
    
     const dispatch = useDispatch()
     const [isLoaded, setIsLoaded] = useState(false)
@@ -47,12 +46,13 @@ const DreamDetail = ({dreamProp}) => {
     // this useEffect also sets our state variables to display dream data.
     useEffect(() => {
         (async () => {
-            const data = await dispatch(getSingleDream(currentDream.id));
+            const data = await dispatch(getSingleDream(dreamProp?.id));
             
             await setTitle(data.title)
             // console.log(data.date)
             await setDate(data.date)
-            await setJournalId(data.journal.id)
+            await setJournalId(data.journal['id'])
+            // console.log(data.journal['id'])
             // edit body is what shows in the editor, value is the parsed body to display outside of the editor
             await setEditBody(data.body)
             const parsedBody = parse(data.body)
@@ -60,7 +60,7 @@ const DreamDetail = ({dreamProp}) => {
             await setIsEdit(false)
             await setIsLoaded(true);
         })();
-    }, [dispatch, currentDream.id]);
+    }, [dispatch, dreamProp?.id]);
 
 
     // if use effect hasnt run or there was no dreamProp passed for some reason.
@@ -103,10 +103,10 @@ const DreamDetail = ({dreamProp}) => {
             const dreamId = selectedDream.id
             // const strDate = dateHandler(date)
     
-            const data = await dispatch(updateDream(trimTitle, date, editBody, dreamId, journalId))
-                if (data) {
+            const data = await dispatch(updateDreamThunk(trimTitle, date, editBody, dreamId, journalId))
+                if (data.errors) {
                     // console.log(data)
-                    return setErrors(data);
+                    return setErrors(data.errors);
                 } else {
                     // TODO
                     // await setTitle()
