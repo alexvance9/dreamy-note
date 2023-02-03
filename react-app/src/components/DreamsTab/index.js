@@ -32,6 +32,21 @@ const DreamsTab = ({isNew}) => {
     // console.log(isLoaded)
 
     /* --- WEIRD CONDITIONAL RENDERING OF DREAM PAGE VIEW--- */
+
+    // sort the dreams array to be in order by date.
+    const dreamsCopy = [...dreams]
+    //    console.log('copy', dreamsCopy)
+
+    function dateSorter(a, b) {
+        // console.log("a: ", a.date)
+        // console.log("b: ", b.date)
+        let aDate = new Date(a.date)
+        let bDate = new Date(b.date)
+        // console.log(aDate, bDate)
+        return bDate - aDate
+    }
+    //    console.log(dreamsCopy.sort(dateSorter))
+    const sorted = dreamsCopy.sort(dateSorter)
     
     // If there is a url param, grab it. else, we will render the details of the 
     // first dream in the list. 
@@ -43,12 +58,15 @@ const DreamsTab = ({isNew}) => {
             // setCurrentDream(currentDreamId)
         } else if (!dreams.length) {
             return (
-                <div className="render-view-container">
-                    <CreateDreamForm />
+                <div className="dreams-tab-container flex">
+                    <DreamNav dreams={dreams} />
+                    <div className="render-view-container">
+                        <CreateDreamForm />
+                    </div>
                 </div>
             )
         } else {
-            currentDreamId = dreams[0].id
+            currentDreamId = sorted[0].id
         }
         // grab the dream by id from the users dreams attr.
         let d = dreams.filter(dream => dream.id === currentDreamId)
@@ -82,7 +100,7 @@ const DreamsTab = ({isNew}) => {
 
     return (
         <div className="dreams-tab-container flex"> 
-            <DreamNav dreams={dreams}/>
+            <DreamNav dreams={sorted}/>
             {renderPage}
         </div>
     )

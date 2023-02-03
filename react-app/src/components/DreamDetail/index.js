@@ -10,6 +10,7 @@ import OpenModalButton from "../OpenModalButton";
 import DeleteDreamModal from "../DeleteDreamModal";
 import './DreamDetail.css'
 import LoadingPage from "../ExtraPages/LoadingPage";
+import moment from 'moment'
 
 /* This component shows a nicely rendered view of a particular 
     dream entry, and handles editing of the dream.*/
@@ -17,7 +18,7 @@ import LoadingPage from "../ExtraPages/LoadingPage";
 const DreamDetail = ({dreamProp}) => {
     // bc dream gets sent as[{...}] 
     const currentDream = dreamProp[0]
-
+    
     // grab dream slice of state
     const selectedDream = useSelector(state => state.dream.dream)
     const userJournals = useSelector(state => state.session.user.journals)
@@ -35,11 +36,10 @@ const DreamDetail = ({dreamProp}) => {
     const [editBody, setEditBody] = useState('') // this is the value of the body before being parsed, so still html string
 
     // function returns date as 'yyyy-mm-dd'
-    const dateHandler = (str) => {
-        // console.log('this is the date string passed to handler,', str)
-        const handled = new Date(str).toISOString().split('T')[0].toString()
-        return handled
-    }
+    // const dateHandler = (str) => {
+    //     const handled = moment(str, 'MM-DD-YYYY').format("MM/DD/YYYY")
+    //     return handled
+    // }
 
     // load dream slice of state, which is a single dream. it is set by grabbing the 
     // dream id of the dreamProp passed from the DreamsTab component.
@@ -50,9 +50,8 @@ const DreamDetail = ({dreamProp}) => {
             const data = await dispatch(getSingleDream(currentDream.id));
             
             await setTitle(data.title)
-            // dream.date is a json date so needs to be handled
-            const handledDate = dateHandler(data.date)
-            await setDate(handledDate)
+            // console.log(data.date)
+            await setDate(data.date)
             await setJournalId(data.journal.id)
             // edit body is what shows in the editor, value is the parsed body to display outside of the editor
             await setEditBody(data.body)
@@ -102,9 +101,9 @@ const DreamDetail = ({dreamProp}) => {
         if(!errors.length){
             setErrors([])
             const dreamId = selectedDream.id
-            const strDate = dateHandler(date)
+            // const strDate = dateHandler(date)
     
-            const data = await dispatch(updateDream(trimTitle, strDate, editBody, dreamId, journalId))
+            const data = await dispatch(updateDream(trimTitle, date, editBody, dreamId, journalId))
                 if (data) {
                     // console.log(data)
                     return setErrors(data);
@@ -186,7 +185,7 @@ const DreamDetail = ({dreamProp}) => {
                 <div className="detail-body flexcol">
                     <div className="detail-body-top flex">
                         <div className="detail-title">{title}</div>
-                        <div className="detail-date">{date}</div>
+                        <div className="detail-date">{moment(date, 'YYYY-MM-DD').format("MM/DD/YYYY")}</div>
                     </div>
                     <div>{value}</div>
                     </div> 

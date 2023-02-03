@@ -21,7 +21,7 @@ class Dream(db.Model):
         return {
             'id': self.id,
             'title': self.title,
-            'date': self.date,
+            'date': self.date.strftime("%Y-%m-%d"),
             'body': self.body,
             'journal': self.journal.to_dict()
         }
@@ -31,6 +31,6 @@ class Dream(db.Model):
         return {
             'id': self.id,
             'title': self.title,
-            'date': self.date,
+            'date': self.date.strftime("%Y-%m-%d"),
             'body': self.body
         }

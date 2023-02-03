@@ -34,7 +34,6 @@ def create_dream():
 
         db.session.add(new_dream)
         db.session.commit()
-        journal.set_last_updated()
         return current_user.to_dict(), 200
     
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -65,7 +64,7 @@ def update_dream(id):
 
         db.session.add(current_dream)
         db.session.commit()
-        current_dream.journal.set_last_updated()
+        # current_dream.journal.set_last_updated()
         return current_user.to_dict(), 200
     
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -83,7 +82,7 @@ def delete_dream(id):
     if not current_dream:
         return {'errors': ['Could not find dream']}, 404
     
-    current_dream.journal.set_last_updated()
+    # current_dream.journal.set_last_updated()
     db.session.delete(current_dream)
     db.session.commit()
 
