@@ -121,6 +121,7 @@ export const createDream = (title, date, body, journalId) => async (dispatch) =>
   if (response.ok) {
     // api route will return current user to update user slice of state
     const data = await response.json();
+    console.log("user that comes back from thunk: ", data)
     dispatch(setUser(data))
     return null
     // FE not expecting return

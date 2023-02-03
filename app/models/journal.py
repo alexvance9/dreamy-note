@@ -10,7 +10,7 @@ class Journal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     date_created = db.Column(db.Date, nullable=False)
-    last_updated = db.Column(db.Datetime, default=datetime.now(), onupdate=datetime.now(), nullable=True)
+    last_updated = db.Column(db.DateTime, default=datetime.now(), onupdate=datetime.now(), nullable=True)
     dreamer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete="CASCADE"))
 
     user = db.relationship("User", back_populates="journals")
@@ -21,8 +21,8 @@ class Journal(db.Model):
         return {
             'id': self.id,
             'title': self.title,
-            'dateCreated': self.date_created,
-            'lastUpdated': self.last_updated,
+            'dateCreated': self.date_created.strftime("%m-%d-%Y"),
+            'lastUpdated': self.last_updated.strftime("%m/%d/%Y, %H:%M:%S"),
             'entries': [entry.to_journal_dict() for entry in self.entries]
         }
     

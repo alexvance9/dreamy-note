@@ -6,7 +6,7 @@ import 'react-quill/dist/quill.snow.css';
 import { createDream } from "../../store/session";
 import './CreateDreamForm.css'
 import '../DreamDetail/DreamDetail.css'
-import moment from 'moment'
+// import moment from 'moment'
 
 const CreateDreamForm = () => {
     
@@ -36,11 +36,6 @@ const CreateDreamForm = () => {
             'list', 'bullet'
         ]
     
-// yyyy-mm-dd
-    const handleDate = (str) => {
-        const handled = moment(str).format("YYYY-MM-DD")
-        return handled
-    }
 
     const bodyHasContent = (body) => {
         // console.log(body)
@@ -64,8 +59,9 @@ const CreateDreamForm = () => {
         
         if(!errors.length){
             setErrors([])
-            const submitDate = handleDate(date)
-            const data = await dispatch(createDream(trimTitle, submitDate, body, journalId))
+            // const submitDate = handleDate(date)
+            // console.log("date being sent to thunk: ", submitDate, typeof submitDate)
+            const data = await dispatch(createDream(trimTitle, date, body, journalId))
             if (data) {
                 // console.log(data)
                 return setErrors(data);

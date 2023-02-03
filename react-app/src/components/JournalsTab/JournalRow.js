@@ -54,11 +54,11 @@ const JournalRow = ({journal}) => {
         </div>
     )
 
-    console.log("lastUpdated: ", journal.lastUpdated)
+    // console.log("lastUpdated: ", journal.lastUpdated)
     // console.log("moment attempt: ", moment(journal.lastUpdated))
-    console.log("new date: ", new Date(journal.lastUpdated))
+    // console.log("new date: ", new Date(journal.lastUpdated))
     const momentUpdated = moment(journal.lastUpdated)
-    console.log("format:", momentUpdated.format("MM/D/YYYY"))
+    // console.log("format:", momentUpdated.format("MM/D/YYYY"))
 
     return (
         <>

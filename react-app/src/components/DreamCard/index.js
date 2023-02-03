@@ -1,17 +1,14 @@
 import parse from 'html-react-parser';
-import './DreamCard.css'
+import './DreamCard.css';
+import moment from 'moment';
 
 const DreamCard = ({dream}) => {
 
-    // function returns date as 'yyyy-mm-dd'
+    
     const dateHandler = (str) => {
-        // console.log('this is the date string passed to handler,', str)
-        const handled = new Date(str).toISOString().split('T')[0].toString()
-        const handledArr = handled.split('-')
-        // console.log(handledArr)
-        const prettyDate = `${handledArr[1]}/${handledArr[2]}/${handledArr[0]}`
-
-        return prettyDate
+    //    console.log(str)
+        const handled = moment(str, 'YYYY-MM-DD').format("MM/DD/YYYY")
+        return handled
     }
 
     if (!dream) return null
