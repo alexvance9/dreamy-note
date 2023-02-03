@@ -5,11 +5,11 @@ import moment from 'moment';
 const DreamCard = ({dream}) => {
 
     
-    const dateHandler = (str) => {
-    //    console.log(str)
-        const handled = moment(str, 'YYYY-MM-DD').format("MM/DD/YYYY")
-        return handled
-    }
+    // const dateHandler = (str) => {
+    // //    console.log(str)
+    //     const handled = moment(str, 'YYYY-MM-DD').format("MM/DD/YYYY")
+    //     return handled
+    // }
 
     if (!dream) return null
 
@@ -18,7 +18,7 @@ const DreamCard = ({dream}) => {
         <div className="dream-card">
             <div className='card-title'>{dream.title}</div>
             <div className='card-body'>{parse(dream.body)}</div>
-            <div className='card-date'>{dateHandler(dream.date)}</div>
+            <div className='card-date'>{moment(dream.date, 'YYYY-MM-DD').format("MM/DD/YYYY")}</div>
         </div>
         
 

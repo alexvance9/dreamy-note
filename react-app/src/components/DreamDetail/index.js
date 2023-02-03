@@ -50,7 +50,7 @@ const DreamDetail = ({dreamProp}) => {
             const data = await dispatch(getSingleDream(currentDream.id));
             
             await setTitle(data.title)
-            console.log(data.date)
+            // console.log(data.date)
             await setDate(data.date)
             await setJournalId(data.journal.id)
             // edit body is what shows in the editor, value is the parsed body to display outside of the editor

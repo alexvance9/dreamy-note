@@ -7,6 +7,7 @@ import NoDreamsYet from "../ExtraPages/NoDreamsYet";
 import './JoDe.css'
 import DreamDetail from "../DreamDetail";
 import LoadingPage from "../ExtraPages/LoadingPage";
+// import { authenticate } from "../../store/session";
 
 const JournalDetailsView = () => {
     const dispatch = useDispatch()
@@ -17,6 +18,8 @@ const JournalDetailsView = () => {
     
     useEffect(() => {
         (async () => {
+            console.log("reloading")
+            // await dispatch(authenticate())
             await dispatch(loadSingleJournalThunk(journalId));
             setIsLoaded(true);
         })();
@@ -24,6 +27,7 @@ const JournalDetailsView = () => {
     
     const currentJournal = useSelector(state => state.journals.singleJournal)
     const entries = useSelector(state => state.journals.singleJournal.entries)
+    // const dreams = useSelector(state => state.session.user.dreams)
       
 
     if (!isLoaded) {
