@@ -120,3 +120,15 @@
     padding-right: .5rem;
 }
 
+.about-me {
+    /* border: 2px solid red; */
+    color: rgb(128, 255, 0);
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+}
+
+.about-links {
+    justify-content: space-around;
+    width: 100%;
+}
