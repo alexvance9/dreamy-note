@@ -1,9 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { createDreamThunk } from "../../store/dreams";
+import { loadJournalsThunk } from "../../store/journals";
 import './CreateDreamForm.css'
 import '../DreamDetail/DreamDetail.css'
 // import moment from 'moment'
@@ -19,7 +20,12 @@ const CreateDreamForm = () => {
     const [journalId, setJournalId] = useState("")
     const [body, setBody] = useState("")
 
-    const userJournals = useSelector(state => state.session.user.journals)
+    const userJournals = useSelector(state => state.session.journals.journals)
+    useEffect(() => {
+        (async () => {
+            await dispatch(loadJournalsThunk());
+        })();
+    }, [dispatch]);
 
    const modules = {
         toolbar: [
