@@ -16,11 +16,11 @@ import moment from 'moment'
     dream entry, and handles editing of the dream.*/
 
 const DreamDetail = ({dreamProp}) => {
-    
+    // console.log("dreamprop:", dreamProp)
     // grab dream slice of state
     const selectedDream = useSelector(state => state.dreams.singleDream)
     const userJournals = useSelector(state => state.session.user.journals)
-    console.log(selectedDream.id)
+    // console.log(selectedDream.id)
    
     const dispatch = useDispatch()
     const [isLoaded, setIsLoaded] = useState(false)
@@ -46,21 +46,23 @@ const DreamDetail = ({dreamProp}) => {
     // this useEffect also sets our state variables to display dream data.
     useEffect(() => {
         (async () => {
-            const data = await dispatch(getSingleDream(dreamProp?.id));
-            
-            await setTitle(data.title)
-            // console.log(data.date)
-            await setDate(data.date)
-            await setJournalId(data.journal['id'])
-            // console.log(data.journal['id'])
-            // edit body is what shows in the editor, value is the parsed body to display outside of the editor
-            await setEditBody(data.body)
-            const parsedBody = parse(data.body)
-            await setValue(parsedBody)
-            await setIsEdit(false)
-            await setIsLoaded(true);
+            if (dreamProp){
+                const data = await dispatch(getSingleDream(dreamProp.id));
+                
+                await setTitle(data.title)
+                // console.log(data.date)
+                await setDate(data.date)
+                // console.log(data.journal)
+                await setJournalId(data.journal['id'])
+                // edit body is what shows in the editor, value is the parsed body to display outside of the editor
+                await setEditBody(data.body)
+                const parsedBody = parse(data.body)
+                await setValue(parsedBody)
+                await setIsEdit(false)
+                await setIsLoaded(true);
+            }
         })();
-    }, [dispatch, dreamProp?.id]);
+    }, [dispatch, dreamProp]);
 
 
     // if use effect hasnt run or there was no dreamProp passed for some reason.

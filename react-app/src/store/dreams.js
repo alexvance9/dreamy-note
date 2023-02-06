@@ -44,6 +44,7 @@ export const getSingleDream = (dreamId) => async (dispatch) => {
     if (response.ok){
         const dream = await response.json()
         dispatch(setSingleDream(dream))
+        console.log(dream)
         return dream
     } else if (response.status < 500) {
         // if error is coming from backend route^^

@@ -28,6 +28,7 @@ class Journal(db.Model):
             'title': self.title,
             'dateCreated': self.date_created.strftime("%m-%d-%Y"),
             'lastUpdated': self.last_updated.strftime("%m/%d/%Y, %H:%M:%S"),
+            'isDefault': self.is_default,
             'entries': [entry.to_journal_dict() for entry in self.entries]
         }
     

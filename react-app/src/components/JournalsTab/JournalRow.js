@@ -38,18 +38,22 @@ const JournalRow = ({journal}) => {
     const menuClassName = "journal-dropdown" + (showMenu ? "" : " hidden");
     const entryClassName = "journal-entry" + (showEntries ? "" : " hidden")
     const entryButton = (showEntries ? <i className="fa-solid fa-caret-down"></i> : <i className="fa-solid fa-caret-right"></i> )
+    const deleteDivClass = "delete-button" + (journal.isDefault ? "-disabled" : "")
 
     const menuComponents = (
         <div className="drop-container">
             <div className={menuClassName} ref={ulRef}>
                 <OpenModalButton
-                    buttonText="edit"
+                    buttonText="rename"
                     modalComponent={<EditJournalModal journal={journal}/>}
                 />
+                <div className={deleteDivClass} data-tooltip={journal.isDefault ? "Cannot delete default Journal" : ""}>
                 <OpenModalButton
                     buttonText="delete"
                     modalComponent={<DeleteJournalModal journal={journal} />}
+                    disabled={journal.isDefault ? true : false }
                 />
+                </div>
             </div>
         </div>
     )
