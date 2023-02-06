@@ -20,7 +20,10 @@ const DreamDetail = ({dreamProp, isJournal}) => {
     // console.log("dreamprop:", dreamProp)
     // grab dream slice of state
     const selectedDream = useSelector(state => state.dreams.singleDream)
-    const userJournals = useSelector(state => state.session.user.journals)
+    // const userJournals = useSelector(state => state.session.user.journals)
+    const userJournals = useSelector(state => state.journals.journals)
+    const journalsArr = Object.values(userJournals)
+    // console.log(journalsArr)
     // console.log(selectedDream.id)
    
     const dispatch = useDispatch()
@@ -47,6 +50,7 @@ const DreamDetail = ({dreamProp, isJournal}) => {
     // this useEffect also sets our state variables to display dream data.
     useEffect(() => {
         (async () => {
+
             if (dreamProp){
                 const data = await dispatch(getSingleDream(dreamProp.id));
                 
@@ -62,6 +66,7 @@ const DreamDetail = ({dreamProp, isJournal}) => {
                 await setIsEdit(false)
                 await setIsLoaded(true);
             }
+            // await dispatch(loadJournalsThunk())
         })();
     }, [dispatch, dreamProp]);
 
@@ -162,7 +167,7 @@ const DreamDetail = ({dreamProp, isJournal}) => {
                     <div className="journal-select">
                         <select name="journal" value={journalId} onChange={e => setJournalId(e.target.value)}>
                             <option value="">Select a Journal...</option>
-                            {userJournals.map(journal => (
+                            {journalsArr.map(journal => (
                                 <option key={journal.id} value={journal.id}>{journal.title}</option>
                             ))}
                         </select>
