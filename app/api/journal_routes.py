@@ -36,6 +36,16 @@ def get_single_journal(id):
     return journal.to_dict(), 200
 
 
+# get journal entries
+# @journal_routes.route('/<int:id>/entries')
+# @login_required
+# def get_journal_entries(id):
+#     """
+#     load dream entries of single journal, for state purposes
+#     """
+    
+
+
 # create new journal
 @journal_routes.route('', methods=['POST'])
 @login_required
@@ -52,7 +62,7 @@ def create_journal():
         new_journal = Journal(
             title=form.data["title"],
             date_created=date.today(),
-            last_updated=date.today(),
+            # last_updated=date.today(),
             dreamer_id=current_user.id
         )
 
@@ -99,6 +109,8 @@ def delete_journal(id):
     current_journal = Journal.query.get(id)
     if not current_journal:
         return {'errors': ['Could not find journal']}, 404
+    elif current_journal.is_default == True:
+        return {'errors': ['Cannot delete default journal']}, 400
     
     db.session.delete(current_journal)
     db.session.commit()

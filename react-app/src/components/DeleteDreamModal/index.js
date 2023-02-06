@@ -1,40 +1,50 @@
 import { useState } from "react"
-import { useHistory } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { deleteDream } from "../../store/session";
+import { deleteDreamThunk } from "../../store/dreams";
 import './DeleteDreamModal.css'
 import sheep from '../../assets/sheep.png'
+import { loadSingleJournalThunk } from "../../store/journals";
 
 
-function DeleteDreamModal({ currentDreamId }) {
+function DeleteDreamModal({ currentDream, isJournal }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
 
-    // add error handling here
+    const currentDreamId = currentDream.id;
+    console.log(currentDream.journal.id)
 
-    const handleDelete = (e) => {
+    let pushUrl;
+    if (isJournal){
+        pushUrl = `/journals/${currentDream.journal.id}`
+    } else {
+        pushUrl = '/dreams'
+    }
+
+    const handleDelete =  (e) => {
         e.preventDefault();
-
-        dispatch(deleteDream(currentDreamId))
-            .then(history.push("/dreams"))
+        // console.log(currentDreamId)
+        // const data = await dispatch(deleteDreamThunk(currentDreamId))
+        // if (data.errors) {
+        //     return setErrors(data.errors)
+        // } else {
+        //     // closeModal()
+        //     await history.push('/dreams')
+        //     return closeModal()
+        // }
+        // WHY DOESNT THIS WORK ^^^^
+        dispatch(deleteDreamThunk(currentDreamId))
+            .then(dispatch(loadSingleJournalThunk(currentDream.journal.id)))
+            .then(history.push(pushUrl))
             .then(closeModal())
             .catch(e => {
                 // console.log(e)
                 setErrors(e)
             })
 
-        // FOR SOME REASON this async await created a race condition... so switched to .then
-        // if (data) {
-        //     console.log("this is the data:", data)
-        //     setErrors(data);
-        // } else {
-        //     // await history.push("/dashboard")
-        //     await closeModal()
-        //     return <Redirect to="/dashboard" />
-        // }
     }
 
     return (

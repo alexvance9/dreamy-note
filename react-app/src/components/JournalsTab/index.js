@@ -52,7 +52,7 @@ const JournalsTab = () => {
                         <tr>
                             <th className='table-title header-title'>Name</th>
                             <th className='table-entries'>Entries</th>
-                            <th className='table-updated'>Updated</th>
+                            <th className='table-updated'>Date Created</th>
                             <th className='table-shared'>Shared</th>
                             <th className='table-menu'></th>
                         </tr>
