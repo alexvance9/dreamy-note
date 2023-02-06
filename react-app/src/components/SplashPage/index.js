@@ -58,8 +58,8 @@ const SplashPage = () => {
             </div>
             <div className='welcome-about-links flex'>
                 Created by Alex Vance
-                <a href='https://www.linkedin.com/in/alex-vance-503537234/'><i class="fa-brands fa-linkedin"></i></a>
-                <a href='https://github.com/alexvance9/dreamy-note'><i class="fa-brands fa-github"></i></a>
+                <a href='https://www.linkedin.com/in/alex-vance-503537234/'><i className="fa-brands fa-linkedin"></i></a>
+                <a href='https://github.com/alexvance9/dreamy-note'><i className="fa-brands fa-github"></i></a>
           </div>
         </div>
     )

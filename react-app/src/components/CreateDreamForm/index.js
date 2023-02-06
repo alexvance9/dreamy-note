@@ -7,6 +7,7 @@ import { createDreamThunk } from "../../store/dreams";
 import { loadJournalsThunk } from "../../store/journals";
 import './CreateDreamForm.css'
 import '../DreamDetail/DreamDetail.css'
+import LoadingPage from "../ExtraPages/LoadingPage";
 // import moment from 'moment'
 
 const CreateDreamForm = () => {
@@ -20,12 +21,18 @@ const CreateDreamForm = () => {
     const [journalId, setJournalId] = useState("")
     const [body, setBody] = useState("")
 
-    const userJournals = useSelector(state => state.session.journals.journals)
+    const userJournals = useSelector(state => state.journals.journals)
+    const journalsArr = Object.values(userJournals)
+
     useEffect(() => {
         (async () => {
             await dispatch(loadJournalsThunk());
         })();
     }, [dispatch]);
+
+    if (!Object.values(userJournals).length){
+        return <LoadingPage />
+    }
 
    const modules = {
         toolbar: [
@@ -99,7 +106,7 @@ const CreateDreamForm = () => {
                 <div className="journal-select">
                     <select name="journal" value={journalId} onChange={e => setJournalId(e.target.value)}>
                         <option value="">Select a Journal...</option>
-                        {userJournals.map(journal => (
+                        {journalsArr.map(journal => (
                             <option key={journal.id} value={journal.id}>{journal.title}</option>
                         ))}
                     </select>
