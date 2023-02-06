@@ -15,7 +15,7 @@ function DeleteDreamModal({ currentDream, isJournal }) {
     const { closeModal } = useModal();
 
     const currentDreamId = currentDream.id;
-    console.log(currentDream.journal.id)
+    // console.log(currentDream.journal.id)
 
     let pushUrl;
     if (isJournal){

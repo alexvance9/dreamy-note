@@ -59,8 +59,8 @@ const NavBar = ({loaded}) => {
         </div>
         <div className='about-me'>
           <div className='about-links flex'>
-          <a href='https://www.linkedin.com/in/alex-vance-503537234/'><i class="fa-brands fa-linkedin"></i></a>
-          <a href='https://github.com/alexvance9/dreamy-note'><i class="fa-brands fa-github"></i></a>
+          <a href='https://www.linkedin.com/in/alex-vance-503537234/'><i className="fa-brands fa-linkedin"></i></a>
+          <a href='https://github.com/alexvance9/dreamy-note'><i className="fa-brands fa-github"></i></a>
           </div>
           <p>Project by Alex Vance</p>
         </div>
