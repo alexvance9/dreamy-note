@@ -4,24 +4,24 @@ import { useDispatch, useSelector} from "react-redux";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import parse from 'html-react-parser';
-import { updateDream } from "../../store/session";
-import { getSingleDream } from "../../store/dream";
+
+import { getSingleDream, updateDreamThunk } from "../../store/dreams";
 import OpenModalButton from "../OpenModalButton";
 import DeleteDreamModal from "../DeleteDreamModal";
 import './DreamDetail.css'
 import LoadingPage from "../ExtraPages/LoadingPage";
 import moment from 'moment'
+import { loadSingleJournalThunk } from "../../store/journals";
 
 /* This component shows a nicely rendered view of a particular 
     dream entry, and handles editing of the dream.*/
 
-const DreamDetail = ({dreamProp}) => {
-    // bc dream gets sent as[{...}] 
-    const currentDream = dreamProp[0]
-    
+const DreamDetail = ({dreamProp, isJournal}) => {
+    // console.log("dreamprop:", dreamProp)
     // grab dream slice of state
-    const selectedDream = useSelector(state => state.dream.dream)
+    const selectedDream = useSelector(state => state.dreams.singleDream)
     const userJournals = useSelector(state => state.session.user.journals)
+    // console.log(selectedDream.id)
    
     const dispatch = useDispatch()
     const [isLoaded, setIsLoaded] = useState(false)
@@ -47,20 +47,23 @@ const DreamDetail = ({dreamProp}) => {
     // this useEffect also sets our state variables to display dream data.
     useEffect(() => {
         (async () => {
-            const data = await dispatch(getSingleDream(currentDream.id));
-            
-            await setTitle(data.title)
-            // console.log(data.date)
-            await setDate(data.date)
-            await setJournalId(data.journal.id)
-            // edit body is what shows in the editor, value is the parsed body to display outside of the editor
-            await setEditBody(data.body)
-            const parsedBody = parse(data.body)
-            await setValue(parsedBody)
-            await setIsEdit(false)
-            await setIsLoaded(true);
+            if (dreamProp){
+                const data = await dispatch(getSingleDream(dreamProp.id));
+                
+                await setTitle(data.title)
+                // console.log(data.date)
+                await setDate(data.date)
+                // console.log(data.journal)
+                await setJournalId(data.journal['id'])
+                // edit body is what shows in the editor, value is the parsed body to display outside of the editor
+                await setEditBody(data.body)
+                const parsedBody = parse(data.body)
+                await setValue(parsedBody)
+                await setIsEdit(false)
+                await setIsLoaded(true);
+            }
         })();
-    }, [dispatch, currentDream.id]);
+    }, [dispatch, dreamProp]);
 
 
     // if use effect hasnt run or there was no dreamProp passed for some reason.
@@ -103,16 +106,19 @@ const DreamDetail = ({dreamProp}) => {
             const dreamId = selectedDream.id
             // const strDate = dateHandler(date)
     
-            const data = await dispatch(updateDream(trimTitle, date, editBody, dreamId, journalId))
-                if (data) {
+            const data = await dispatch(updateDreamThunk(trimTitle, date, editBody, dreamId, journalId))
+                if (data.errors) {
                     // console.log(data)
-                    return setErrors(data);
+                    return setErrors(data.errors);
                 } else {
-                    // TODO
-                    // await setTitle()
-                    await setValue(parse(editBody))
-                    await setIsEdit(false)
-                    return
+                    const loadJournal = await dispatch(loadSingleJournalThunk(journalId))
+                    if (loadJournal.errors) {
+                        return setErrors(loadJournal.errors);
+                    } else{
+                        await setValue(parse(editBody))
+                        await setIsEdit(false)
+                        return
+                    }
                 }
         }
         return setErrors(errors)
@@ -178,7 +184,7 @@ const DreamDetail = ({dreamProp}) => {
                         <button onClick={openEditor}>Edit Dream</button>
                         <OpenModalButton
                             buttonText="Delete Dream"
-                            modalComponent={<DeleteDreamModal currentDreamId={selectedDream.id} />}
+                            modalComponent={<DeleteDreamModal currentDream={selectedDream} isJournal={isJournal}/>}
                         />
                     </div>
                 </div>

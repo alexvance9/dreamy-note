@@ -1,6 +1,8 @@
 .app-nav {
     display: flex;
     width: 25%;
+    min-width: 25%;
+    max-width: 25%;
     background-color: rgb(25, 10, 33);
     /* background-color: black; */
     box-sizing: border-box;
@@ -118,3 +120,15 @@
     padding-right: .5rem;
 }
 
+.about-me {
+    /* border: 2px solid red; */
+    color: rgb(128, 255, 0);
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+}
+
+.about-links {
+    justify-content: space-around;
+    width: 100%;
+}

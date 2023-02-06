@@ -5,7 +5,7 @@ from datetime import date
 # Adds a demo user, you can add other users here if you want
 def seed_journals():
     journal1 = Journal(
-        title='Journal #1', date_created=date(2022, 6, 1), dreamer_id=1
+        title='Journal #1', date_created=date(2022, 6, 1), dreamer_id=1, is_default=True
     )
     journal2 = Journal(
         title='Greece Trip', date_created=date(2022, 6, 1), dreamer_id=1
@@ -14,10 +14,10 @@ def seed_journals():
         title='Freshman Year', date_created=date(2022, 6, 1), dreamer_id=2
     )
     journal4 = Journal(
-        title='Journal #1', date_created=date(2022, 6, 1), dreamer_id=2
+        title='Journal #1', date_created=date(2022, 6, 1), dreamer_id=2, is_default=True
     )
     journal5 = Journal(
-        title='Good Dreams', date_created=date(2022, 6, 1), dreamer_id=3
+        title='Good Dreams', date_created=date(2022, 6, 1), dreamer_id=3, is_default=True
     )
     journal6 = Journal(
         title='Bad Dreams', date_created=date(2022, 6, 1), dreamer_id=3

@@ -18,7 +18,7 @@ const JournalDetailsView = () => {
     
     useEffect(() => {
         (async () => {
-            console.log("reloading")
+            // console.log("reloading")
             // await dispatch(authenticate())
             await dispatch(loadSingleJournalThunk(journalId));
             setIsLoaded(true);
@@ -59,7 +59,7 @@ const JournalDetailsView = () => {
         <div className="journal-detail-container flex">
             <JournalDetailNav currentJournal={currentJournal} entries={entries}/>
             <div className="render-view-container">
-                <DreamDetail dreamProp={entry}/>
+                <DreamDetail dreamProp={entry[0]} isJournal={true}/>
             </div>
         </div>
     )

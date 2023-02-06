@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from datetime import date
+from datetime import date, datetime
 from app.models import Dream, Journal, db
 from flask_login import current_user, login_required
 from app.forms import DreamForm
@@ -34,7 +34,8 @@ def create_dream():
 
         db.session.add(new_dream)
         db.session.commit()
-        return current_user.to_dict(), 200
+        # journal.last_updated = datetime.now()
+        return new_dream.to_dict(), 200
     
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
@@ -65,7 +66,7 @@ def update_dream(id):
         db.session.add(current_dream)
         db.session.commit()
         # current_dream.journal.set_last_updated()
-        return current_user.to_dict(), 200
+        return current_dream.to_dict(), 200
     
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
@@ -86,7 +87,7 @@ def delete_dream(id):
     db.session.delete(current_dream)
     db.session.commit()
 
-    return current_user.to_dict(), 200
+    return jsonify([dream.to_dict() for dream in current_user.dreams]), 200
 
 
 # get single dream
@@ -102,3 +103,10 @@ def single_dream(id):
         return {'errors': ['Could not find dream']}, 404
     
     return current_dream.to_dict(), 200
+
+
+# get all dreams
+@dream_routes.route('')
+@login_required
+def get_user_dreams():
+    return jsonify([dream.to_dict() for dream in current_user.dreams]), 200

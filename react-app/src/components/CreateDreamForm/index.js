@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { createDream } from "../../store/session";
+import { createDreamThunk } from "../../store/dreams";
 import './CreateDreamForm.css'
 import '../DreamDetail/DreamDetail.css'
 // import moment from 'moment'
@@ -61,12 +61,12 @@ const CreateDreamForm = () => {
             setErrors([])
             // const submitDate = handleDate(date)
             // console.log("date being sent to thunk: ", submitDate, typeof submitDate)
-            const data = await dispatch(createDream(trimTitle, date, body, journalId))
-            if (data) {
+            const data = await dispatch(createDreamThunk(trimTitle, date, body, journalId))
+            if (data.errors) {
                 // console.log(data)
-                return setErrors(data);
+                return setErrors(data.errors);
             } else {
-                return history.push('/dreams')
+                return history.push(`/dreams/${data.id}`)
             }
         } 
         return setErrors(errors)

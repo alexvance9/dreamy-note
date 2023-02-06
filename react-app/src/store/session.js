@@ -102,97 +102,11 @@ export const signUp = (username, email, password) => async (dispatch) => {
   }
 }
 
-/*---------- DREAM THUNKS ---------- */
-
-export const createDream = (title, date, body, journalId) => async (dispatch) => {
-  const response = await fetch('/api/dreams', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      title,
-      date,
-      body,
-      journal_id: journalId
-    })
-  })
-
-  if (response.ok) {
-    // api route will return current user to update user slice of state
-    const data = await response.json();
-    // console.log("user that comes back from thunk: ", data)
-    dispatch(setUser(data))
-    return null
-    // FE not expecting return
-  } else if (response.status < 500) {
-    // if error is coming from backend route^^
-      const data = await response.json()
-      if (data.errors) {
-        return data.errors
-      }
-  } else {
-    return ['An error ocurred, please try again.']
-  }
-
-}
 
 
-export const updateDream = (title, date, body, dreamId, journalId) => async (dispatch) => {
-  // dreamId must be sent from FE
-  const response = await fetch(`/api/dreams/${dreamId}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      title,
-      date,
-      body,
-      journal_id: journalId
-    })
-  })
 
-  if (response.ok) {
-    // api route will return current user to update user slice of state
-    const data = await response.json();
-    console.log(data)
-    dispatch(setUser(data))
-    return null
-    // FE not expecting return
-  } else if (response.status < 500) {
-    // if error is coming from backend route^^
-    const data = await response.json()
-    if (data.errors) {
-      return data.errors
-    }
-  } else {
-    return ['An error ocurred, please try again.']
-  }
 
-}
 
-export const deleteDream = (dreamId) => async (dispatch) => {
-  const response = await fetch(`/api/dreams/${dreamId}`, {
-    method: 'DELETE'
-  })
-
-  if (response.ok) {
-    // api route will return current user to update user slice of state
-    const data = await response.json();
-    dispatch(setUser(data))
-    return null
-    // FE not expecting return
-  } else if (response.status < 500) {
-    // if error is coming from backend route^^
-    const data = await response.json()
-    if (data.errors) {
-      return data.errors
-    }
-  } else {
-    return ['An error ocurred, please try again.']
-  }
-}
 
 /*---------- REDUCER ---------- */
 

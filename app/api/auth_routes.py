@@ -72,6 +72,7 @@ def sign_up():
             title="My Journal",
             date_created=date.today(),
             last_updated=date.today(),
+            is_default=True,
             user=user
         )
         db.session.add(user)

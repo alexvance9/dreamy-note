@@ -3,7 +3,7 @@ import './extra.css'
 
 const PageNotFound = () => {
     return (
-        <div className="journal-detail-container">
+        <div className="journal-detail-container-extra">
             <div className='sheep-no-dreams'>
                 <img className='user-sheep-img' alt='sheep icon' src={sheep} />
             </div>
