@@ -1,6 +1,7 @@
 // Constants
 const LOAD_JOURNALS = 'journals/LOAD_JOURNALS';
 const LOAD_SINGLE_JOURNAL = 'journals/LOAD_SINGLE_JOURNAL'
+// const LOAD_JOURNAL_ENTRIES = 'journals/LOAD_JOURNAL_ENTRIES'
 const ADD_JOURNAL = 'journals/ADD_JOURNAL';
 const EDIT_JOURNAL = 'journals/EDIT_JOURNAL';
 const DELETE_JOURNAL = 'journals/DELETE_JOURNAL';
@@ -27,6 +28,11 @@ const loadSingleJournal = (data) => ({
     payload: data
 })
 
+// const loadJournalEntries = (data) => ({
+//     type: LOAD_JOURNAL_ENTRIES,
+//     payload: data
+// })
+
 // const deleteJournal = () => ({
 //     type: DELETE_JOURNAL
 // })
@@ -45,7 +51,7 @@ export const loadJournalsThunk = () => async (dispatch) => {
     } else if (response.status < 500) {
         const data = response.json()
         if(data.errors){
-            return data.errors
+            return data
         }
     } else {
         return ['an error ocurred at load journals, please try again.']
@@ -59,16 +65,34 @@ export const loadSingleJournalThunk = (journalId) => async (dispatch) => {
         const data = await response.json()
         // console.log(data)
         dispatch(loadSingleJournal(data))
-        return null
+        return data
     } else if (response.status < 500) {
         const data = response.json()
         if (data.errors) {
-            return data.errors
+            return data
         }
     } else {
         return ['an error ocurred at load journals, please try again.']
     }
 }
+
+// export const loadJournalEntriesThunk = (journalId) => async (dispatch) => {
+//     const response = await fetch(`/api/journals/${journalId}/entries`)
+
+//     if (response.ok) {
+//         const data = await response.json()
+//         // console.log(data)
+//         dispatch(loadJournalEntries(data))
+//         return data
+//     } else if (response.status < 500) {
+//         const data = response.json()
+//         if (data.errors) {
+//             return data
+//         }
+//     } else {
+//         return ['an error ocurred at load journals, please try again.']
+//     }
+// }
 
 export const createJournalThunk = (title) => async (dispatch) => {
     
@@ -91,7 +115,7 @@ export const createJournalThunk = (title) => async (dispatch) => {
     } else if (response.status < 500) {
         const data = response.json()
         if (data.errors) {
-            return data.errors
+            return data
         }
     } else {
         return ['an error ocurred at add journals, please try again.']
@@ -118,7 +142,7 @@ export const editJournalThunk = (title, journalId) => async (dispatch) => {
     } else if (response.status < 500) {
         const data = response.json()
         if (data.errors) {
-            return data.errors
+            return data
         }
     } else {
         return ['an error ocurred at edit journals, please try again.']
@@ -137,7 +161,7 @@ export const deleteJournalThunk = (journalId) => async (dispatch) => {
     } else if (response.status < 500) {
         const data = response.json()
         if (data.errors) {
-            return data.errors
+            return data
         }
     } else {
         return ['an error ocurred at edit journals, please try again.']
@@ -158,9 +182,13 @@ export default function reducer(state = initialState, action) {
         case LOAD_SINGLE_JOURNAL: {
             const newState = { journals: { ...state.journals }, singleJournal: { entries: [] } }
             newState.singleJournal = action.payload
-            newState.singleJournal.entries = action.payload.entries
             return newState;
         }
+        // case LOAD_JOURNAL_ENTRIES: {
+        //     const newState = {journals: {...state.journals}, singleJournal: {...state.singleJournal}}
+        //     newState.singleJournal.entries = action.payload
+        //     return newState
+        // }
         case ADD_JOURNAL: {
             const newState = { journals: { ...state.journals }, singleJournal: { entries: [] } }
             newState.journals[action.payload.id] = action.payload;

@@ -11,6 +11,7 @@ import DeleteDreamModal from "../DeleteDreamModal";
 import './DreamDetail.css'
 import LoadingPage from "../ExtraPages/LoadingPage";
 import moment from 'moment'
+import { loadSingleJournalThunk } from "../../store/journals";
 
 /* This component shows a nicely rendered view of a particular 
     dream entry, and handles editing of the dream.*/
@@ -110,11 +111,14 @@ const DreamDetail = ({dreamProp}) => {
                     // console.log(data)
                     return setErrors(data.errors);
                 } else {
-                    // TODO
-                    // await setTitle()
-                    await setValue(parse(editBody))
-                    await setIsEdit(false)
-                    return
+                    const loadJournal = await dispatch(loadSingleJournalThunk(journalId))
+                    if (loadJournal.errors) {
+                        return setErrors(loadJournal.errors);
+                    } else{
+                        await setValue(parse(editBody))
+                        await setIsEdit(false)
+                        return
+                    }
                 }
         }
         return setErrors(errors)
