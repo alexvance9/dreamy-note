@@ -1,19 +1,28 @@
 import { useState } from "react"
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deleteDreamThunk } from "../../store/dreams";
 import './DeleteDreamModal.css'
 import sheep from '../../assets/sheep.png'
+import { loadSingleJournalThunk } from "../../store/journals";
 
 
-function DeleteDreamModal({ currentDreamId }) {
+function DeleteDreamModal({ currentDream, isJournal }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
-// console.log(currentDreamId)
-    // add error handling here
+
+    const currentDreamId = currentDream.id;
+    console.log(currentDream.journal.id)
+
+    let pushUrl;
+    if (isJournal){
+        pushUrl = `/journals/${currentDream.journal.id}`
+    } else {
+        pushUrl = '/dreams'
+    }
 
     const handleDelete =  (e) => {
         e.preventDefault();
@@ -28,7 +37,8 @@ function DeleteDreamModal({ currentDreamId }) {
         // }
         // WHY DOESNT THIS WORK ^^^^
         dispatch(deleteDreamThunk(currentDreamId))
-            .then(history.push("/dreams"))
+            .then(dispatch(loadSingleJournalThunk(currentDream.journal.id)))
+            .then(history.push(pushUrl))
             .then(closeModal())
             .catch(e => {
                 // console.log(e)

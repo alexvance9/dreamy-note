@@ -93,7 +93,7 @@ const DreamsTab = ({isNew}) => {
     } else {
         renderPage = (
             <div className="render-view-container">
-                <DreamDetail dreamProp={d} />
+                <DreamDetail dreamProp={d} isJournal={false}/>
             </div>
         )
     }

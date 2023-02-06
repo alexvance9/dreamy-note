@@ -16,7 +16,7 @@ import { loadSingleJournalThunk } from "../../store/journals";
 /* This component shows a nicely rendered view of a particular 
     dream entry, and handles editing of the dream.*/
 
-const DreamDetail = ({dreamProp}) => {
+const DreamDetail = ({dreamProp, isJournal}) => {
     // console.log("dreamprop:", dreamProp)
     // grab dream slice of state
     const selectedDream = useSelector(state => state.dreams.singleDream)
@@ -184,7 +184,7 @@ const DreamDetail = ({dreamProp}) => {
                         <button onClick={openEditor}>Edit Dream</button>
                         <OpenModalButton
                             buttonText="Delete Dream"
-                            modalComponent={<DeleteDreamModal currentDreamId={selectedDream.id} />}
+                            modalComponent={<DeleteDreamModal currentDream={selectedDream} isJournal={isJournal}/>}
                         />
                     </div>
                 </div>

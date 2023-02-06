@@ -59,7 +59,7 @@ const JournalDetailsView = () => {
         <div className="journal-detail-container flex">
             <JournalDetailNav currentJournal={currentJournal} entries={entries}/>
             <div className="render-view-container">
-                <DreamDetail dreamProp={entry[0]}/>
+                <DreamDetail dreamProp={entry[0]} isJournal={true}/>
             </div>
         </div>
     )
