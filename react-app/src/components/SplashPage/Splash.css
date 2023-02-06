@@ -66,6 +66,26 @@
     padding: 20px;
 }
 
-.welcome-container > p {
+
+
+.welcome-about {
+    text-align: center;
     color: rgb(198, 195, 195);
+    line-height: 1.5rem;
+}
+
+.welcome-techs {
+    /* display: flex; */
+    font-size: medium;
+    /* line-height: 1.5rem; */
+    color: rgb(198, 195, 195);
+}
+
+.welcome-about-links {
+    color: rgb(128, 255, 0);
+}
+
+
+.welcome-about-links > * {
+    padding-left: 15px;
 }
