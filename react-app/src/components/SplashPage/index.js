@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { authenticate } from '../../store/session';
-import sheep from '../../assets/sheep.png'
+
 import './Splash.css'
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../auth/LoginFormModal';
 import SignUpFormModal from '../auth/SignUpFormModal';
 import { Redirect } from 'react-router-dom';
+import SplashCarousel from './SplashCarousel';
 
 const SplashPage = () => {
     const dispatch = useDispatch();
@@ -26,6 +27,25 @@ const SplashPage = () => {
     return (
         <div className='welcome-container'>
             <h1 className='welcome'>Welcome to DreamyNote</h1>
+          <SplashCarousel />
+            <div className='logged-out-nav flex'>
+                <OpenModalButton
+                    buttonText="Sign Up"
+                    modalComponent={<SignUpFormModal />}
+                />
+                <OpenModalButton
+                    buttonText="Log In"
+                    modalComponent={<LoginFormModal />}
+                />
+            </div>
+        </div>
+    )
+}
+
+export default SplashPage;
+
+
+/* <h1 className='welcome'>Welcome to DreamyNote</h1>
             <div className='sheep-splash'>
                     <img className='user-sheep-img' alt='sheep icon' src={sheep} />
             </div>
@@ -60,9 +80,4 @@ const SplashPage = () => {
                 Created by Alex Vance
                 <a href='https://www.linkedin.com/in/alex-vance-503537234/'><i className="fa-brands fa-linkedin"></i></a>
                 <a href='https://github.com/alexvance9/dreamy-note'><i className="fa-brands fa-github"></i></a>
-          </div>
-        </div>
-    )
-}
-
-export default SplashPage;
+          </div> */
