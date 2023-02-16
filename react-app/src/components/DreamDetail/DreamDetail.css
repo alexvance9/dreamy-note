@@ -61,7 +61,16 @@
 .detail-body {
     margin-top: 20px;
     padding: 20px;
-    background-color: rgb(48, 47, 47);
+    /* background-color: rgb(48, 47, 47); */
+    /* border: 1px solid rgb(175,
+                59,
+                238,
+                0.25);
+        border-radius: .25rem;
+        background-color: rgba(153, 52, 207, 0.25);
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
+        backdrop-filter: blur(3px); */
+
     min-height: 40vh;
     border-radius: .5rem;
 }
@@ -71,7 +80,10 @@
     position: sticky;
     top: 0;
     padding-top: 10px;
-    background-color: inherit;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgb(12, 12, 20);
+    /* border-radius: 10px 10px 0 0; */
     /* border: 2px solid red; */
     /* align-self: center; */
 }

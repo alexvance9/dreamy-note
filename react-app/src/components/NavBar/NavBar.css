@@ -86,6 +86,10 @@
     color: rgb(198, 195, 195);
     padding: 0 5px;
 }
+.tab>*:hover{
+    color: rgb(128, 255, 0);
+    text-decoration: underline;
+}
 
  .new-dream-button {
   /* border: 2px solid red;  */
