@@ -45,7 +45,7 @@ tbody {
 }
 
 tbody>tr:nth-child(odd){
-    background-color: rgb(25, 10, 33);
+    background-color: rgb(73, 30, 96);
     /* border: 2px solid red; */
 }
 
