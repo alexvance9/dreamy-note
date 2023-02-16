@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { authenticate } from '../../store/session';
-
+import sheep from '../../assets/sheep.png'
 import './Splash.css'
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../auth/LoginFormModal';
@@ -27,6 +27,9 @@ const SplashPage = () => {
     return (
         <div className='welcome-container'>
             <h1 className='welcome'>Welcome to DreamyNote</h1>
+            <div className='sheep-splash'>
+                <img className='user-sheep-img' alt='sheep icon' src={sheep} />
+            </div>
           <SplashCarousel />
             <div className='logged-out-nav flex'>
                 <OpenModalButton

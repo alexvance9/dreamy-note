@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import sheep from '../../assets/sheep.png'
+
 
 function SplashCarousel() {
     const [index, setIndex] = useState(0);
@@ -11,23 +11,25 @@ function SplashCarousel() {
 
     return (
         <Carousel activeIndex={index} onSelect={handleSelect}>
-            <Carousel.Item>
+            <Carousel.Item interval={6000}>
                 <div className='carousel-slide'>
-                    <div className='sheep-splash'>
-                        <img className='user-sheep-img' alt='sheep icon' src={sheep} />
-                    </div>
+                    
                     <div className='welcome-about'>
-                    Discover the power of your subconscious with DreamyNote, a dream journaling app.
-                    Dive into a world of self-discovery as you explore your innermost thoughts, emotions, and desires.
-                    Keeping track of your dreams has never been easier!
+                        <p>Discover the power of your subconscious with DreamyNote, a dream journaling app.</p>
+                        
+                        
                     </div>
                 </div>
+            </Carousel.Item >
+            <Carousel.Item interval={6000}>
+                <div className='carousel-slide'>
+                    <p>Dive into a world of self-discovery as you explore your innermost thoughts, emotions, and desires.</p>
+                </div>
             </Carousel.Item>
-            <Carousel.Item>
-                <div className='carousel-slide'>hello</div>
-            </Carousel.Item>
-            <Carousel.Item>
-                <div className='carousel-slide'>hello</div>
+            <Carousel.Item interval={6000}>
+                <div className='carousel-slide'>
+                    <p>Keeping track of your dreams has never been easier!</p>
+                </div>
             </Carousel.Item>
         </Carousel>
     );
