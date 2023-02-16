@@ -1,0 +1,105 @@
+.dashboard-container{
+    width: 75%;
+    height: 100%;
+    background-image: url('../../assets/black-space.jpg');
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dashboard-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 85%;
+    height: 25%;
+    background-color: rgba(153, 52, 207, 0.25);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
+    border: 1px solid rgb(175,
+                59,
+                238,
+                0.25);
+    border-radius: 10px;
+    backdrop-filter: blur(3px);
+    margin-top: 5%;
+    color: antiquewhite;
+    
+}
+
+.divider{
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(.25turn, rgb(128, 255, 0), rgb(153, 52, 207), rgb(128, 255, 0));
+}
+
+.widget-container{
+    /* border: 2px solid red; */
+    display: flex;
+    width: 85%;
+    height: 60%;
+    margin-top: 5%;
+    justify-content: space-between;
+}
+
+.dream-widget{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: antiquewhite;
+    width: 48%;
+    max-width: 50%;
+    height: 90%;
+    background-color: rgba(153, 52, 207, 0.25);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
+    border: 1px solid rgb(175,
+            59,
+            238,
+            0.25);
+    border-radius: 10px;
+    backdrop-filter: blur(3px);
+    padding: 3%;
+}
+.dream-widget>*{
+    margin: 5px 0;
+}
+
+.dream-widget>h3{
+    color: rgb(128, 255, 0, .95);
+    font-size: 24px;
+}
+
+.dream-widget>h4{
+    font-size: 20px;
+}
+
+.dream-widget-body{
+    height: 80%;
+    overflow: auto;
+    font-size: small;
+}
+
+.tags-widget{
+    display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        color: antiquewhite;
+        width: 48%;
+        max-width: 50%;
+        min-height: 30%;
+        max-height: 35%;
+        background-color: rgba(153, 52, 207, 0.25);
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
+        border: 1px solid rgb(175,
+                59,
+                238,
+                0.25);
+        border-radius: 10px;
+        backdrop-filter: blur(3px);
+        padding: 3%;
+}
+
+.tags-widget>* {
+    margin: 5px 0;
+}
