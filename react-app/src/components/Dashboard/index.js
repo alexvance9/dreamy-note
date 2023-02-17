@@ -16,9 +16,9 @@ const Dashboard = () => {
         return (
         <div className="dashboard-container ">
             <div className="dashboard-header">
-                <h2>Welcome to your Dreams</h2>
+                <h2>Welcome to DreamyNote</h2>
                 <div className='divider'></div>
-                <div>Today is {moment().format('dddd MMMM Do, YYYY')}</div>
+                <div className='today'>Today is {moment().format('dddd MMMM Do, YYYY')}</div>
             </div>
             <div className="widget-container">
                 <div className="dream-widget">

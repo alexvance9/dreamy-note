@@ -23,8 +23,11 @@
     border-radius: 10px;
     backdrop-filter: blur(3px);
     margin-top: 5%;
-    color: antiquewhite;
-    
+    color: rgb(128, 255, 0);
+}
+
+.today{
+    color: antiquewhite; 
 }
 
 .divider{
