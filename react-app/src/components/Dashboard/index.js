@@ -11,6 +11,7 @@ const Dashboard = () => {
     // console.log(dreams)
     let dreamsWidget;
     if (dreams.length > 0){
+        const randomDream = dreams[Math.floor(Math.random()*dreams.length)];
         dreamsWidget = (
             <div className="dream-widget">
                 <h3>Remember this Dream?</h3>
@@ -25,13 +26,12 @@ const Dashboard = () => {
             <div className="dream-widget">
                 <h3>Remember this dream?</h3>
                 <div className='divider'></div>
-                <p>Start recording your dreams to see past dreams here!</p>
+                <p>Start journaling your dreams to see past dreams here!</p>
             </div>
         )
     }
 
 
-    const randomDream = dreams[Math.floor(Math.random()*dreams.length)];
     // console.log(randomDream)
     
    
