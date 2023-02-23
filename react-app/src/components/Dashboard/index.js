@@ -9,8 +9,30 @@ const Dashboard = () => {
     // random dream
     const dreams = useSelector(state => state.session.user.dreams)
     // console.log(dreams)
-    const randomDream = dreams[Math.floor(Math.random()*dreams.length)];
-    console.log(randomDream)
+    let dreamsWidget;
+    if (dreams.length > 0){
+        const randomDream = dreams[Math.floor(Math.random()*dreams.length)];
+        dreamsWidget = (
+            <div className="dream-widget">
+                <h3>Remember this Dream?</h3>
+                <div className='divider'></div>
+                <h4>{randomDream.title}</h4>
+                <div>{moment(randomDream.date, "YYYY-MM-DD").format("MM/DD/YYYY")}</div>
+                <div className='dream-widget-body'>{parse(randomDream.body)}</div>
+            </div>
+        )
+    } else {
+        dreamsWidget = (
+            <div className="dream-widget">
+                <h3>Remember this dream?</h3>
+                <div className='divider'></div>
+                <p>Start journaling your dreams to see past dreams here!</p>
+            </div>
+        )
+    }
+
+
+    // console.log(randomDream)
     
    
         return (
@@ -21,13 +43,7 @@ const Dashboard = () => {
                 <div className='today'>Today is {moment().format('dddd MMMM Do, YYYY')}</div>
             </div>
             <div className="widget-container">
-                <div className="dream-widget">
-                    <h3>Remember this Dream?</h3>
-                        <div className='divider'></div>
-                    <h4>{randomDream.title}</h4>
-                    <div>{moment(randomDream.date, "YYYY-MM-DD").format("MM/DD/YYYY")}</div>
-                    <div className='dream-widget-body'>{parse(randomDream.body)}</div>
-                </div>
+                {dreamsWidget}
                 <div className="tags-widget">
                     <h3>Coming Soon</h3>
                      <div className='divider'></div>

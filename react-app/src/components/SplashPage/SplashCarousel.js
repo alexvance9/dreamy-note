@@ -18,7 +18,7 @@ function SplashCarousel() {
                     <div className='splash-image-container-1'>
                         <img src={dashboard} alt="dashboard" />
                     </div>
-                    <div className='welcome-about'>
+                    <div className='welcome-about-3'>
                         <p>Discover the power of your subconscious with DreamyNote, a dream journaling app.</p>
                         <p>Dive into a world of self-discovery as you explore your innermost thoughts, emotions, and desires.</p>
                     </div>
