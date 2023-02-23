@@ -3,7 +3,7 @@
     /* background-image: url('../../assets/stars.jpg'); */
     /* width: 100%; */
     margin: 0 auto;
-    padding: 10px;
+    padding: 15px;
     justify-content: center;
     align-items: center;
 }
@@ -140,8 +140,16 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     font-size: xx-small;
     color: rgb(198, 195, 195);
+}
+
+.tech-and-contact>a{
+    font-size: large;
+}
+.tech-and-contact>p{
+    margin: 0;
 }
 
 .welcome-about-links {
