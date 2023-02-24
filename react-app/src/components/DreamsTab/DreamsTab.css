@@ -84,3 +84,8 @@
     background-color: #323232;
     border: 2px solid rgb(128, 255, 0);
 }
+
+.dream-card-nav:hover{
+    background-color: #323232;
+     border: 1px solid rgb(128, 255, 0);
+}

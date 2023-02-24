@@ -54,7 +54,7 @@ const JournalsTab = () => {
                             <th className='table-entries'>Entries</th>
                             <th className='table-updated'>Date Created</th>
                             <th className='table-shared'>Shared</th>
-                            <th className='table-menu'></th>
+                            <th className='table-menu'>Actions</th>
                         </tr>
                     </thead>
                     <tbody>

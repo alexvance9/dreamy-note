@@ -129,6 +129,11 @@ const DreamDetail = ({dreamProp, isJournal}) => {
         return setErrors(errors)
     }
 
+    const handleCancel = (e) => {
+        e.preventDefault()
+        return setIsEdit(false)
+    }
+
     const modules = {
         toolbar: [
             [{ 'header': [1, 2, false] }],
@@ -175,7 +180,8 @@ const DreamDetail = ({dreamProp, isJournal}) => {
                     <ReactQuill theme='snow' modules={modules} formats={formats} value={editBody} onChange={setEditBody}/>
 
                     <div className="edit-form-button">
-                    <button type="submit" >Save Changes</button>
+                        <button className="cancel-button-dreams" onClick={handleCancel}>Cancel</button>
+                        <button type="submit" >Save Changes</button>
                     </div>
                 </form>
             </div>
