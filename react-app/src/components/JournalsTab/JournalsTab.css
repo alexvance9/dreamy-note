@@ -26,6 +26,9 @@
     border: none;
     color: rgb(128, 255, 0);
 }
+.new-journal-button>button:hover{
+    text-decoration: underline;
+}
 
 .hidden {
     display:none;
