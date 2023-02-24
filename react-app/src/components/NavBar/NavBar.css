@@ -60,13 +60,16 @@
 .logout-button > button {
     /* background-color: rgb(64, 57, 166); */
     background-color: rgb(42, 41, 41);
-    background: linear-gradient(rgb(60, 58, 58), rgb(42, 41, 41));
+    background: linear-gradient(rgba(60, 58, 58, .90), rgba(42, 41, 41, .90));
     color: rgb(198, 195, 195);
     border: 1px solid rgb(60, 58, 58);
     border-radius: 10px;
     width: 70%;
     margin: 0 auto;
     padding: 5px;
+}
+.logout-button>button:hover{
+    background: linear-gradient(rgb(60, 58, 58), rgb(42, 41, 41))
 }
 
 
@@ -100,6 +103,7 @@
  #new-dream-plus{
     color: black;
  }
+ 
 
 
 .new-dream-button > a{
@@ -112,12 +116,15 @@
     align-items: center;
     padding: 10px;
     /* background-color: rgb(128, 255, 0); */
-    background: linear-gradient(rgb(128, 255, 0), rgb(83, 166, 0));
+    background: linear-gradient(rgba(128, 255, 0, .90), rgba(83, 166, 0, .90));
     color: black;
     /* background-color: rgb(64, 57, 166); */
     font-weight: bolder;
     border-radius: 1rem;
     
+}
+.new-dream-button>a:hover{
+    background: linear-gradient(rgb(128, 255, 0), rgb(83, 166, 0));
 }
 
 .new-dream-button > a>i {
