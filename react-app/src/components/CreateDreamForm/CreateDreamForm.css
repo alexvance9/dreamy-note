@@ -14,17 +14,31 @@
 }
 
 .create-dream-button {
-    align-self: end;
+    display: flex;
+    justify-content: space-between;
         margin-top: 40px;
 }
-
-.create-dream-button > button {
-    background-color: rgb(128, 255, 0);
+.cancel-button-dreams{
+    border: 2px solid rgb(128, 255, 0);
+    color:rgb(128, 255, 0);
+    background-color: black;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+.cancel-button-dreams:hover{
+    border: 2px solid rgb(128, 255, 0);
+        color: rgb(128, 255, 0);
+        background-color: rgba(128, 255, 0, .15);
+}
+.create-dream-button > button+button {
+        background: linear-gradient(rgba(128, 255, 0, .90), rgba(83, 166, 0, .90));
     border: none;
-    border-radius: .5rem;
-    padding: 5px;
+    border-radius: 10px;
+    padding: 5px 10px;
     font-weight: 600;
 }
+.create-dream-button>button+button:hover{
+    background: linear-gradient(rgb(128, 255, 0), rgb(83, 166, 0));}
 
 .create-title {
     /* border: 2px solid pink; */

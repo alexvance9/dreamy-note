@@ -98,14 +98,14 @@
     background-color: inherit;
     color:rgba(128, 255, 0, .90);
     font-weight: 400;
-    border: 1px solid rgba(128, 255, 0, .90);
+    border: 2px solid rgba(128, 255, 0, .90);
     border-radius: 10px;
     padding: 5px;
     margin: 0 5px
 }
 
 .detail-button-container>button:hover{
-    border: 1px solid rgb(128, 255, 0);
+    border: 2px solid rgb(128, 255, 0);
     color: rgb(128, 255, 0);
     background-color: rgba(128, 255, 0, .15);
 }
