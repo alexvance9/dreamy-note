@@ -44,11 +44,6 @@
 }
 
 .signup-form>button{
-    /* background-color: rgb(128, 255, 0, .90);
-    border: 1px solid rgb(128, 255, 0);
-    border-radius: .25rem;
-    padding: 5px; */
-    /* width: 75%; */
     background: linear-gradient(rgb(175,
                     59,
                     238, .75), rgba(99, 34, 135, 0.75));
@@ -58,6 +53,12 @@
         padding: 5px;
         color: rgb(128, 255, 0);
 }
+.signup-form>button:hover{
+    background: linear-gradient(rgb(175,
+                    59,
+                    238), rgba(99, 34, 135))
+}
+
 
 .errors {
     color: rgb(128, 255, 0, .90);
@@ -118,6 +119,11 @@
     color: rgb(128, 255, 0);
     /* width: 75%; */
 }
+.login-form>button:first-of-type:hover{
+    background: linear-gradient(rgb(175,
+                    59,
+                    238), rgba(99, 34, 135))
+}
 
 .login-form>button:nth-of-type(2){
     background-color: inherit;
@@ -128,5 +134,13 @@
     padding: 5px;
     color: rgb(175,
             59,
-            238);
+            238, .75);
+}
+.login-form>button:nth-of-type(2):hover{
+    border: 1px solid rgb(175,
+                59,
+                238);
+    color: rgb(175,
+                59,
+                238);
 }

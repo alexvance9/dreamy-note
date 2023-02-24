@@ -85,6 +85,11 @@ const CreateDreamForm = () => {
         return setErrors(errors)
     }
 
+    const handleCancel = (e) => {
+        e.preventDefault()
+        return history.push('/dreams')
+    }
+
     return (
         <div className="dream-detail-container">
         <div className="dream-form-container">
@@ -112,8 +117,9 @@ const CreateDreamForm = () => {
                     </select>
                 </div>
                 <ReactQuill theme='snow' modules={modules} formats={formats} value={body} onChange={setBody} />
-
+                
                 <div className="create-dream-button">
+                <button className="cancel-button-dreams" onClick={handleCancel}>Cancel</button>
                 <button type="submit" >Save Dream</button>
                 </div>
             </form>

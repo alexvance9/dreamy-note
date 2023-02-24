@@ -42,9 +42,9 @@ const SplashPage = () => {
                 />
             </div>
             <div className='tech-and-contact'>
+                <a href='https://www.linkedin.com/in/alex-vance-503537234/' target="_blank" rel="noopener noreferrer"><i className="fa-brands fa-linkedin"></i></a>
+                <a href='https://github.com/alexvance9/dreamy-note' target="_blank" rel="noopener noreferrer"><i className="fa-brands fa-github"></i></a>
                 <p>Project by Alex Vance</p>
-                <a href='https://www.linkedin.com/in/alex-vance-503537234/'><i className="fa-brands fa-linkedin"></i></a>
-                <a href='https://github.com/alexvance9/dreamy-note'><i className="fa-brands fa-github"></i></a>
                 <p>React | Redux | JavaScript</p>
                 <p>Flask | Python | SQLAlchemy</p>
                 <p>Quilljs</p>
