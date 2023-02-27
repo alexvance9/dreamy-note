@@ -18,7 +18,8 @@ def create_tag():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         new_tag = Tag(
-            name=form.data['name']
+            name=form.data['name'],
+            dreamer_id=current_user.id
         )
 
         db.session.add(new_tag)
@@ -68,3 +69,15 @@ def delete_tag(id):
     db.session.commit()
     return current_user.to_dict(), 200
     
+
+
+# get all tags
+@tag_routes.route('')
+@login_required
+def get_all_tags():
+    """
+    get all tags by user
+    """
+    user_tags = Tag.query.filter(Tag.dreamer_id == current_user.id).all()
+
+    return jsonify([tag.to_dict() for tag in user_tags]), 200
