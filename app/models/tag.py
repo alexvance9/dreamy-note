@@ -26,6 +26,9 @@ class Tag(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
+    dreamer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete="CASCADE"))
+
+    user = db.relationship("User", back_populates="tags")
 
     dreams = db.relationship("Dream", secondary=dream_tags, back_populates="tags")
 

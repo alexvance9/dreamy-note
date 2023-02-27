@@ -13,9 +13,7 @@ dream_routes = Blueprint('dream', __name__)
 @login_required
 def create_dream():
     """
-    Creates a new dream entry, returns current user 
-    Dispatch wants user to update user slice of state, which includes the users dreams.
-    also updates journal.last_updated
+    Creates a new dream entry, returns new dream to_dict 
     """
     
     form = DreamForm()
@@ -44,8 +42,7 @@ def create_dream():
 @login_required
 def update_dream(id):
     """
-    updates an existing dream entry, returns current user 
-    Dispatch wants user to update user slice of state, which includes the users dreams.
+    updates an existing dream entry, returns current dream
     DreamForm handles date which gets sent as yyy-mm-dd
     """
 
@@ -76,8 +73,7 @@ def update_dream(id):
 @login_required
 def delete_dream(id):
     """
-    deletes a dream by id, returns current user 
-    Dispatch wants user to update user slice of state, which includes the users dreams.
+    deletes a dream by id, returns current user dreams 
     """
     current_dream = Dream.query.get(id)
     if not current_dream:
