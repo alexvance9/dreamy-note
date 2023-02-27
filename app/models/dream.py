@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from .tag import dream_tags
 
 class Dream(db.Model):
     __tablename__ = 'dreams'
@@ -17,13 +18,16 @@ class Dream(db.Model):
 
     journal = db.relationship("Journal", back_populates="entries")
 
+    tags = db.relationship("Tag", secondary=dream_tags, back_populates="dreams")
+
     def to_dict(self):
         return {
             'id': self.id,
             'title': self.title,
             'date': self.date.strftime("%Y-%m-%d"),
             'body': self.body,
-            'journal': self.journal.to_dict()
+            'journal': self.journal.to_dict(),
+            'tags': [tag.to_dict() for tag in self.tags]
         }
     
 
