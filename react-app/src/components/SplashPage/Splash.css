@@ -175,10 +175,8 @@
     display: flex;
     width: 60%;
     min-height: 0;
-    max-height: 350px;
-    /* max-height: 350px; */
-    /* border: 2px solid red; */
-    /* border-radius: 2rem; */
+    height: 350px;
+    
 }
 
 .splash-image-container-1>img{
@@ -205,7 +203,7 @@
 .splash-image-container-3 {
     display: flex;
     width: 80%;
-    /* height: ; */
+    /* height: 350px; */
     /* max-height: 350px; */
     /* border: 2px solid red; */
     /* border-radius: 2rem; */
