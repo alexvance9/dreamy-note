@@ -2,12 +2,14 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session';
 import dreams from './dreams';
-import journals from './journals'
+import journals from './journals';
+import tags from './tags';
 
 const rootReducer = combineReducers({
   session,
   dreams, 
-  journals
+  journals,
+  tags
 });
 
 
