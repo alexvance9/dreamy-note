@@ -3,6 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
+import TagsNavButton from '../TagsMenu/TagsNavButton';
 // import OpenModalButton from '../OpenModalButton';
 // import LoginFormModal from '../auth/LoginFormModal';
 // import SignUpFormModal from '../auth/SignUpFormModal';
@@ -55,6 +56,9 @@ const NavBar = ({loaded}) => {
             <NavLink to='/journals'>
               My Journals
             </NavLink>
+          </div>
+          <div className='tab flex'>
+            <TagsNavButton />
           </div>
         </div>
         <div className='about-me'>
