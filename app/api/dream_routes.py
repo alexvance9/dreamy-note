@@ -1,11 +1,49 @@
 from flask import Blueprint, jsonify, session, request
 from datetime import date, datetime
-from app.models import Dream, Journal, db
+from app.models import Dream, Journal, Tag, db
 from flask_login import current_user, login_required
 from app.forms import DreamForm
 from.auth_routes import validation_errors_to_error_messages
 
 dream_routes = Blueprint('dream', __name__)
+
+# add tag to dream
+@dream_routes.route('/<int:id>/tags', methods=['POST'])
+@login_required
+def add_tag(id):
+    """
+    adds tag to dream. if tag already in current dream tags, do nothing.
+    return dream to_dict
+    """
+    tag_id = request.json("tag_id")
+    tag = Tag.query.get(int(tag_id))
+    current_dream = Dream.query.get(id)
+    if tag not in current_dream.tags:
+        current_dream.tags.append(tag)
+        db.session.add(current_dream)
+        db.session.commit()
+        return current_dream.to_dict(), 200
+    else:
+        return current_dream.to_dict(), 200
+
+
+# remove tag from dream
+@dream_routes.route('/<int:id>/tags', methods=['DELETE'])
+@login_required
+def remove_tag(id):
+    """
+    removes tag from current dreams tags. if tag not in current dreams tags, do nothing.
+    """
+    tag_id = request.json("tag_id")
+    tag = Tag.query.get(int(tag_id))
+    current_dream = Dream.query.get(id)   
+    if tag in current_dream.tags:
+        current_dream.tags.remove(tag)
+        db.session.add(current_dream)
+        db.session.commit()
+        return current_dream.to_dict(), 200
+    else:
+        return current_dream.to_dict(), 200 
 
 
 
