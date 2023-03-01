@@ -27,6 +27,11 @@ export const thunkLoadTags = () => async (dispatch) => {
 const initialState = { tags: []}
 export default function reducer(state = initialState, action){
     switch (action.type) {
+        case LOAD_TAGS: {
+            const newState = { tags: [] }
+            newState.tags = action.payload.tags
+            return newState;
+        }
         default:
             return state;
     }
