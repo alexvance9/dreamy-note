@@ -17,7 +17,7 @@ export const thunkLoadTags = () => async (dispatch) => {
     const response = await fetch('/api/tags')
     if (response.ok){
         const tags = await response.json()
-        console.log('tags at thunk: ', tags)
+        // console.log('tags at thunk: ', tags)
         dispatch(loadTags(tags))
         return null
     } else if (response.status < 500) {
@@ -59,7 +59,7 @@ export default function reducer(state = initialState, action){
     switch (action.type) {
         case LOAD_TAGS: {
             const newState = { tags: {} }
-            console.log('action.payload:', action.payload)
+            // console.log('action.payload:', action.payload)
             action.payload.forEach(tag => newState.tags[tag.id] = tag)
             return newState;
         } 

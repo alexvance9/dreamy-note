@@ -2,9 +2,26 @@ import OpenModalButton from '../OpenModalButton'
 import CreateTagModal from './CreateTagModal';
 
 const TagsPopOut = ({setShowMenu, tags}) => {
-    // console.log(tags)
-    const tagsArr = Object.values(tags.tags)
-    // console.log(tagsArr)
+    
+    // console.log("entries: ", Object.entries(tags))
+
+
+    const tagsArr = Object.values(tags)
+    const sortedTags = tagsArr.sort((a, b) => {
+        const nameA = a.name.toLowerCase()
+        const nameB = b.name.toLowerCase()
+
+        if (nameA < nameB) return -1;
+        else if (nameA > nameB) return 1;
+        else return 0;
+    })
+
+    const alphabetObj = sortedTags.reduce((alphObj, currVal) => {
+        const char = currVal.name[0].toUpperCase()
+        alphObj[char] = [].concat((alphObj[char] || []), currVal)
+        return alphObj;
+    }, {})
+    
     
 
     return(
@@ -16,11 +33,16 @@ const TagsPopOut = ({setShowMenu, tags}) => {
                 modalComponent={<CreateTagModal/>} 
                 />
             <div className='tags-list-container'>
-            {tagsArr.map(tag => (
-                <div key={tag.id}>
-                    {tag.name}
+            {Object.entries(alphabetObj).map(([letter, tags]) => {
+                return (
+                    <div key={letter}>
+                        <div>{letter}</div>
+                        {tags.map(tag => (
+                            <div key={tag.id}>{tag.name}</div>
+                        ))}
                     </div>
-            ))}
+                )
+            })}
             </div>
         </div>
     )

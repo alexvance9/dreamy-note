@@ -21,8 +21,8 @@ const TagsNavButton = () => {
     const [showMenu, setShowMenu] = useState(false);
     const dispatch = useDispatch()
 
-    const tags = useSelector(state => state.tags)
-    console.log(tags)
+    const tags = useSelector(state => state.tags.tags)
+    // console.log(tags)
     useEffect(() => {
         (async () => {
             await dispatch(thunkLoadTags());
