@@ -1,0 +1,32 @@
+.tags-nav-button {
+    background: none;
+    border: none;
+    text-decoration: none;
+    color: rgb(198, 195, 195);
+    padding: 0 5px;
+}
+
+.tags-pop-out {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.tags-pop-out>button{
+    border: none;
+    background-color: inherit;
+    color: rgb(198, 195, 195);
+    align-self: flex-end;
+    padding-right: 15px;
+    padding-top: 10px;
+}
+
+.tags-pop-out>h2{
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    color: rgb(198, 195, 195);
+    width: 85%;
+    border-bottom: 2px solid rgb(198, 195, 195);
+}
+

@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import { ModalProvider, Modal } from './context/Modal';
+import { TagsMenuProvider } from './context/TagMenu';
 import { BrowserRouter } from 'react-router-dom';
 import configureStore from './store';
 
@@ -15,12 +16,14 @@ const store = configureStore();
 function Root() {
   return (
     <ModalProvider>
+      <TagsMenuProvider>
       <Provider store={store}>
         <BrowserRouter>
           <App />
           <Modal />
         </BrowserRouter>
       </Provider>
+      </TagsMenuProvider>
     </ModalProvider>
   );
 }

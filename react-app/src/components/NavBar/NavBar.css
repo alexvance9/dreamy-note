@@ -1,7 +1,7 @@
 .app-nav {
     display: flex;
     width: 25%;
-    min-width: 25%;
+    min-width: 250px;
     max-width: 25%;
     background-color: rgb(25, 10, 33);
     /* background-color: black; */

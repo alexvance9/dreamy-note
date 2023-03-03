@@ -12,12 +12,17 @@ needs:
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { thunkLoadTags } from "../../store/tags";
+import { TagsMenu } from "../../context/TagMenu";
 import TagsPopOut from "./TagsPopOut";
+import './Tags.css'
 
 const TagsNavButton = () => {
     const [isLoaded, setIsLoaded] = useState(false);
+    const [showMenu, setShowMenu] = useState(false);
     const dispatch = useDispatch()
 
+    const tags = useSelector(state => state.tags)
+    console.log(tags)
     useEffect(() => {
         (async () => {
             await dispatch(thunkLoadTags());
@@ -27,10 +32,22 @@ const TagsNavButton = () => {
 
     if (!isLoaded) return null;
 
+    const showTags = (e) => {
+        e.preventDefault()
+        return setShowMenu(!showMenu)
+    }
+
     return (
         <>
-        <button>TagsNav</button>
-        <TagsPopOut />
+        <div className="tab">
+            <i className="fa-solid fa-tag"></i><button className="tags-nav-button" onClick={() => setShowMenu(!showMenu)}>Tags</button>
+            {showMenu && (
+                <TagsMenu onClose={() => setShowMenu(!showMenu)}>
+                    <TagsPopOut setShowMenu={showTags} tags={tags}/>
+                </TagsMenu>
+            )}
+        </div>
+
         </>
     )
 }
