@@ -18,6 +18,8 @@ class User(db.Model, UserMixin):
 
     journals = db.relationship("Journal", back_populates="user", cascade="all, delete")
 
+    tags = db.relationship("Tag", back_populates="user", cascade="all, delete")
+
     @property
     def password(self):
         return self.hashed_password

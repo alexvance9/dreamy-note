@@ -45,13 +45,19 @@ const CreateJournalModal = () => {
         )
     } else {
         subtitleComponents = (
-            <div className="errors">
-                {
-                    errors.map((error, ind) => (
-                        <div key={ind}>{error}</div>
-                    ))
-                }
-            </div>
+            <>
+                <div>Journals are useful for grouping dream entries together.<br />
+                    Were you traveling for a while? Is it your freshman year of college?<br />
+                    Give your Journal a descriptive name.
+                </div>
+                <div className="errors">
+                    {
+                        errors.map((error, ind) => (
+                            <div key={ind}>{error}</div>
+                            ))
+                        }
+                </div>
+            </>
            )
     }
 
