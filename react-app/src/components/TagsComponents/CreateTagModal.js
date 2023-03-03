@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { thunkCreateTag } from "../../store/tags";
+import './Tags.css'
 
 const CreateTagModal = () => {
     const [errors, setErrors] = useState([]);

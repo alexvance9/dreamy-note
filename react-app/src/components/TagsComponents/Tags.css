@@ -58,3 +58,22 @@
 .tag>span{
     padding-left: 10px;
 }
+
+
+/* create tag modal */
+
+.new-tag-modal {
+    background-color: rgb(34, 14, 45);
+    padding: 25px;
+    border-radius: .25rem;
+    color: rgb(214, 212, 212);
+}
+
+.new-tag-form >.subtitle-components>*{
+    padding-top: 10px;
+    line-height: 2rem;
+}
+
+.title-input >input{
+    margin-bottom: 10px;
+}
