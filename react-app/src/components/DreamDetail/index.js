@@ -147,7 +147,7 @@ const DreamDetail = ({dreamProp, isJournal}) => {
         'bold', 'italic', 'underline', 'strike',
         'list', 'bullet'
     ]
-    console.log(selectedDream.tags)
+    // console.log(selectedDream.tags)
     let tagsList;
     if (Object.keys(selectedDream).length > 0){
 

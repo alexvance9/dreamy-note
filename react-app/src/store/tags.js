@@ -1,6 +1,7 @@
 // action variables
 const LOAD_TAGS = 'tags/LOAD_TAGS'
 const CREATE_TAG = 'tags/CREATE_TAG'
+const UPDATE_TAG = 'tags/UPDATE_TAG'
 
 // actions
 const loadTags = (tags) => ({
@@ -10,6 +11,11 @@ const loadTags = (tags) => ({
 
 const createTag = (tag) => ({
     type: CREATE_TAG,
+    payload: tag
+})
+
+const updateTag = (tag) => ({
+    type: UPDATE_TAG,
     payload: tag
 })
 // thunks
@@ -50,7 +56,46 @@ export const thunkCreateTag = (name) => async (dispatch) => {
             return data
         }
     } else {
-        return ['an error ocurred at add journals, please try again.']
+        return ['an error ocurred at create tags, please try again.']
+    }
+}
+
+export const thunkUpdateTag = (tagId, name) => async (dispatch) => {
+    const response = await fetch(`/api/tags/${tagId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name
+        })
+    })
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(updateTag(data))
+        return data;
+    } else if (response.status < 500) {
+        const data = await response.json()
+        if (data.errors) {
+            return data
+        }
+    } else {
+        return ['an error ocurred at update tags, please try again.']
+    }
+}
+
+export const thunkDeleteTag = (tagId) => async (dispatch) => {
+    const response = await fetch(`/api/tags/${tagId}`, {
+        method: 'DELETE'
+    })
+    if (response.ok) {
+        dispatch(thunkLoadTags())
+        return null
+    } else if (response.status < 500) {
+        const data = await response.json()
+        return data
+    } else {
+        return ['an error occurred at delete tags, please try again']
     }
 }
 
@@ -66,6 +111,11 @@ export default function reducer(state = initialState, action){
         case CREATE_TAG: {
             const newState = { tags: {...state.tags} }
             newState.tags[action.payload.id] = action.payload;
+            return newState;
+        }
+        case UPDATE_TAG: {
+            const newState = {tags: {...state.tags}}
+            newState.tags[action.payload.id] = action.payload
             return newState;
         }
         default:
