@@ -35,10 +35,10 @@ const TagsPopOut = ({setShowMenu, tags}) => {
             <div className='tags-list-container'>
             {Object.entries(alphabetObj).map(([letter, tags]) => {
                 return (
-                    <div key={letter}>
-                        <div>{letter}</div>
+                    <div className="letter-list" key={letter}>
+                        <div className="letter-label">{letter}</div>
                         {tags.map(tag => (
-                            <div key={tag.id}>{tag.name}</div>
+                            <div className='tag' key={tag.id}>{tag.name}<span>{`(${tag.refsCount})`}</span></div>
                         ))}
                     </div>
                 )

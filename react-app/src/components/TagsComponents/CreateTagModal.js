@@ -15,7 +15,7 @@ const CreateTagModal = () => {
         if (!trimmedName) {
             setErrors(['Give your tag a name'])
         } else if (trimmedName.length > 20) {
-            setErrors(['Tag Name must be 30 characters or less'])
+            setErrors(['Tag Name must be 20 characters or less'])
         } else {
 
             const data = await dispatch(thunkCreateTag(trimmedName))

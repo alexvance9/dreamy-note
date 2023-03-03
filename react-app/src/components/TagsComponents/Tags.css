@@ -32,4 +32,29 @@
 
 .tags-list-container{
     color: rgb(198, 195, 195);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    /* border: 2px solid red; */
+}
+
+.letter-list {
+    padding-left: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.letter-label {
+    font-size: larger;
+    color: rgb(128, 255, 0);
+}
+
+.tag {
+    padding-left: 30px;
+    padding-bottom: 10px;
+}
+.tag>span{
+    padding-left: 10px;
 }
