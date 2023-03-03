@@ -2,6 +2,7 @@ const LOAD_DREAMS = 'dreams/LOAD_DREAMS'
 const SET_SINGLE_DREAM = 'dreams/SET_SINGLE_DREAM'
 const CREATE_DREAM = 'dreams/CREATE_DREAM'
 const UPDATE_DREAM = 'dreams/UPDATE_DREAM'
+// const ADD_DREAM_TAG = 'dreams/ADD_DREAM_TAG'
 
 const loadDreams = (dreams) => ({
     type: LOAD_DREAMS,
@@ -22,6 +23,8 @@ const updateDream = (dream) => ({
     type: UPDATE_DREAM,
     payload: dream
 })
+
+// const addDreamTag = ()
 
 export const loadDreamsThunk = () => async (dispatch) => {
     const response = await fetch('/api/dreams')
@@ -135,6 +138,32 @@ export const deleteDreamThunk = (dreamId) => async (dispatch) => {
         const data = await response.json()
         if (data.errors) {
             return data.errors
+        }
+    } else {
+        return ['An error ocurred, please try again.']
+    }
+}
+
+export const thunkAddDreamTag = (dreamId, tagId) => async(dispatch) => {
+    const response = await fetch(`/api/dreams/${dreamId}/tags`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            tag_id: tagId
+        }) 
+    })
+    if (response.ok) {
+        const data = await response.json();
+        // console.log(data)
+        dispatch(updateDream(data))
+        return data
+    } else if (response.status < 500) {
+        // if error is coming from backend route^^
+        const data = await response.json()
+        if (data.errors) {
+            return data
         }
     } else {
         return ['An error ocurred, please try again.']

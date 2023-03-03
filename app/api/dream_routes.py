@@ -15,7 +15,8 @@ def add_tag(id):
     adds tag to dream. if tag already in current dream tags, do nothing.
     return dream to_dict
     """
-    tag_id = request.json("tag_id")
+    print(request.json)
+    tag_id = request.json["tag_id"]
     tag = Tag.query.get(int(tag_id))
     current_dream = Dream.query.get(id)
     if tag not in current_dream.tags:

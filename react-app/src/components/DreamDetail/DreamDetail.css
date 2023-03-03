@@ -244,3 +244,12 @@
 .journal-select {
     margin-bottom: 10px;
 }
+
+
+/* edit tags modal */
+.edit-dream-tags-modal{
+    background-color: rgb(34, 14, 45);
+    padding: 25px;
+    border-radius: .25rem;
+    color: rgb(214, 212, 212);
+}

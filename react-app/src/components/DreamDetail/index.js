@@ -12,6 +12,7 @@ import './DreamDetail.css'
 import LoadingPage from "../ExtraPages/LoadingPage";
 import moment from 'moment'
 import { loadSingleJournalThunk } from "../../store/journals";
+import EditTagsModal from "./EditTagsModal";
 
 /* This component shows a nicely rendered view of a particular 
     dream entry, and handles editing of the dream.*/
@@ -20,11 +21,9 @@ const DreamDetail = ({dreamProp, isJournal}) => {
     // console.log("dreamprop:", dreamProp)
     // grab dream slice of state
     const selectedDream = useSelector(state => state.dreams.singleDream)
-    // const userJournals = useSelector(state => state.session.user.journals)
     const userJournals = useSelector(state => state.journals.journals)
     const journalsArr = Object.values(userJournals)
-    // console.log(journalsArr)
-    // console.log(selectedDream.id)
+    
    
     const dispatch = useDispatch()
     const [isLoaded, setIsLoaded] = useState(false)
@@ -148,6 +147,24 @@ const DreamDetail = ({dreamProp, isJournal}) => {
         'bold', 'italic', 'underline', 'strike',
         'list', 'bullet'
     ]
+    console.log(selectedDream.tags)
+    let tagsList;
+    if (Object.keys(selectedDream).length > 0){
+
+        if (selectedDream.tags.length > 0) {
+            tagsList = (
+                <>
+            {selectedDream?.tags.map(tag => (
+                <div key={tag.id}>{tag.name}</div>
+                ))}
+            </>
+        )
+    } else {
+        tagsList = (
+            <div>Add tags to see them here!</div>
+            )
+        }
+    }
     
 
     let detailComponents;
@@ -205,7 +222,16 @@ const DreamDetail = ({dreamProp, isJournal}) => {
                         <div className="detail-date">{moment(date, 'YYYY-MM-DD').format("MM/DD/YYYY")}</div>
                     </div>
                     <div>{value}</div>
-                    </div> 
+                </div> 
+                <div className="dream-tags-container">
+                    <OpenModalButton 
+                        buttonText="Edit Tags"
+                        modalComponent={<EditTagsModal dreamId={selectedDream.id} currentDreamsTags={selectedDream.tags}/>}
+                    />
+                    <div className="dream-tags-list">
+                        {tagsList}
+                    </div>
+                </div>
             </div>
         )
     }
