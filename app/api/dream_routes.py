@@ -28,14 +28,14 @@ def add_tag(id):
         return current_dream.to_dict(), 200
 
 
-# remove tag from dream
-@dream_routes.route('/<int:id>/tags', methods=['DELETE'])
+# remove tag from dream - PUT because really just updating dream, not deleting anything.
+@dream_routes.route('/<int:id>/tags', methods=['PUT'])
 @login_required
 def remove_tag(id):
     """
     removes tag from current dreams tags. if tag not in current dreams tags, do nothing.
     """
-    tag_id = request.json("tag_id")
+    tag_id = request.json["tag_id"]
     tag = Tag.query.get(int(tag_id))
     current_dream = Dream.query.get(id)   
     if tag in current_dream.tags:

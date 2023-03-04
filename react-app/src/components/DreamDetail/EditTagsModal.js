@@ -1,4 +1,4 @@
-import { thunkAddDreamTag } from "../../store/dreams";
+import { thunkAddDreamTag, thunkRemoveDreamTag } from "../../store/dreams";
 import { useModal } from "../../context/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
@@ -12,7 +12,19 @@ const EditTagsModal = ({dreamId, currentDreamsTags}) => {
     const [tagId, setTagId] = useState("")
     const [errors, setErrors] = useState([])
     const [dreamTags, setDreamTags] = useState(currentDreamsTags)
-    console.log(typeof tagId)
+    
+    const handleRemoveTag = async (e) => {
+        e.preventDefault()
+        const currentTagId = e.currentTarget.value;
+        const data = await dispatch(thunkRemoveDreamTag(dreamId, currentTagId))
+        if (data.errors) {
+            return setErrors(data.errors)
+        } else {
+            return setDreamTags(data.tags)
+        }
+        
+    }
+
     let tagsList;
     if (dreamTags?.length > 0){
         tagsList = (
@@ -20,6 +32,7 @@ const EditTagsModal = ({dreamId, currentDreamsTags}) => {
             {dreamTags.map(tag => (
                 <div key={tag.id}>
                     {tag.name}
+                    <button className="remove-dream-tag-button" value={tag.id} onClick={handleRemoveTag}><i className="fa-regular fa-square-minus"></i></button>
                 </div>
             ))}
             </>
@@ -61,7 +74,9 @@ const EditTagsModal = ({dreamId, currentDreamsTags}) => {
             </div>)}
             <form className="add-dream-tag-form" onSubmit={handleAddDreamTag}>
                 <div className='tag-select'>
-                    <select name='tags' value={tagId} onChange={e => setTagId(e.target.value)} >
+                    <select name='tags' value={tagId} onChange={e => {
+                                                            setErrors([])
+                                                            return setTagId(e.target.value)}} >
                         <option value="">Add a Tag...</option>
                         {tagsArr?.map(tag => (
                             <option key={tag.id} value={tag.id}>{tag.name}</option>
