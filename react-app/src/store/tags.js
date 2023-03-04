@@ -1,3 +1,5 @@
+import { loadDreamsThunk } from "./dreams"
+
 // action variables
 const LOAD_TAGS = 'tags/LOAD_TAGS'
 const CREATE_TAG = 'tags/CREATE_TAG'
@@ -73,6 +75,7 @@ export const thunkUpdateTag = (tagId, name) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json()
         dispatch(updateTag(data))
+        dispatch(loadDreamsThunk())
         return data;
     } else if (response.status < 500) {
         const data = await response.json()
@@ -90,6 +93,7 @@ export const thunkDeleteTag = (tagId) => async (dispatch) => {
     })
     if (response.ok) {
         dispatch(thunkLoadTags())
+        dispatch(loadDreamsThunk())
         return null
     } else if (response.status < 500) {
         const data = await response.json()
