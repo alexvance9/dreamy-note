@@ -1,4 +1,4 @@
-import { loadDreamsThunk } from "./dreams"
+import { loadDreamsThunk, thunkAddDreamTag } from "./dreams"
 
 // action variables
 const LOAD_TAGS = 'tags/LOAD_TAGS'
@@ -38,7 +38,8 @@ export const thunkLoadTags = () => async (dispatch) => {
     }
 }
 
-export const thunkCreateTag = (name) => async (dispatch) => {
+export const thunkCreateTag = (name, dreamId) => async (dispatch) => {
+    // console.log(dreamId)
     const response = await fetch('/api/tags', {
         method: 'POST',
         headers: {
@@ -50,7 +51,10 @@ export const thunkCreateTag = (name) => async (dispatch) => {
     })
     if (response.ok){
         const data = await response.json()
-        dispatch(createTag(data))
+        await dispatch(createTag(data))
+        if (dreamId) {
+            return dispatch(thunkAddDreamTag(dreamId, data.id))
+        }
         return null
     } else if (response.status < 500) {
         const data = await response.json()

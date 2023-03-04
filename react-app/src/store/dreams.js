@@ -1,3 +1,5 @@
+import { thunkLoadTags } from "./tags"
+
 const LOAD_DREAMS = 'dreams/LOAD_DREAMS'
 const SET_SINGLE_DREAM = 'dreams/SET_SINGLE_DREAM'
 const CREATE_DREAM = 'dreams/CREATE_DREAM'
@@ -158,6 +160,7 @@ export const thunkAddDreamTag = (dreamId, tagId) => async(dispatch) => {
         const data = await response.json();
         // console.log(data)
         dispatch(updateDream(data))
+        dispatch(thunkLoadTags())
         return data
     } else if (response.status < 500) {
         // if error is coming from backend route^^
@@ -184,6 +187,7 @@ export const thunkRemoveDreamTag = (dreamId, tagId) => async (dispatch) => {
         const data = await response.json();
         // console.log(data)
         dispatch(updateDream(data))
+        dispatch(thunkLoadTags())
         return data
     } else if (response.status < 500) {
         // if error is coming from backend route^^
