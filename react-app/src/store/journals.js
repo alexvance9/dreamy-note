@@ -67,7 +67,7 @@ export const loadSingleJournalThunk = (journalId) => async (dispatch) => {
         dispatch(loadSingleJournal(data))
         return data
     } else if (response.status < 500) {
-        const data = response.json()
+        const data = await response.json()
         if (data.errors) {
             return data
         }
@@ -113,7 +113,7 @@ export const createJournalThunk = (title) => async (dispatch) => {
         dispatch(addJournal(data))
         return null
     } else if (response.status < 500) {
-        const data = response.json()
+        const data = await response.json()
         if (data.errors) {
             return data
         }
@@ -140,7 +140,7 @@ export const editJournalThunk = (title, journalId) => async (dispatch) => {
         dispatch(editJournal(data))
         return null
     } else if (response.status < 500) {
-        const data = response.json()
+        const data = await response.json()
         if (data.errors) {
             return data
         }
@@ -159,7 +159,7 @@ export const deleteJournalThunk = (journalId) => async (dispatch) => {
         dispatch(loadJournalsThunk())
         return null
     } else if (response.status < 500) {
-        const data = response.json()
+        const data = await response.json()
         if (data.errors) {
             return data
         }
