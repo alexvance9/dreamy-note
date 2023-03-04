@@ -1,3 +1,5 @@
+import { loadDreamsThunk, thunkAddDreamTag } from "./dreams"
+
 // action variables
 const LOAD_TAGS = 'tags/LOAD_TAGS'
 const CREATE_TAG = 'tags/CREATE_TAG'
@@ -36,7 +38,8 @@ export const thunkLoadTags = () => async (dispatch) => {
     }
 }
 
-export const thunkCreateTag = (name) => async (dispatch) => {
+export const thunkCreateTag = (name, dreamId) => async (dispatch) => {
+    // console.log(dreamId)
     const response = await fetch('/api/tags', {
         method: 'POST',
         headers: {
@@ -48,7 +51,10 @@ export const thunkCreateTag = (name) => async (dispatch) => {
     })
     if (response.ok){
         const data = await response.json()
-        dispatch(createTag(data))
+        await dispatch(createTag(data))
+        if (dreamId) {
+            return dispatch(thunkAddDreamTag(dreamId, data.id))
+        }
         return null
     } else if (response.status < 500) {
         const data = await response.json()
@@ -73,6 +79,7 @@ export const thunkUpdateTag = (tagId, name) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json()
         dispatch(updateTag(data))
+        dispatch(loadDreamsThunk())
         return data;
     } else if (response.status < 500) {
         const data = await response.json()
@@ -90,6 +97,7 @@ export const thunkDeleteTag = (tagId) => async (dispatch) => {
     })
     if (response.ok) {
         dispatch(thunkLoadTags())
+        dispatch(loadDreamsThunk())
         return null
     } else if (response.status < 500) {
         const data = await response.json()

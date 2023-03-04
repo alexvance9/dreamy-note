@@ -1,5 +1,8 @@
 import OpenModalButton from '../OpenModalButton'
 import CreateTagModal from './CreateTagModal';
+import DeleteTagModal from './DeleteTagModal';
+import UpdateTagModal from './UpdateTagModal';
+// import { thunkUpdateTag, thunkDeleteTag } from '../../store/tags';
 
 const TagsPopOut = ({setShowMenu, tags}) => {
     
@@ -38,7 +41,21 @@ const TagsPopOut = ({setShowMenu, tags}) => {
                     <div className="letter-list" key={letter}>
                         <div className="letter-label">{letter}</div>
                         {tags.map(tag => (
-                            <div className='tag' key={tag.id}>{tag.name}<span>{`(${tag.refsCount})`}</span></div>
+                            <div className='tag' key={tag.id}>
+                                {tag.name}
+                                <span>{`(${tag.refsCount})`}</span>
+                                <div className="tag-action-menu">
+                                    <OpenModalButton
+                                        buttonText="Rename"
+                                        modalComponent={<UpdateTagModal tagId={tag.id} tagName={tag.name}/>}
+                                    />
+                                    <OpenModalButton
+                                        buttonText="Delete"
+                                        modalComponent={<DeleteTagModal tagId={tag.id}/>}
+                                    />
+                                    
+                                </div>
+                            </div>
                         ))}
                     </div>
                 )
