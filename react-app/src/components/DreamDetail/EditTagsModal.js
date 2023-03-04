@@ -3,22 +3,24 @@ import { useModal } from "../../context/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
-const EditTagsModal = ({dreamId, currentDreamTags}) => {
-    // console.log(dreamId)
+const EditTagsModal = ({dreamId, currentDreamsTags}) => {
+    
     const {closeModal} = useModal()
     const dispatch = useDispatch()
     const currentTags = useSelector(state => state.tags.tags)
     const tagsArr = Object.values(currentTags)
-    const [tagId, setTagId] = useState('')
+    const [tagId, setTagId] = useState("")
     const [errors, setErrors] = useState([])
-    const [dreamTags, setDreamTags] = useState(currentDreamTags)
-    console.log(currentDreamTags)
+    const [dreamTags, setDreamTags] = useState(currentDreamsTags)
+    console.log(typeof tagId)
     let tagsList;
     if (dreamTags?.length > 0){
         tagsList = (
             <>
             {dreamTags.map(tag => (
-                <div>{tag.name}</div>
+                <div key={tag.id}>
+                    {tag.name}
+                </div>
             ))}
             </>
         )
@@ -35,8 +37,8 @@ const EditTagsModal = ({dreamId, currentDreamTags}) => {
 
     const handleAddDreamTag = async (e) => {
         e.preventDefault()
-        const errors = []
-
+        setErrors([])
+        if (!tagId) return setErrors(['Select a tag to add'])
         if(!errors.length) {
             const data = await dispatch(thunkAddDreamTag(dreamId, tagId))
             if(data.errors){
@@ -50,6 +52,13 @@ const EditTagsModal = ({dreamId, currentDreamTags}) => {
     return (
         <div className="edit-dream-tags-modal">
             <h2>Add Tags to your Dream</h2>
+            { errors && (<div className="errors">
+                {
+                    errors.map((error, ind) => (
+                        <div key={ind}>{error}</div>
+                    ))
+                }
+            </div>)}
             <form className="add-dream-tag-form" onSubmit={handleAddDreamTag}>
                 <div className='tag-select'>
                     <select name='tags' value={tagId} onChange={e => setTagId(e.target.value)} >
@@ -58,7 +67,7 @@ const EditTagsModal = ({dreamId, currentDreamTags}) => {
                             <option key={tag.id} value={tag.id}>{tag.name}</option>
                         ))}
                     </select>
-                    <button type="submit">Add </button>
+                    <button type="submit">Add</button>
                 </div>
             </form>
             <div className="edit-dream-tags-list">{tagsList}</div>
