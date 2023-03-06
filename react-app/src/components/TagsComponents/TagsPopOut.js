@@ -1,14 +1,12 @@
+// import { useState } from 'react';
 import OpenModalButton from '../OpenModalButton'
 import CreateTagModal from './CreateTagModal';
-import DeleteTagModal from './DeleteTagModal';
-import UpdateTagModal from './UpdateTagModal';
-// import { thunkUpdateTag, thunkDeleteTag } from '../../store/tags';
+import TagRow from './TagRow';
 
 const TagsPopOut = ({setShowMenu, tags}) => {
     
-    // console.log("entries: ", Object.entries(tags))
 
-
+    // make an array of tags, and alphabetize by tag name
     const tagsArr = Object.values(tags)
     const sortedTags = tagsArr.sort((a, b) => {
         const nameA = a.name.toLowerCase()
@@ -18,12 +16,14 @@ const TagsPopOut = ({setShowMenu, tags}) => {
         else if (nameA > nameB) return 1;
         else return 0;
     })
-
+    // use reduce to make into an object with the beginning letter as a key,
+    // list/array of tag names with that starting letter as value.
     const alphabetObj = sortedTags.reduce((alphObj, currVal) => {
         const char = currVal.name[0].toUpperCase()
         alphObj[char] = [].concat((alphObj[char] || []), currVal)
         return alphObj;
     }, {})
+
     
     
 
@@ -31,31 +31,20 @@ const TagsPopOut = ({setShowMenu, tags}) => {
         <div className="tags-pop-out">
             <button onClick={setShowMenu}><i className="fa-solid fa-xmark fa-xl"></i></button>
             <h2>Tags</h2>
-            <OpenModalButton 
-                buttonText="Add a Tag"
-                modalComponent={<CreateTagModal/>} 
+            <div className='new-tag-button'>
+                <i class="fa-solid fa-tag"></i>
+                <OpenModalButton
+                    buttonText="Add a Tag"
+                    modalComponent={<CreateTagModal />}
                 />
+            </div>
             <div className='tags-list-container'>
             {Object.entries(alphabetObj).map(([letter, tags]) => {
                 return (
                     <div className="letter-list" key={letter}>
                         <div className="letter-label">{letter}</div>
                         {tags.map(tag => (
-                            <div className='tag' key={tag.id}>
-                                {tag.name}
-                                <span>{`(${tag.refsCount})`}</span>
-                                <div className="tag-action-menu">
-                                    <OpenModalButton
-                                        buttonText="Rename"
-                                        modalComponent={<UpdateTagModal tagId={tag.id} tagName={tag.name}/>}
-                                    />
-                                    <OpenModalButton
-                                        buttonText="Delete"
-                                        modalComponent={<DeleteTagModal tagId={tag.id}/>}
-                                    />
-                                    
-                                </div>
-                            </div>
+                            <TagRow tag={tag} />
                         ))}
                     </div>
                 )
