@@ -1,8 +1,8 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useModal } from "../../context/Modal";
 import { thunkAddDreamTag, thunkRemoveDreamTag } from "../../store/dreams";
 import { thunkCreateTag } from "../../store/tags";
-import { useModal } from "../../context/Modal";
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
 
 const EditTagsModal = ({dreamId, currentDreamsTags}) => {
 

@@ -32,7 +32,7 @@ const TagsPopOut = ({setShowMenu, tags}) => {
             <button onClick={setShowMenu}><i className="fa-solid fa-xmark fa-xl"></i></button>
             <h2>Tags</h2>
             <div className='new-tag-button'>
-                <i class="fa-solid fa-tag"></i>
+                <i className="fa-solid fa-tag"></i>
                 <OpenModalButton
                     buttonText="Add a Tag"
                     modalComponent={<CreateTagModal />}
