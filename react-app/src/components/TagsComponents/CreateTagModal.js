@@ -38,15 +38,17 @@ const CreateTagModal = () => {
     let subtitleComponents;
     if (!errors.length) {
         subtitleComponents = (
-            <div>Tags are useful for tracking themes in your dreams.<br />
+            <div>
+                Tags are useful for tracking recurring themes in your dreams.<br />
                 Are you always having a dream about butterflies?<br />
-                Create a tag and reuse it to look for recurring themes and motifs.
+                Put a tag on it!
             </div>
         )
     } else {
         subtitleComponents = (
             <>
-                <div>Tags are useful for tracking recurring themes in your dreams.<br />
+                <div>
+                    Tags are useful for tracking recurring themes in your dreams.<br />
                     Are you always having a dream about butterflies?<br />
                     Put a tag on it!
                 </div>
@@ -69,7 +71,6 @@ const CreateTagModal = () => {
                     {subtitleComponents}
                 </div>
                 <div className="title-input flexcol">
-                    <label htmlFor="name">Name</label>
                     <input
                         name="name"
                         type='text'

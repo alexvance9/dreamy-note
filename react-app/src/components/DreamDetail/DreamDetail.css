@@ -1,10 +1,12 @@
 .dream-detail-container {
     width: 100%;
+    max-width: 100%;
     background-color: rgb(25, 10, 33, .25);
     background: linear-gradient(rgb(25, 10, 33, .25), black);
     backdrop-filter: blur(2px);
     display: flex;
     overflow: auto;
+    /* overflow-wrap: break-word; */
     height: 100%;
     /* border: 2px solid aqua; */
 }
@@ -14,7 +16,7 @@
     color: rgb(198, 195, 195);
     /* border: 2px solid green; */
     width: 90%;
-    height: fit-content;
+    height: 100%;
     margin: 0 auto;
     /* padding: 15px; */
     padding-top: 0;
@@ -25,13 +27,10 @@
 .dream-detail-header {
     /* border: 2px solid red; */
     display: flex;
-    
     justify-content: flex-end;
     background-color: inherit;
     width: 100%;
-    /* height: 3rem; */
     margin: 0;
-    
     padding-top: 10px;
     /* border-radius: 0 0 1rem 1rem; */
 }
@@ -53,33 +52,39 @@
     color: white;
     min-width: 200px;
     width: 300px;
+    /* height: auto; */
     /* border: 2px solid red; */
     overflow-wrap: break-word ;
     padding-bottom: 10px;
 }
 
 .detail-body {
+    padding-right: 20px;
+    padding-left: 20px;
     margin-top: 20px;
-    padding: 20px;
-    /* background-color: rgb(48, 47, 47); */
-    /* border: 1px solid rgb(175,
-                59,
-                238,
-                0.25);
-        border-radius: .25rem;
-        background-color: rgba(153, 52, 207, 0.25);
-        box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
-        backdrop-filter: blur(3px); */
-
-    min-height: 40vh;
+    /* min-height: 40vh; */
+    /* height: calc(100% - 80px); */
+    overflow: auto;
     border-radius: .5rem;
+   flex-grow: 1;
+    /* scrollbar-color: dark; */
+}
+
+.detail-body::-webkit-scrollbar{
+    background-color: black;
+    width: 3px;
+}
+.detail-body::-webkit-scrollbar-thumb{
+    background-color: rgb(128, 255, 0, .90);
+    border-radius: 1rem;
 }
 
 .detail-body-top {
+    /* width: 90%; */
     border-bottom: 1px solid grey;
     position: sticky;
     top: 0;
-    padding-top: 10px;
+    margin-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
     background-color: rgb(12, 12, 20);
@@ -88,6 +93,9 @@
     /* align-self: center; */
 }
 
+.detail-value {
+    word-break: break-all;
+}
 
 .detail-button-container {
     display: flex;
@@ -245,11 +253,168 @@
     margin-bottom: 10px;
 }
 
+/* tags */
+.dream-tags-container {
+    /* border: 2px solid red; */
+    background-color: black;
+    display: flex;
+    align-items: center;
+    /* position: absolute; */
+    bottom: 0;
+    width: 90%;
+    padding: 5px;
+}
+
+.dream-tags-container>button{
+    background-color: black;
+    color: rgb(128, 255, 0);
+    font-size: small;
+    margin-right: 10px;
+    border: none;
+}
+
+.dream-tags-container>button:hover{
+    color: rgb(53, 21, 70);
+    text-decoration: dashed;
+}
+
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tags-list-item {
+    background-color: rgb(128, 255, 0);
+    color: black;
+    border-radius: 1.5rem;
+    padding: 5px 10px;
+    font-size: small;
+    margin: 2px;
+}
 
 /* edit tags modal */
 .edit-dream-tags-modal{
-    background-color: rgb(34, 14, 45);
-    padding: 25px;
-    border-radius: .25rem;
+    border: 1px solid rgb(175,
+                59,
+                238,
+                0.25);
+        border-radius: .25rem;
+        background: linear-gradient(rgb(49, 20, 66), black);
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
+        backdrop-filter: blur(7px);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        color: rgba(128, 255, 0, .90);
+}
+.edit-dream-tags-modal>*{
+    margin-top: 10px;
+}
+
+.edit-dream-tags-modal>button{
+    background: linear-gradient(rgb(175,
+                    59,
+                    238, .75), rgba(99, 34, 135, 0.75));
+        /* border: 1px solid rgb(128, 255, 0); */
+        border: none;
+        border-radius: .25rem;
+        padding: 5px 10px;
+        color: rgb(128, 255, 0)
+}
+.edit-dream-tags-modal>button:hover{
+    background: linear-gradient(rgb(175,
+                    59,
+                    238), rgba(99, 34, 135))
+}
+
+.edit-dream-tags-modal>form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.edit-dream-tags-modal>form>h3{
+    font-size: medium;
+    color: rgb(198, 195, 195);
+}
+
+.create-dream-tag-input{
+    display: flex;
+}
+
+.create-dream-tag-input>input{
+    background-color: transparent;
+    border: .5px solid grey;
     color: rgb(214, 212, 212);
+    border-radius: .5rem;
+    padding: 5px;
+    margin-top: 5px;
+}
+.create-dream-tag-input>button{
+    background-color: inherit;
+    color: rgba(128, 255, 0, .90);
+    font-weight: 400;
+    border: 2px solid rgba(128, 255, 0, .90);
+    border-radius: 10px;
+    padding: 5px;
+    margin: 0 5px
+}
+.create-dream-tag-input>button:hover{
+    border: 2px solid rgb(128, 255, 0);
+    color: rgb(128, 255, 0);
+    background-color: rgba(128, 255, 0, .15);
+}
+
+.tag-select>select{
+    background-color: transparent;
+        border: .5px solid grey;
+        color: rgb(214, 212, 212);
+        border-radius: .5rem;
+        padding: 5px;
+        margin-top: 5px;
+}
+.tag-select>button{
+    background-color: inherit;
+    color: rgba(128, 255, 0, .90);
+    font-weight: 400;
+    border: 2px solid rgba(128, 255, 0, .90);
+    border-radius: 10px;
+    padding: 5px;
+    margin: 0 5px
+}
+
+.tag-select>button:hover{
+    border: 2px solid rgb(128, 255, 0);
+    color: rgb(128, 255, 0);
+    background-color: rgba(128, 255, 0, .15);
+}
+
+.edit-dream-tags-container{
+    display: flex;
+    width: 500px;
+    flex-wrap: wrap;
+}
+
+.edit-dream-tag {
+    display: flex;
+    align-items: center;
+    background-color: rgb(128, 255, 0);
+    color: black;
+    padding: 5px 10px;
+    border-radius: 2rem;
+    margin: 2px;
+    font-size: small;
+    font-weight: 700;
+    width: fit-content;
+}
+
+.edit-dream-tag>button{
+    background-color: black;
+    color: grey;
+    border-radius: 100%;
+    border: none;
+    margin-left: 4px;
 }

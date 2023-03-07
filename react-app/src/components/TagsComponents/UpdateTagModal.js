@@ -67,7 +67,7 @@ const UpdateTagModal = ({tagId, tagName}) => {
                     {subtitleComponents}
                 </div>
                 <div className="title-input flexcol">
-                    <label htmlFor="name">Name</label>
+                    
                     <input
                         name="name"
                         type='text'

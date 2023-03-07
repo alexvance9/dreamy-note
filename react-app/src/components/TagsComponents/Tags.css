@@ -10,6 +10,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
+    /* border: 2px solid green; */
     
 }
 .tags-pop-out>button{
@@ -29,21 +31,42 @@
     width: 85%;
     border-bottom: 2px solid rgb(198, 195, 195);
 }
+.new-tag-button{
+    align-self: flex-end;
+}
+
+.new-tag-button>button{
+    border: none;
+    background-color: inherit;
+    padding-right: 15px;
+    padding-top: 10px;
+    color: rgb(128, 255, 0);
+}
+.new-tag-button>button:hover{
+    text-decoration: underline;
+}
 
 .tags-list-container{
     color: rgb(198, 195, 195);
     overflow-y: auto;
+    overflow-x: auto;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
+    height: 100%;
     /* border: 2px solid red; */
+}
+
+.tags-list-container::-webkit-scrollbar{
+    display: none;
 }
 
 .letter-list {
     padding-left: 15px;
     display: flex;
     flex-direction: column;
+    /* width: 80%; */
 }
 
 .letter-label {
@@ -52,21 +75,75 @@
 }
 
 .tag {
-    padding-left: 30px;
-    padding-bottom: 10px;
+    margin-left: 30px;
+    margin-bottom: 10px;
+    display: flex;
+    padding: 5px;
+}
+.tag:hover{
+    background-color: rgb(71, 28, 95);
+    border-radius: 10px;
 }
 .tag>span{
     padding-left: 10px;
 }
 
+/* action menu */
+.drop-container {
+    position: relative;
+}
+
+.tag-actions {
+    position: absolute;
+        top: 140%;
+        right: 0;
+        /* border: 2px solid red; */
+        padding: 10px;
+        border-radius: .25rem;
+        background-color: black;
+}
+.tag-actions>button{
+    background-color: transparent;
+        color: rgb(128, 255, 0);
+        border: none;
+}
+
+.tag-action-button{
+    background-color: transparent;
+    color: rgb(128, 255, 0);
+    border: none;
+    /* align-self: flex-end; */
+}
+
+.tag-actions-menu {
+    justify-self: flex-end;
+    /* border: 2px solid green; */
+}
+
+
 
 /* create tag modal */
 
 .new-tag-modal {
-    background-color: rgb(34, 14, 45);
+    /* background-color: rgb(34, 14, 45);
     padding: 25px;
     border-radius: .25rem;
-    color: rgb(214, 212, 212);
+    color: rgb(214, 212, 212); */
+    border: 1px solid rgb(175,
+                59,
+                238,
+                0.25);
+        border-radius: .25rem;
+        background: linear-gradient(rgb(49, 20, 66), black);
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
+        backdrop-filter: blur(7px);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        color: rgba(128, 255, 0, .90);
 }
 
 .new-tag-form >.subtitle-components>*{

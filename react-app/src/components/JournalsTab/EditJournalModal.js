@@ -63,7 +63,7 @@ const EditJournalModal = ({journal}) => {
                     {subtitleComponents}
                 </div>
                 <div className="title-input flexcol">
-                    <label htmlFor="title">Name</label>
+                    
                     <input
                         name="title"
                         type='text'
