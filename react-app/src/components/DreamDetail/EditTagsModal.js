@@ -41,11 +41,11 @@ const EditTagsModal = ({dreamId, currentDreamsTags}) => {
     if (dreamTags?.length > 0){
         dreamTags.sort(alphabetizer)
         tagsList = (
-            <div className='dream-tags-conatiner'>
+            <div className='edit-dream-tags-container'>
             {dreamTags.map(tag => (
-                <div key={tag.id}>
+                <div key={tag.id} className='edit-dream-tag'>
                     {tag.name}
-                    <button className="remove-dream-tag-button" value={tag.id} onClick={handleRemoveTag}><i className="fa-regular fa-square-minus"></i></button>
+                    <button className="remove-dream-tag-button" value={tag.id} onClick={handleRemoveTag}><i className="fa-solid fa-xmark"></i></button>
                 </div>
             ))}
             </div>
@@ -114,11 +114,12 @@ const EditTagsModal = ({dreamId, currentDreamsTags}) => {
                         placeholder="Tag Name"
                         value={tagName}
                         onChange={e => setTagName(e.target.value)}
-
                     />
-                </div>
+                    
                 <button type="submit">Add</button>
+                </div>
             </form>
+            <div> OR </div>
             <form className="add-dream-tag-form" onSubmit={handleAddDreamTag}>
                 <h3>Add an existing Tag</h3>
                 <div className='tag-select'>

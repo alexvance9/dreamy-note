@@ -37,6 +37,7 @@ const JournalsTab = () => {
 
     return (
         <div className='journals-tab'>
+            <div className='blur-container'>
             <h2 className='my-journals'>My Dream Journals</h2>
             <div className='new-journal-button'>
                 <i className="fa-solid fa-book"></i>
@@ -64,7 +65,7 @@ const JournalsTab = () => {
                     </tbody>
                 </table>
             </div>
-            
+            </div>
         </div>
     )
 }

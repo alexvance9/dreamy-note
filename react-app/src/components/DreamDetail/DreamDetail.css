@@ -294,8 +294,127 @@
 
 /* edit tags modal */
 .edit-dream-tags-modal{
-    background-color: rgb(34, 14, 45);
-    padding: 25px;
-    border-radius: .25rem;
+    border: 1px solid rgb(175,
+                59,
+                238,
+                0.25);
+        border-radius: .25rem;
+        background: linear-gradient(rgb(49, 20, 66), black);
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
+        backdrop-filter: blur(7px);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        color: rgba(128, 255, 0, .90);
+}
+.edit-dream-tags-modal>*{
+    margin-top: 10px;
+}
+
+.edit-dream-tags-modal>button{
+    background: linear-gradient(rgb(175,
+                    59,
+                    238, .75), rgba(99, 34, 135, 0.75));
+        /* border: 1px solid rgb(128, 255, 0); */
+        border: none;
+        border-radius: .25rem;
+        padding: 5px 10px;
+        color: rgb(128, 255, 0)
+}
+.edit-dream-tags-modal>button:hover{
+    background: linear-gradient(rgb(175,
+                    59,
+                    238), rgba(99, 34, 135))
+}
+
+.edit-dream-tags-modal>form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.edit-dream-tags-modal>form>h3{
+    font-size: medium;
+    color: rgb(198, 195, 195);
+}
+
+.create-dream-tag-input{
+    display: flex;
+}
+
+.create-dream-tag-input>input{
+    background-color: transparent;
+    border: .5px solid grey;
     color: rgb(214, 212, 212);
+    border-radius: .5rem;
+    padding: 5px;
+    margin-top: 5px;
+}
+.create-dream-tag-input>button{
+    background-color: inherit;
+    color: rgba(128, 255, 0, .90);
+    font-weight: 400;
+    border: 2px solid rgba(128, 255, 0, .90);
+    border-radius: 10px;
+    padding: 5px;
+    margin: 0 5px
+}
+.create-dream-tag-input>button:hover{
+    border: 2px solid rgb(128, 255, 0);
+    color: rgb(128, 255, 0);
+    background-color: rgba(128, 255, 0, .15);
+}
+
+.tag-select>select{
+    background-color: transparent;
+        border: .5px solid grey;
+        color: rgb(214, 212, 212);
+        border-radius: .5rem;
+        padding: 5px;
+        margin-top: 5px;
+}
+.tag-select>button{
+    background-color: inherit;
+    color: rgba(128, 255, 0, .90);
+    font-weight: 400;
+    border: 2px solid rgba(128, 255, 0, .90);
+    border-radius: 10px;
+    padding: 5px;
+    margin: 0 5px
+}
+
+.tag-select>button:hover{
+    border: 2px solid rgb(128, 255, 0);
+    color: rgb(128, 255, 0);
+    background-color: rgba(128, 255, 0, .15);
+}
+
+.edit-dream-tags-container{
+    display: flex;
+    width: 500px;
+    flex-wrap: wrap;
+}
+
+.edit-dream-tag {
+    display: flex;
+    align-items: center;
+    background-color: rgb(128, 255, 0);
+    color: black;
+    padding: 5px 10px;
+    border-radius: 2rem;
+    margin: 2px;
+    font-size: small;
+    font-weight: 700;
+    width: fit-content;
+}
+
+.edit-dream-tag>button{
+    background-color: black;
+    color: grey;
+    border-radius: 100%;
+    border: none;
+    margin-left: 4px;
 }
