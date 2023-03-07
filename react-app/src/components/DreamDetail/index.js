@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useDispatch, useSelector} from "react-redux";
 // import { useParams } from "react-router-dom";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import parse from 'html-react-parser';
+
+import OverlayTrigger from 'react-bootstrap/Overlay';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 import { getSingleDream, updateDreamThunk } from "../../store/dreams";
 import OpenModalButton from "../OpenModalButton";
@@ -36,12 +39,9 @@ const DreamDetail = ({dreamProp, isJournal}) => {
     const [journalId, setJournalId] = useState('')
     const [value, setValue] = useState('') //this is the value of the 'body' after being parsed by the react html parser
     const [editBody, setEditBody] = useState('') // this is the value of the body before being parsed, so still html string
-
-    // function returns date as 'yyyy-mm-dd'
-    // const dateHandler = (str) => {
-    //     const handled = moment(str, 'MM-DD-YYYY').format("MM/DD/YYYY")
-    //     return handled
-    // }
+    // for tags tooltip
+    const tagsRef = useRef(null);
+    const [tip, setTip] = useState(false);
 
     // load dream slice of state, which is a single dream. it is set by grabbing the 
     // dream id of the dreamProp passed from the DreamsTab component.
@@ -153,11 +153,11 @@ const DreamDetail = ({dreamProp, isJournal}) => {
 
         if (selectedDream.tags.length > 0) {
             tagsList = (
-                <>
+                <div className="tags-list">
             {selectedDream?.tags.map(tag => (
-                <div key={tag.id}>{tag.name}</div>
+                <div key={tag.id} className="tags-list-item">{tag.name}</div>
                 ))}
-            </>
+            </div>
         )
     } else {
         tagsList = (
@@ -216,21 +216,21 @@ const DreamDetail = ({dreamProp, isJournal}) => {
                         />
                     </div>
                 </div>
+                
                 <div className="detail-body flexcol">
                     <div className="detail-body-top flex">
                         <div className="detail-title">{title}</div>
                         <div className="detail-date">{moment(date, 'YYYY-MM-DD').format("MM/DD/YYYY")}</div>
                     </div>
-                    <div>{value}</div>
+                    <div className="detail-value">{value}</div>
                 </div> 
                 <div className="dream-tags-container">
-                    <OpenModalButton 
-                        buttonText="Edit Tags"
-                        modalComponent={<EditTagsModal dreamId={selectedDream.id} currentDreamsTags={selectedDream.tags}/>}
-                    />
-                    <div className="dream-tags-list">
-                        {tagsList}
-                    </div>
+                        <OpenModalButton
+                            buttonText={<i className="fa-solid fa-tags fa-xl"></i>}
+                            modalComponent={<EditTagsModal dreamId={selectedDream.id} currentDreamsTags={selectedDream.tags} />}
+                            />
+                    
+                    {tagsList}
                 </div>
             </div>
         )

@@ -1,9 +1,17 @@
 .new-journal-modal {
-    /* background-color: rgb(35, 35, 35); */
-    background-color: rgb(34, 14, 45);
-    padding: 20px;
+border: 1px solid rgb(175,
+            59,
+            238,
+            0.25);
     border-radius: .25rem;
-    color: rgb(214, 212, 212);
+    /* background-color: rgb(34, 14, 46); */
+    background: linear-gradient(rgb(49, 20, 66), black);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
+    backdrop-filter: blur(7px);
+    padding: 20px;
+    display: flex;
+    margin: 0 auto;
+    
 }
 .new-journal-form{
     display: flex;
@@ -17,6 +25,7 @@
 .new-journal-h2{
     margin-top: 0;
     margin-bottom: 0;
+    color: rgba(128, 255, 0, .90);
 }
 
 .title-input{
@@ -27,7 +36,7 @@
     background-color: transparent;
     border: .5px solid grey;
     color: rgb(214, 212, 212);
-    border-radius: .25rem;
+    border-radius: .5rem;
     padding: 5px;
     margin-top: 5px;
 }
@@ -40,22 +49,39 @@
 }
 .submit-button{
     align-self: flex-end;
-    background-color: rgb(128, 255, 0);
-    border: none;
-    border-radius: .25rem;
+    background: linear-gradient(rgb(175,
+                    59,
+                    238, .75), rgba(99, 34, 135, 0.75));
+    border: 1px solid rgb(175,
+            59,
+            238, .75);
+    border-radius: .5rem;
     padding: 5px;
-    font-weight: 600;
+    font-weight: 400;
     margin-right: 5px;
+    color: rgb(128, 255, 0)
+}
+.submit-button:hover{
+    background: linear-gradient(rgb(175,
+                    59,
+                    238), rgba(99, 34, 135))
 }
 .cancel-button{
-    border:1px solid rgb(128, 255, 0);
-    color: rgb(128, 255, 0);
-    background-color: black;
-    border-radius: .25rem;
-        padding: 5px;
-        font-weight: 600;
-        margin-right: 5px;
+    border:1px solid rgba(128, 255, 0, .90);
+    color: rgba(128, 255, 0, .90);
+    background-color: inherit;
+    border-radius: .5rem;
+    padding: 5px;
+    font-weight: 400;
+    margin-right: 5px;
 }
+.cancel-button:hover{
+    border: 1px solid rgb(128, 255, 0);
+        color: rgb(128, 255, 0);
+        background-color: rgba(128, 255, 0, .15);
+}
+
 .subtitle-components{
     line-height: 1.5rem;
+    color: rgb(214, 212, 212);
 }
