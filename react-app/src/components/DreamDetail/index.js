@@ -1,12 +1,10 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch, useSelector} from "react-redux";
 // import { useParams } from "react-router-dom";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import parse from 'html-react-parser';
 
-import OverlayTrigger from 'react-bootstrap/Overlay';
-import Tooltip from 'react-bootstrap/Tooltip';
 
 import { getSingleDream, updateDreamThunk } from "../../store/dreams";
 import OpenModalButton from "../OpenModalButton";
@@ -39,9 +37,7 @@ const DreamDetail = ({dreamProp, isJournal}) => {
     const [journalId, setJournalId] = useState('')
     const [value, setValue] = useState('') //this is the value of the 'body' after being parsed by the react html parser
     const [editBody, setEditBody] = useState('') // this is the value of the body before being parsed, so still html string
-    // for tags tooltip
-    const tagsRef = useRef(null);
-    const [tip, setTip] = useState(false);
+
 
     // load dream slice of state, which is a single dream. it is set by grabbing the 
     // dream id of the dreamProp passed from the DreamsTab component.

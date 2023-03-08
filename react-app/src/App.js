@@ -39,28 +39,28 @@ function App() {
       <NavBar loaded={loaded}/>
       {loaded && (
       <Switch>
-        <ProtectedRoute path='/journals/:journalId/entries/:dreamId' exact={true} >
+        <ProtectedRoute path='/journals/:journalId/entries/:dreamId' exact={true}>
           <JournalDetailsView/>
         </ProtectedRoute>
-        <ProtectedRoute path='/journals/:journalId' exact={true} >
+        <ProtectedRoute path='/journals/:journalId' exact={true}>
           <JournalDetailsView/>
         </ProtectedRoute>
-        <ProtectedRoute path='/journals' exact={true} >
+        <ProtectedRoute path='/journals' exact={true}>
           <JournalsTab/>
         </ProtectedRoute>
-        <ProtectedRoute path='/dreams' exact={true} >
+        <ProtectedRoute path='/dreams' exact={true}>
           <DreamsTab isNew={false}/>
         </ProtectedRoute>
-        <ProtectedRoute path='/dreams/new' exact={true} >
+        <ProtectedRoute path='/dreams/new' exact={true}>
           <DreamsTab isNew={true}/>
         </ProtectedRoute>
-        <ProtectedRoute path='/dreams/:dreamId' exact={true} >
+        <ProtectedRoute path='/dreams/:dreamId' exact={true}>
           <DreamsTab isNew={false}/>
         </ProtectedRoute>
         <ProtectedRoute path='/dashboard' exact={true}>
           <Dashboard />
         </ProtectedRoute>
-        <Route path='/' exact={true} >
+        <Route path='/' exact={true}>
           <SplashPage />
         </Route>
         <Route>
