@@ -3,8 +3,20 @@ import DreamNav from "./DreamsNav";
 
 
 const FilterComponent = ({dreams}) => {
-    // console.log(dreams)
     const {currentFilters, setCurrentFilters} = useFilter()
+    
+    let filteredDreams;
+    if (currentFilters.length){
+        filteredDreams = dreams.filter(dream => {
+            const filter = currentFilters[0]
+        return dream.tags.some(tag => tag.id === filter.id)   
+        })
+        // console.log(filteredDreams)
+    } else {
+        filteredDreams = dreams
+    }
+    
+
 
     const handleClear = (e) => {
         e.preventDefault()
@@ -20,12 +32,12 @@ const FilterComponent = ({dreams}) => {
             {currentFilters.length > 0 && 
                 <div className="filter-container">
                 {currentFilters.map(tag => (
-                    <div className="filter">{tag.name}
+                    <div className="filter" key={tag.id}>{tag.name}
                         <button onClick={handleClear}>X</button>
                     </div>
                 ))}
                 </div>}
-            <DreamNav dreams={dreams} />
+            <DreamNav dreams={filteredDreams} />
         </div>
         
     )
