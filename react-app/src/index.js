@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import { ModalProvider, Modal } from './context/Modal';
 import { TagsMenuProvider } from './context/TagMenu';
-import { BrowserRouter } from 'react-router-dom';
+import  FilterProvider  from './context/Filter';
 import configureStore from './store';
 
 const store = configureStore();
@@ -16,6 +17,7 @@ const store = configureStore();
 function Root() {
   return (
     <ModalProvider>
+      <FilterProvider>
       <TagsMenuProvider>
       <Provider store={store}>
         <BrowserRouter>
@@ -24,6 +26,7 @@ function Root() {
         </BrowserRouter>
       </Provider>
       </TagsMenuProvider>
+      </FilterProvider>
     </ModalProvider>
   );
 }
