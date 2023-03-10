@@ -44,7 +44,7 @@ const TagsPopOut = ({setShowMenu, tags}) => {
                     <div className="letter-list" key={letter}>
                         <div className="letter-label">{letter}</div>
                         {tags.map(tag => (
-                            <TagRow tag={tag} />
+                            <TagRow tag={tag} setShowMenu={setShowMenu}/>
                         ))}
                     </div>
                 )

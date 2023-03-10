@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import DreamDetail from "../DreamDetail";
 import DreamNav from "./DreamsNav"
 import CreateDreamForm from "../CreateDreamForm";
+import FilterComponent from "./FilterComponent";
 
 import './DreamsTab.css'
 import LoadingPage from "../ExtraPages/LoadingPage";
@@ -92,7 +93,8 @@ const DreamsTab = ({isNew}) => {
 
     return (
         <div className="dreams-tab-container flex"> 
-            <DreamNav dreams={sorted}/>
+            <FilterComponent dreams={sorted}/>
+            {/* <DreamNav dreams={sorted}/> */}
             {renderPage}
         </div>
     )
