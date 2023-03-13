@@ -6,11 +6,7 @@ const DreamNav = ({dreams}) => {
     if (!dreams) return null;
 
     return (
-        <div className="dream-nav-container flexcol">
-            <div className="flex dream-title">
-                <i className="fa-solid fa-moon fa-xl"></i>
-                <h2>My Dreams</h2>
-            </div>
+        
             <div className="dream-cards-container flexcol">
                 {dreams.map(dream => (
                     <NavLink to={`/dreams/${dream.id}`} key={dream.id} className='dream-card-nav' activeClassName="selected-dream-card">
@@ -18,7 +14,7 @@ const DreamNav = ({dreams}) => {
                     </NavLink>
                 ))}
             </div>
-        </div>
+       
     )
 }
 
