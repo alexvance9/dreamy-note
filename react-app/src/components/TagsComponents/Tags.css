@@ -83,6 +83,15 @@
 .tag:hover{
     background-color: rgb(71, 28, 95);
     border-radius: 10px;
+    /* text-decoration: underline; */
+}
+.tag>button{
+    background-color: inherit;
+    border: none;
+    color: rgb(198, 195, 195);
+}
+.tag>button:hover{
+    text-decoration: underline;
 }
 .tag>span{
     padding-left: 10px;
