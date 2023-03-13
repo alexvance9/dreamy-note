@@ -26,14 +26,17 @@ const FilterComponent = ({dreams}) => {
     return (
         <div className="dream-nav-container flexcol">
             <div className="flex dream-title">
+                <div className="dream-title-inner">
                 <i className="fa-solid fa-moon fa-xl"></i>
                 <h2>My Dreams</h2>
+                </div>
             </div>
             {currentFilters.length > 0 && 
                 <div className="filter-container">
+                    <h3>Filters</h3>
                 {currentFilters.map(tag => (
                     <div className="filter" key={tag.id}>{tag.name}
-                        <button onClick={handleClear}>X</button>
+                        <button onClick={handleClear}><i className="fa-solid fa-xmark"></i></button>
                     </div>
                 ))}
                 </div>}
