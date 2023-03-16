@@ -126,9 +126,9 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 5rem;
+    width: fit-content;
     border-radius: 2rem;
-    padding-left: 5px;
+    padding: 2px 5px;
 }
 .filter>button{
     background-color: inherit;
