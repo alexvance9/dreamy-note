@@ -52,7 +52,7 @@ const DreamsTab = ({isNew}) => {
         } else if (!dreamsArr.length) {
             return (
                 <div className="dreams-tab-container flex">
-                    <DreamNav dreams={dreamsArr} />
+                    <FilterComponent dreams={dreamsArr} />
                     <div className="render-view-container">
                         <CreateDreamForm />
                     </div>
@@ -94,7 +94,6 @@ const DreamsTab = ({isNew}) => {
     return (
         <div className="dreams-tab-container flex"> 
             <FilterComponent dreams={sorted}/>
-            {/* <DreamNav dreams={sorted}/> */}
             {renderPage}
         </div>
     )
