@@ -5,10 +5,10 @@ from datetime import date
 # Adds a demo user, you can add other users here if you want
 def seed_journals():
     journal1 = Journal(
-        title='Journal #1', date_created=date(2022, 6, 1), dreamer_id=1, is_default=True
+        title='First Journal', date_created=date(2022, 6, 1), dreamer_id=1, is_default=True
     )
     journal2 = Journal(
-        title='Greece Trip', date_created=date(2022, 6, 1), dreamer_id=1
+        title='Travel Dreams', date_created=date(2022, 6, 1), dreamer_id=1
     )
     journal3 = Journal(
         title='Freshman Year', date_created=date(2022, 6, 1), dreamer_id=2
