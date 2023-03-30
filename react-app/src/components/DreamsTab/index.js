@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router-dom";
 import DreamDetail from "../DreamDetail";
-import DreamNav from "./DreamsNav"
+
 import CreateDreamForm from "../CreateDreamForm";
 import FilterComponent from "./FilterComponent";
 
@@ -24,7 +24,7 @@ const DreamsTab = ({isNew}) => {
         (async () => {
             await dispatch(loadDreamsThunk());
             setIsLoaded(true);
-        })();
+        })(); 
     }, [dispatch]);
 
     // console.log(isLoaded)
