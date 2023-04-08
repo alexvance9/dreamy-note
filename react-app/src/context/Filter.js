@@ -7,7 +7,10 @@ export function useFilter() {
 }
 
 function FilterProvider({children}){
-    const [currentFilters, setCurrentFilters] = useState([])
+    const [currentFilters, setCurrentFilters] = useState({
+        tags: [],
+        journal: []
+    })
 
     return (
         <FilterContext.Provider value={{currentFilters, setCurrentFilters}}>

@@ -10,7 +10,12 @@ const TagRow = ({tag, setShowMenu}) => {
 
     const handleFilterClick = async (e) => {
         e.preventDefault()
-        await setCurrentFilters([tag])
+        await setCurrentFilters(filters => {
+            return {
+                ...filters,
+                tags: [tag]
+            }
+        })
         await history.push('/dreams')
         return setShowMenu(e)
     }
