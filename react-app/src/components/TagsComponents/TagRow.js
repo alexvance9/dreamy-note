@@ -1,14 +1,17 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import TagsActionMenu from './TagsActionMenu';
 import { useFilter } from '../../context/Filter';
 
 const TagRow = ({tag, setShowMenu}) => {
     const [showActions, setShowActions] = useState(false)
     const { setCurrentFilters } = useFilter()
+    const history = useHistory()
 
     const handleFilterClick = async (e) => {
         e.preventDefault()
         await setCurrentFilters([tag])
+        await history.push('/dreams')
         return setShowMenu(e)
     }
 
