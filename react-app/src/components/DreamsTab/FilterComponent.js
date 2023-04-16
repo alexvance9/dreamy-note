@@ -12,7 +12,7 @@ const FilterComponent = ({dreams}) => {
                 
         //     }
 
-        console.log(dreams)
+        // console.log(dreams)
         let filteredDreams = dreams.filter(function (dream) {
             // console.log(this)
             if (this.journal.length && this.tags.length) {
