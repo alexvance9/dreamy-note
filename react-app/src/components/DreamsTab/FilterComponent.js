@@ -1,44 +1,33 @@
 import { useFilter } from "../../context/Filter";
 import DreamNav from "./DreamsNav";
 
-
+// dreams prop is passed from dreamstab index page
 const FilterComponent = ({dreams}) => {
+    // refers to filter context- used to filter dreams by tags
+    // set up to eventually add journals filter.
+    // shape of filter context: {tags:[{...}, {...}], journal:[]}
+    // CURRENTLY only 1 tag filter allowed at a time. 
     const {currentFilters, setCurrentFilters} = useFilter()
     
-    // let filteredDreams;
-    // if (currentFilters.tags.length || currentFilters.journal.length){
-        // filteredDreams = dreams.filter(dream => {
-        //     if (this.journal.length && this.tags.length) {
-                
-        //     }
-
-        // console.log(dreams)
+    // note to self:
+    // Added option to have "journals" be part of filters in similar way to tags.
+    // However, there was intended to be some extra functionality to the 
+    // Journals page, so keeping journals page for now.
         let filteredDreams = dreams.filter(function (dream) {
             // console.log(this)
             if (this.journal.length && this.tags.length) {
-                return dream.journalId === this.journal[0] && dream.tags.some(tag => tag === this.tags[0])
+                return dream.journalId === this.journal[0] && dream.tags.some(tag => tag.id === this.tags[0].id)
             } else if (this.journal.length && !this.tags.length) {
                 return dream.journalId === this.journal[0]
             } else if (!this.journal.length && this.tags.length) {
-                // console.log('just tags is true')
-                // console.log('inside filter func: ', this.tags, dream.tags.some(tag => tag.name === this.tags[0].name))
                 return dream.tags.some(tag => tag.id === this.tags[0].id)
             } else {
                 return dream;
             }
-
         }, currentFilters)
-        // console.log('filtered dreams in filter comp:', filteredDreams)
-        //     const filter = currentFilters.tags[0]
-        // return dream.tags.some(tag => tag.id === filter.id)   
+        
 
-        // console.log(filteredDreams)
-    // } else {
-    //     filteredDreams = dreams
-    // }
-    
-
-
+    // separate functions to handle clearing of different parts of filter context (tags & journals)
     const handleTagClear = (e) => {
         e.preventDefault()
        return setCurrentFilters(filters =>{ return {...filters, tags: []}})
@@ -59,6 +48,7 @@ const FilterComponent = ({dreams}) => {
             {(currentFilters.journal.length || currentFilters.tags.length) && 
                 <div className="filter-container">
                     <h3>Filters</h3>
+                {/* these are the same small components for tags and journal, with different clearing functions*/}
                 {currentFilters.tags.map(tag => (
                     <div className="filter" key={tag.id}>{tag.name}
                         <button onClick={handleTagClear}><i className="fa-solid fa-xmark"></i></button>
@@ -70,6 +60,7 @@ const FilterComponent = ({dreams}) => {
                     </div>
                 ))}
                 </div>}
+            {/* send filtered dreams to be displayed in dreams nav */}
             <DreamNav dreams={filteredDreams} />
         </div>
         
