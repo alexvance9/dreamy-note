@@ -11,6 +11,8 @@ const FilterComponent = ({dreams}) => {
         //     if (this.journal.length && this.tags.length) {
                 
         //     }
+
+        console.log(dreams)
         let filteredDreams = dreams.filter(function (dream) {
             // console.log(this)
             if (this.journal.length && this.tags.length) {
@@ -18,12 +20,15 @@ const FilterComponent = ({dreams}) => {
             } else if (this.journal.length && !this.tags.length) {
                 return dream.journalId === this.journal[0]
             } else if (!this.journal.length && this.tags.length) {
-                return dream.tags.some(tag => tag === this.tags[0])
+                // console.log('just tags is true')
+                // console.log('inside filter func: ', this.tags, dream.tags.some(tag => tag.name === this.tags[0].name))
+                return dream.tags.some(tag => tag.id === this.tags[0].id)
             } else {
                 return dream;
             }
 
         }, currentFilters)
+        // console.log('filtered dreams in filter comp:', filteredDreams)
         //     const filter = currentFilters.tags[0]
         // return dream.tags.some(tag => tag.id === filter.id)   
 

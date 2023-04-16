@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const DreamNav = ({dreams}) => {
 
-
+    // console.log('dreams in dreams nav: ', dreams)
 
     return (
         
