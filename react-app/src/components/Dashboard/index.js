@@ -47,7 +47,7 @@ const Dashboard = () => {
                 <div className="tags-widget">
                     <h3>Coming Soon</h3>
                      <div className='divider'></div>
-                    <div>Track recurring themes in your Dreams with tags!</div>
+                    <div>See which themes are recurring most in your dreams, with a Tag Tracker!</div>
                 </div>
             </div>
         </div>
